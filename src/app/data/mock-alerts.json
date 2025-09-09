@@ -1,0 +1,364 @@
+{
+    "alerts": [
+      {
+        "id": 1,
+        "type": "debit",
+        "title": "Grocery Shopping",
+        "description": "Payment of $54.20 made at Walmart.",
+        "amount": 54.20,
+        "timestamp": "2025-09-09T09:15:00Z",
+        "date": "2025-09-09"
+      },
+      {
+        "id": 2,
+        "type": "credit",
+        "title": "Salary Deposit",
+        "description": "Monthly salary credited to your account.",
+        "amount": 3200.00,
+        "timestamp": "2025-09-09T08:00:00Z",
+        "date": "2025-09-09"
+      },
+      {
+        "id": 3,
+        "type": "debit",
+        "title": "Online Purchase",
+        "description": "Payment of $120.00 made to Amazon.",
+        "amount": 120.00,
+        "timestamp": "2025-09-08T19:20:00Z",
+        "date": "2025-09-08"
+      },
+      {
+        "id": 4,
+        "type": "credit",
+        "title": "Refund Processed",
+        "description": "Refund of $45.00 from Target credited.",
+        "amount": 45.00,
+        "timestamp": "2025-09-08T15:10:00Z",
+        "date": "2025-09-08"
+      },
+      {
+        "id": 5,
+        "type": "debit",
+        "title": "Gas Station Payment",
+        "description": "Payment of $38.50 made at Shell Gas Station.",
+        "amount": 38.50,
+        "timestamp": "2025-09-07T20:45:00Z",
+        "date": "2025-09-07"
+      },
+      {
+        "id": 6,
+        "type": "credit",
+        "title": "Gift Received",
+        "description": "Transfer of $100.00 received from John Doe.",
+        "amount": 100.00,
+        "timestamp": "2025-09-07T17:30:00Z",
+        "date": "2025-09-07"
+      },
+      {
+        "id": 7,
+        "type": "debit",
+        "title": "Restaurant Bill",
+        "description": "Payment of $75.00 at Olive Garden.",
+        "amount": 75.00,
+        "timestamp": "2025-09-06T21:10:00Z",
+        "date": "2025-09-06"
+      },
+      {
+        "id": 8,
+        "type": "credit",
+        "title": "Cashback Reward",
+        "description": "Cashback of $15.00 credited to your account.",
+        "amount": 15.00,
+        "timestamp": "2025-09-06T11:00:00Z",
+        "date": "2025-09-06"
+      },
+      {
+        "id": 9,
+        "type": "debit",
+        "title": "Utility Bill Payment",
+        "description": "Electricity bill of $130.00 paid.",
+        "amount": 130.00,
+        "timestamp": "2025-09-05T18:25:00Z",
+        "date": "2025-09-05"
+      },
+      {
+        "id": 10,
+        "type": "credit",
+        "title": "Freelance Payment",
+        "description": "Payment of $500.00 received from Upwork.",
+        "amount": 500.00,
+        "timestamp": "2025-09-05T12:45:00Z",
+        "date": "2025-09-05"
+      },
+      {
+        "id": 11,
+        "type": "debit",
+        "title": "Subscription Payment",
+        "description": "Payment of $12.99 for Netflix subscription.",
+        "amount": 12.99,
+        "timestamp": "2025-09-04T22:00:00Z",
+        "date": "2025-09-04"
+      },
+      {
+        "id": 12,
+        "type": "credit",
+        "title": "Tax Refund",
+        "description": "Tax refund of $850.00 credited.",
+        "amount": 850.00,
+        "timestamp": "2025-09-04T10:30:00Z",
+        "date": "2025-09-04"
+      },
+      {
+        "id": 13,
+        "type": "debit",
+        "title": "Pharmacy Purchase",
+        "description": "Payment of $22.40 made at CVS.",
+        "amount": 22.40,
+        "timestamp": "2025-09-03T16:20:00Z",
+        "date": "2025-09-03"
+      },
+      {
+        "id": 14,
+        "type": "credit",
+        "title": "Bonus Payment",
+        "description": "Quarterly performance bonus credited.",
+        "amount": 1200.00,
+        "timestamp": "2025-09-03T09:15:00Z",
+        "date": "2025-09-03"
+      },
+      {
+        "id": 15,
+        "type": "debit",
+        "title": "Coffee Shop",
+        "description": "Payment of $8.75 made at Starbucks.",
+        "amount": 8.75,
+        "timestamp": "2025-09-02T08:30:00Z",
+        "date": "2025-09-02"
+      },
+      {
+        "id": 16,
+        "type": "credit",
+        "title": "Stock Dividend",
+        "description": "Dividend payout of $60.00 received.",
+        "amount": 60.00,
+        "timestamp": "2025-09-02T06:00:00Z",
+        "date": "2025-09-02"
+      },
+      {
+        "id": 17,
+        "type": "debit",
+        "title": "Movie Tickets",
+        "description": "Payment of $25.00 at AMC Theatres.",
+        "amount": 25.00,
+        "timestamp": "2025-09-01T19:45:00Z",
+        "date": "2025-09-01"
+      },
+      {
+        "id": 18,
+        "type": "credit",
+        "title": "Cash Deposit",
+        "description": "Cash deposit of $200.00 made.",
+        "amount": 200.00,
+        "timestamp": "2025-09-01T14:00:00Z",
+        "date": "2025-09-01"
+      },
+      {
+        "id": 19,
+        "type": "debit",
+        "title": "Gym Membership",
+        "description": "Monthly gym membership of $45.00 paid.",
+        "amount": 45.00,
+        "timestamp": "2025-08-31T12:10:00Z",
+        "date": "2025-08-31"
+      },
+      {
+        "id": 20,
+        "type": "credit",
+        "title": "Transfer Received",
+        "description": "Bank transfer of $300.00 received.",
+        "amount": 300.00,
+        "timestamp": "2025-08-31T08:30:00Z",
+        "date": "2025-08-31"
+      },
+      {
+        "id": 21,
+        "type": "debit",
+        "title": "Flight Ticket",
+        "description": "Payment of $450.00 made to Delta Airlines.",
+        "amount": 450.00,
+        "timestamp": "2025-08-30T21:00:00Z",
+        "date": "2025-08-30"
+      },
+      {
+        "id": 22,
+        "type": "credit",
+        "title": "Reimbursement",
+        "description": "Work travel reimbursement credited.",
+        "amount": 220.00,
+        "timestamp": "2025-08-30T15:45:00Z",
+        "date": "2025-08-30"
+      },
+      {
+        "id": 23,
+        "type": "debit",
+        "title": "Home Depot Purchase",
+        "description": "Payment of $67.99 made at Home Depot.",
+        "amount": 67.99,
+        "timestamp": "2025-08-29T17:25:00Z",
+        "date": "2025-08-29"
+      },
+      {
+        "id": 24,
+        "type": "credit",
+        "title": "Zelle Transfer",
+        "description": "Received $150.00 via Zelle.",
+        "amount": 150.00,
+        "timestamp": "2025-08-29T11:40:00Z",
+        "date": "2025-08-29"
+      },
+      {
+        "id": 25,
+        "type": "debit",
+        "title": "Pet Supplies",
+        "description": "Payment of $45.90 at PetSmart.",
+        "amount": 45.90,
+        "timestamp": "2025-08-28T19:00:00Z",
+        "date": "2025-08-28"
+      },
+      {
+        "id": 26,
+        "type": "credit",
+        "title": "Lottery Winnings",
+        "description": "Lottery prize of $75.00 credited.",
+        "amount": 75.00,
+        "timestamp": "2025-08-28T10:10:00Z",
+        "date": "2025-08-28"
+      },
+      {
+        "id": 27,
+        "type": "debit",
+        "title": "Hotel Booking",
+        "description": "Payment of $320.00 at Marriott.",
+        "amount": 320.00,
+        "timestamp": "2025-08-27T22:30:00Z",
+        "date": "2025-08-27"
+      },
+      {
+        "id": 28,
+        "type": "credit",
+        "title": "PayPal Transfer",
+        "description": "Payment of $60.00 received via PayPal.",
+        "amount": 60.00,
+        "timestamp": "2025-08-27T15:00:00Z",
+        "date": "2025-08-27"
+      },
+      {
+        "id": 29,
+        "type": "debit",
+        "title": "Car Wash",
+        "description": "Payment of $18.00 at Quick Wash.",
+        "amount": 18.00,
+        "timestamp": "2025-08-26T12:15:00Z",
+        "date": "2025-08-26"
+      },
+      {
+        "id": 30,
+        "type": "credit",
+        "title": "Interest Payment",
+        "description": "Interest of $12.00 credited to savings.",
+        "amount": 12.00,
+        "timestamp": "2025-08-26T06:00:00Z",
+        "date": "2025-08-26"
+      },
+      {
+        "id": 31,
+        "type": "debit",
+        "title": "Parking Fee",
+        "description": "Payment of $10.00 at City Parking.",
+        "amount": 10.00,
+        "timestamp": "2025-08-25T18:00:00Z",
+        "date": "2025-08-25"
+      },
+      {
+        "id": 32,
+        "type": "credit",
+        "title": "Insurance Claim",
+        "description": "Insurance claim settlement of $400.00 received.",
+        "amount": 400.00,
+        "timestamp": "2025-08-25T11:20:00Z",
+        "date": "2025-08-25"
+      },
+      {
+        "id": 33,
+        "type": "debit",
+        "title": "Bookstore Purchase",
+        "description": "Payment of $32.50 at Barnes & Noble.",
+        "amount": 32.50,
+        "timestamp": "2025-08-24T17:30:00Z",
+        "date": "2025-08-24"
+      },
+      {
+        "id": 34,
+        "type": "credit",
+        "title": "Friend Transfer",
+        "description": "Transfer of $90.00 received from Jane Smith.",
+        "amount": 90.00,
+        "timestamp": "2025-08-24T09:40:00Z",
+        "date": "2025-08-24"
+      },
+      {
+        "id": 35,
+        "type": "debit",
+        "title": "Streaming Subscription",
+        "description": "Payment of $9.99 for Spotify subscription.",
+        "amount": 9.99,
+        "timestamp": "2025-08-23T22:00:00Z",
+        "date": "2025-08-23"
+      },
+      {
+        "id": 36,
+        "type": "credit",
+        "title": "Cash Reward",
+        "description": "Reward of $25.00 credited.",
+        "amount": 25.00,
+        "timestamp": "2025-08-23T12:00:00Z",
+        "date": "2025-08-23"
+      },
+      {
+        "id": 37,
+        "type": "debit",
+        "title": "Hardware Store",
+        "description": "Payment of $55.75 at Lowe’s.",
+        "amount": 55.75,
+        "timestamp": "2025-08-22T15:30:00Z",
+        "date": "2025-08-22"
+      },
+      {
+        "id": 38,
+        "type": "credit",
+        "title": "Cashback Bonus",
+        "description": "Cashback of $8.00 credited.",
+        "amount": 8.00,
+        "timestamp": "2025-08-22T09:10:00Z",
+        "date": "2025-08-22"
+      },
+      {
+        "id": 39,
+        "type": "debit",
+        "title": "Concert Ticket",
+        "description": "Payment of $110.00 for concert ticket.",
+        "amount": 110.00,
+        "timestamp": "2025-08-21T20:00:00Z",
+        "date": "2025-08-21"
+      },
+      {
+        "id": 40,
+        "type": "credit",
+        "title": "Refund Processed",
+        "description": "Refund of $30.00 credited.",
+        "amount": 30.00,
+        "timestamp": "2025-08-21T12:00:00Z",
+        "date": "2025-08-21"
+      }
+    ]
+  }  
