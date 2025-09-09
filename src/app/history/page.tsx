@@ -28,6 +28,17 @@ export default function HistoryPage() {
   return (
     <div style={{ position: "relative", minHeight: "100vh", backgroundColor: "#0f1115", color: "#f3f4f6", paddingBottom: 84 }}>
       <HeaderGreeting scale={scale} name="History" />
+      <div style={{ padding: "0 16px 12px 16px" }}>
+        <a href="/savings-insight" style={{
+          textDecoration: "none",
+          display: "inline-block",
+          padding: "12px 16px",
+          borderRadius: 12,
+          background: "linear-gradient(135deg,#22c55e,#0ea5e9)",
+          color: "white",
+          fontWeight: 700
+        }}>Savings insight</a>
+      </div>
       <div style={{ padding: "0 16px" }}>
         <button className="primary" onClick={populateHistory} style={{
           marginTop: 8,

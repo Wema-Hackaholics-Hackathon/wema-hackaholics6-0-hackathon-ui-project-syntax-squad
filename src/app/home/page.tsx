@@ -30,6 +30,17 @@ export default function HomePage() {
 
       {/* Shortcuts */}
       <Shortcuts />
+      <div style={{ padding: "14px 16px" }}>
+        <Link href="/savings-insight" style={{
+          textDecoration: "none",
+          display: "inline-block",
+          padding: "12px 16px",
+          borderRadius: 12,
+          background: "linear-gradient(135deg,#22c55e,#0ea5e9)",
+          color: "white",
+          fontWeight: 700
+        }}>Savings insight</Link>
+      </div>
 
       {/* Transaction history */}
       <HistoryCard latest={null} />
