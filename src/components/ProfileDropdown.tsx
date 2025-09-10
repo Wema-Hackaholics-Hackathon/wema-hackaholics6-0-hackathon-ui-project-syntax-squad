@@ -10,7 +10,7 @@ import {
   Star,
   ChevronRight
 } from "lucide-react"
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
+import { Avatar } from "./ui/avatar"
 import { Button } from "./ui/button"
 import {
   DropdownMenu,
@@ -78,10 +78,11 @@ export function ProfileDropdown({ onNavigate }: ProfileDropdownProps) {
         <DropdownMenuLabel className="font-normal p-0">
           <div className="flex items-center gap-3 p-4 bg-gradient-to-r from-orange-50 to-orange-100/50">
             <Avatar className="h-12 w-12 ring-2 ring-orange-200 shadow-orange-sm">
-              <AvatarImage src={profileData.avatar} alt={profileData.name} />
-              <AvatarFallback className="bg-gradient-orange text-white">
-                {profileData.name.split(' ').map(n => n[0]).join('')}
-              </AvatarFallback>
+{!profileData.avatar ? (
+                <span className="bg-gradient-orange text-white flex items-center justify-center w-full h-full">
+                  {profileData.name.split(' ').map(n => n[0]).join('')}
+                </span>
+              ) : null}
             </Avatar>
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-1">

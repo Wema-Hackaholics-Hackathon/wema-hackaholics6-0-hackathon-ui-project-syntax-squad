@@ -22,7 +22,7 @@ import { Label } from "./ui/label"
 import { Switch } from "./ui/switch"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs"
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
+import { Avatar } from "./ui/avatar"
 import { Badge } from "./ui/badge"
 import { Separator } from "./ui/separator"
 
@@ -93,10 +93,11 @@ export function SettingsPage({ onBack }: SettingsPageProps) {
               <div className="flex items-center gap-6">
                 <div className="relative">
                   <Avatar className="h-20 w-20 ring-4 ring-orange-200 shadow-orange-sm">
-                    <AvatarImage src={profileData.avatar} alt={profileData.name} />
-                    <AvatarFallback className="bg-gradient-orange text-white text-xl">
-                      {profileData.name.split(' ').map(n => n[0]).join('')}
-                    </AvatarFallback>
+{!profileData.avatar ? (
+                      <span className="bg-gradient-orange text-white text-xl flex items-center justify-center w-full h-full">
+                        {profileData.name.split(' ').map(n => n[0]).join('')}
+                      </span>
+                    ) : null}
                   </Avatar>
                   <Button 
                     size="icon" 

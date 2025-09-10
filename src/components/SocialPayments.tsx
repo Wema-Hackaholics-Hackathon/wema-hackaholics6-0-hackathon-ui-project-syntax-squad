@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
 import { Button } from "./ui/button"
 import { Badge } from "./ui/badge"
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
+import { Avatar } from "./ui/avatar"
 import { Progress } from "./ui/progress"
 import { 
   Users, 
@@ -307,9 +307,9 @@ export function SocialPayments() {
               <div key={expense.id} className="flex items-center justify-between p-3 rounded-lg border bg-card">
                 <div className="flex items-center gap-4">
                   <Avatar className="h-8 w-8">
-                    <AvatarFallback>
+                    <span className="flex items-center justify-center w-full h-full">
                       {expense.paidBy === 'You' ? 'Y' : expense.paidBy.substring(0, 2)}
-                    </AvatarFallback>
+                    </span>
                   </Avatar>
                   
                   <div className="flex-1">
