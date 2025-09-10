@@ -1,6 +1,6 @@
 
 
-import { ALATLensApp } from "@/../alatlens/components/ALATLensApp";
+import { ALATLensApp } from "@/components/ALATLensApp";
 
 export default function LandingPage() {
   return (
