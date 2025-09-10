@@ -4,7 +4,11 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
