@@ -16,6 +16,7 @@
     "@mui/icons-material": "^6.1.5",
     "@mui/material": "^6.5.0",
     "@radix-ui/react-avatar": "^1.1.10",
+    "@radix-ui/react-dialog": "^1.1.15",
     "date-fns": "^3.6.0",
     "framer-motion": "^12.23.12",
     "next": "15.5.2",
