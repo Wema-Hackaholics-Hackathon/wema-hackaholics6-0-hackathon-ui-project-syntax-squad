@@ -24,6 +24,18 @@ export async function GET() {
   const savingDiff = ((totalBalance - lastMonthBalance) / lastMonthBalance) * 100;
   const savingDiffFormatted = (savingDiff >= 0 ? "+" : "") + Math.round(savingDiff) + "%";
 
+  // Normalize spending impact: 0 = bad (+100% spending), 100 = good (-100% spending)
+  let spendingImpact = 100 - Math.min(100, Math.max(-100, spendingDiff + 100));
+  
+  // Normalize savings impact: -100% or less = 0, +100% or more = 100
+  let savingImpact = Math.min(100, Math.max(0, savingDiff + 100));
+
+  // Weighted average: savings count a bit more
+  let intelligenceScore = Math.round((spendingImpact * 0.4) + (savingImpact * 0.6));
+
+  const intelligenceScoreFormatted = intelligenceScore + "%";
+
+
   return NextResponse.json({
     totalBalance,
     lastMonthBalance,
@@ -31,5 +43,6 @@ export async function GET() {
     thisMonthSpending,
     spendingDifference: spendingDiffFormatted,
     savingDifference: savingDiffFormatted,
+    intelligenceScore: intelligenceScoreFormatted,
   });
 }
