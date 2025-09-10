@@ -1,8 +1,9 @@
 import { ReactNode } from "react";
-import { CssBaseline, ThemeProvider } from "@mui/material";
-import { light } from "@/theme";
+import ThemeClientProvider from "../components/ThemeClientProvider";
 
-export const metadata = {
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
   title: "Spendlens",
   description: "A simple Spendlens banking mock",
 };
@@ -11,10 +12,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <ThemeProvider theme={light}>
-          <CssBaseline />
+        <ThemeClientProvider>
           {children}
-        </ThemeProvider>
+        </ThemeClientProvider>
       </body>
     </html>
   );
