@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
 import PieChart from "@/components/ui/PieChart";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 type Alert = { id: string; title: string; description: string; date: string; type: string; amount: number };
 type Category = { name: string; total: number; color: string };
@@ -10,21 +11,34 @@ async function analyzeWithGemini(history: Alert[]) {
     const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
     if (!apiKey) throw new Error("Missing Gemini API key");
 
-    const prompt = `You are a finance assistant. Given a user's transaction alerts as JSON, perform:
-1) Categorize each transaction into high-level buckets like groceries, utilities, transport, dining, healthcare, entertainment, subscriptions, transfers, income, fees, others based on description/title.
-2) Compute total spend per category for the last 90 days.
-3) Provide 3-6 personalized savings insights (bullet points) tied to these categories and amounts. Each insight should reference a potential service name (mock name) like "Spendlens Save Vault", "Spendlens Auto-Roundup", or "Spendlens Bills Optimizer".
-4) Forecast monthly spend per category for the next month using a simple frequency and seasonality intuition (describe briefly how you estimated it).
-Return JSON only with the shape: { categories: [{ name, total }], recommendations: string[], forecast: [{ name, nextMonth }] }.
-Data: ${JSON.stringify(history).slice(0, 15000)}`;
+    const historyTrimmed = history.slice(0, 1000);
+    const prompt = {
+      role: "system",
+      task: "transaction_analysis",
+      instructions: {
+        step1:
+          "Categorize each transaction into high-level buckets like groceries, utilities, transport, dining, healthcare, entertainment, subscriptions, transfers, income, fees, others based on description/title.",
+        step2: "Compute total spend per category for the last 90 days.",
+        step3:
+          "Provide 3-6 personalized savings insights (bullet points). Each insight should reference a potential service name (mock name) like 'Spendlens Save Vault', 'Spendlens Auto-Roundup', or 'Spendlens Bills Optimizer'.",
+        step4:
+          "Forecast monthly spend per category for the next month using simple frequency and seasonality intuition.",
+      },
+      format: {
+        type: "json",
+        shape: {
+          categories: [{ name: "string", total: "number" }],
+          recommendations: ["string"],
+          forecast: [{ name: "string", nextMonth: "number" }],
+        },
+      },
+      data: historyTrimmed,
+    };
 
-    const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=" + apiKey, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-    });
-    const json = await res.json();
-    const text = json?.candidates?.[0]?.content?.parts?.[0]?.text || "";
+    const genAI = new GoogleGenerativeAI(apiKey);
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const result = await model.generateContent(JSON.stringify(prompt));
+    const text = result.response.text();
     const start = text.indexOf("{");
     const end = text.lastIndexOf("}") + 1;
     const parsed = JSON.parse(text.slice(start, end));
@@ -60,6 +74,9 @@ export default function SavingsInsightPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<any>(null);
+  const [testLoading, setTestLoading] = useState(false);
+  const [testResponse, setTestResponse] = useState<string | null>(null);
+  const [testError, setTestError] = useState<string | null>(null);
 
   useEffect(() => {
     const stored = localStorage.getItem("alerts");
@@ -83,6 +100,25 @@ export default function SavingsInsightPage() {
     run();
   }, [alerts]);
 
+  const testGemini = async () => {
+    try {
+      setTestLoading(true);
+      setTestError(null);
+      setTestResponse(null);
+      const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
+      if (!apiKey) throw new Error("API key not found. Set NEXT_PUBLIC_GEMINI_API_KEY.");
+      const genAI = new GoogleGenerativeAI(apiKey);
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+      const result = await model.generateContent("Hello Gemini! Can you confirm my API key works?");
+      const text = result.response.text();
+      setTestResponse(text || "No response text returned");
+    } catch (e: any) {
+      setTestError(e?.message || "Gemini test failed");
+    } finally {
+      setTestLoading(false);
+    }
+  };
+
   const categories: Category[] = useMemo(() => {
     const cats = result?.categories || [];
     return cats.map((c: any, i: number) => ({ name: c.name, total: Number(c.total) || 0, color: palette[i % palette.length] }));
@@ -94,6 +130,26 @@ export default function SavingsInsightPage() {
   return (
     <div style={{ position: "relative", minHeight: "100vh", backgroundColor: "#0f1115", color: "#f3f4f6", padding: 16, paddingBottom: 84 }}>
       <h2 style={{ margin: 0, marginBottom: 12, fontWeight: 800 }}>Savings insight</h2>
+      <div style={{ display: "flex", gap: 8, alignItems: "center", marginBottom: 12 }}>
+        <button
+          onClick={testGemini}
+          disabled={testLoading}
+          style={{
+            backgroundColor: testLoading ? "#374151" : "#2563eb",
+            color: "white",
+            padding: "6px 10px",
+            borderRadius: 8,
+            border: "1px solid #1f2937",
+            cursor: testLoading ? "not-allowed" : "pointer",
+          }}
+        >
+          {testLoading ? "Testing Gemini…" : "Test Gemini API"}
+        </button>
+        {testError && <span style={{ color: "#f87171" }}>Error: {testError}</span>}
+        {testResponse && !testError && (
+          <span style={{ color: "#a7f3d0" }}>{testResponse}</span>
+        )}
+      </div>
 
       {loading ? (
         <div style={{ opacity: 0.8 }}>Analyzing your transactions…</div>
