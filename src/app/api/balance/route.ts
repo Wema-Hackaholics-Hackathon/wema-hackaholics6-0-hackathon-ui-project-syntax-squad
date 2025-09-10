@@ -5,28 +5,31 @@ export async function GET() {
   // Random total balance between 500 and 20,000
   const totalBalance = Math.floor(Math.random() * (20000 - 500 + 1)) + 500;
 
-  // Random last month balance between 100 and 5,000
-  const lastMonthBalance = Math.floor(Math.random() * (5000 - 100 + 1)) + 100;
+  // Random last month balance between 500 and totalBalance for realism
+  const lastMonthBalance = Math.floor(Math.random() * (totalBalance - 500 + 1)) + 500;
 
-  // Random last month balance between 100 and 5,000
+  // Random last month spending between 100 and 5,000
   const lastMonthSpending = Math.floor(Math.random() * (5000 - 100 + 1)) + 100;
 
-  // Random this month spending, <= totalBalance
-  const thisMonthSpending = Math.floor(Math.random() * totalBalance);
+  // Random this month spending, within ±50% of lastMonthSpending for realistic trend
+  const minSpending = Math.max(0, Math.floor(lastMonthSpending * 0.5));
+  const maxSpending = Math.floor(lastMonthSpending * 1.5);
+  const thisMonthSpending = Math.floor(Math.random() * (maxSpending - minSpending + 1)) + minSpending;
 
-  // Calculate difference percentage
-  const diff = ((thisMonthSpending - lastMonthSpending) / lastMonthSpending) * 100;
-  const diffFormatted = (diff >= 0 ? "+" : "") + Math.round(diff) + "%";
+  // Calculate spending difference percentage
+  const spendingDiff = ((thisMonthSpending - lastMonthSpending) / lastMonthSpending) * 100;
+  const spendingDiffFormatted = (spendingDiff >= 0 ? "+" : "") + Math.round(spendingDiff) + "%";
 
-  // Calculate difference percentage
-  const savDiff = ((totalBalance - lastMonthBalance) / lastMonthBalance) * 100;
-  const savdiffFormatted = (savDiff >= 0 ? "+" : "") + Math.round(diff) + "%";
+  // Calculate savings difference percentage
+  const savingDiff = ((totalBalance - lastMonthBalance) / lastMonthBalance) * 100;
+  const savingDiffFormatted = (savingDiff >= 0 ? "+" : "") + Math.round(savingDiff) + "%";
 
   return NextResponse.json({
     totalBalance,
+    lastMonthBalance,
     lastMonthSpending,
     thisMonthSpending,
-    savingDifference: savdiffFormatted,
-    spendingDifference: diffFormatted,
+    spendingDifference: spendingDiffFormatted,
+    savingDifference: savingDiffFormatted,
   });
 }
