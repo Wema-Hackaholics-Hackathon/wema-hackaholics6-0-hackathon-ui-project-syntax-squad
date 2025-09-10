@@ -3,13 +3,23 @@ import { useState, useEffect } from "react";
 import HeaderGreeting from "@/components/ui/HeaderGreeting";
 import HistoryCard from "@/components/ui/HistoryCard";
 
+// Define the alert type
+interface Alert {
+  id: string | number;
+  title: string;
+  description: string;
+  date: string;
+  type: "credit" | "debit";
+  amount: number;
+}
+
 export default function HistoryPage() {
-  const [alerts, setAlerts] = useState<any[]>([]);
+  const [alerts, setAlerts] = useState<Alert[]>([]);
   const [scale, setScale] = useState(1);
 
   useEffect(() => {
     const stored = localStorage.getItem("alerts");
-    if (stored) setAlerts(JSON.parse(stored));
+    if (stored) setAlerts(JSON.parse(stored) as Alert[]);
     const interval = setInterval(() => {
       setScale(prev => (prev === 1 ? 1.1 : 1));
     }, 1000);
@@ -19,7 +29,7 @@ export default function HistoryPage() {
   const populateHistory = async () => {
     const res = await fetch("/api/alerts");
     const data = await res.json();
-    setAlerts(data.alerts);
+    setAlerts(data.alerts as Alert[]);
     localStorage.setItem("alerts", JSON.stringify(data.alerts));
   };
 
