@@ -10,7 +10,7 @@ import {
   Star,
   ChevronRight
 } from "lucide-react"
-import { Avatar } from "./ui/avatar"
+import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar"
 import { Button } from "./ui/button"
 import {
   DropdownMenu,

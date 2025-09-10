@@ -1,5 +1,7 @@
 import { ReactNode } from "react";
+import "@/styles/globals.css";
 import ThemeClientProvider from "../components/ThemeClientProvider";
+import EmotionCacheProvider from "@/components/EmotionCacheProvider";
 
 import type { Metadata } from "next";
 
@@ -11,10 +13,15 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
+      <head>
+        <meta name="emotion-insertion-point" content="" />
+      </head>
       <body>
-        <ThemeClientProvider>
-          {children}
-        </ThemeClientProvider>
+        <EmotionCacheProvider>
+          <ThemeClientProvider>
+            {children}
+          </ThemeClientProvider>
+        </EmotionCacheProvider>
       </body>
     </html>
   );
