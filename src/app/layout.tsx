@@ -1,7 +1,6 @@
-import "./globals.css";
 import { ReactNode } from "react";
-
-
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { light } from "@/theme";
 
 export const metadata = {
   title: "Spendlens",
@@ -11,8 +10,11 @@ export const metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body className="bg-gray-100 text-gray-900">
-        <main className="min-h-screen">{children}</main>
+      <body>
+        <ThemeProvider theme={light}>
+          <CssBaseline />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
