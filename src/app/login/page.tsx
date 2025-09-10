@@ -23,7 +23,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div style={{ position: "relative", minHeight: "100vh", backgroundColor: "#0f1115", color: "#f3f4f6", paddingBottom: 84 }}>
+    <div style={{ position: "relative", minHeight: "100vh", backgroundColor: "#000000", color: "#f3f4f6" }}>
       <HeaderGreeting scale={scale} name="Welcome to Spendlens" />
       <div style={{ padding: "0 16px" }}>
         <div
@@ -45,8 +45,7 @@ export default function LoginPage() {
           </form>
         </div>
       </div>
-      <QuickActions />
-      <Shortcuts />
+      {/* Removed bottom quick UI per request */}
     </div>
   );
 }

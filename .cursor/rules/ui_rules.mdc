@@ -1,0 +1,101 @@
+---
+description: to help design a great ui
+alwaysApply: false
+---
+
+
+ COPYWRITING RULES
+Say the most with the least.
+
+Every word should earn its place.
+
+Cut fluff. Eliminate redundancy.
+
+Example: Don’t say “Claim Voting Rewards” if the UI already says “Voting.”
+
+Label based on what the user is doing, not what you think the system is doing.
+
+If the user is claiming rewards, label it that way—not “earn tokens.”
+
+Prioritize clarity > cleverness.
+
+Simple, descriptive text wins.
+
+Outsource clarity checks.
+
+Screenshot your UI and ask ChatGPT for clearer, shorter alternatives (with context).
+
+🎨 VISUAL DESIGN RULES
+Visuals must serve a clear communication goal.
+
+If users can’t tell what matters instantly, you failed.
+
+Don't default to trendy effects.
+
+Gradients, shadows, and blur are tools, not decoration. Use them only if you can pull them off.
+
+If unsure, simplify.
+
+A clean, boring chart is better than a confusing, sexy one.
+
+Use repetition with purpose.
+
+Reuse visual patterns to create meaning and connection (e.g., pulsing dot in two parts of the UI = relationship).
+
+🌈 COLOR RULES
+Too much color = no hierarchy.
+
+If everything screams, nothing gets attention.
+
+Use the 60/30/10 rule.
+
+60% neutral (white, gray)
+
+30% complementary (black or muted tones)
+
+10% accent (your brand color)
+
+Assign meaning to colors.
+
+If red = alert or attention, don't spray it everywhere.
+
+Tints and shades > more colors.
+
+One color used well is more powerful than five used poorly.
+
+🅰️ TYPOGRAPHY RULES
+Limit font sizes and weights.
+
+Use only what’s needed. Every variation must serve a function.
+Use font variations intentionally.
+Consider monospace for numbers to improve readability and alignment.
+Typography = structure.
+It sets the rhythm, flow, and readability of the entire interface.
+
+📐 SPACING & STRUCTURE RULES
+Random spacing = amateur hour.
+
+Avoid arbitrary pixel values like 11px or 25px.
+
+Use the 8-point (or 4-point) grid system.
+
+
+Desgin like a Senior Level designer (7+ years):
+
+Design with restraint. Communicate more with less.
+
+Drive real business impact through clarity, precision, and usability.
+
+🎞️ HIDDEN RULE: DESIGN LIKE A FILMMAKER
+UI isn’t just static screens.
+
+It’s flow, rhythm, and emotion.
+
+Think: how does one screen transition into the next?
+
+Create experiences, not just layouts.
+
+Motion and storytelling matter.
+
+
+
