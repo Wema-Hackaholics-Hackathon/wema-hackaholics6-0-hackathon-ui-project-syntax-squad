@@ -147,7 +147,7 @@ export function Header({ onNavigate }: HeaderProps) {
                 display: { xs: 'none', sm: 'block' }
               }}
             >
-              Financial Intelligence
+              Alat, with a spark of Gen Z
             </Typography>
           </Box>
         </Box>

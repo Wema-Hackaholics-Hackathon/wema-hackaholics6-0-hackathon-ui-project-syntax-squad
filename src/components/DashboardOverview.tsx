@@ -195,7 +195,8 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
       </Card>
 
       {/* Quick Stats */}
-      <Grid2 container spacing={{ xs: 2, md: 3 }}>
+      <Box sx={{ mt: { xs: 4, md: 6 } }}>
+        <Grid2 container spacing={{ xs: 2, md: 3 }}>
         {quickStats.map((stat, index) => (
           <Grid2 size={{ xs: 6, md: 6 }} key={index}>
             <Card 
@@ -249,9 +250,10 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
           </Grid2>
         ))}
       </Grid2>
+      </Box>
 
       {/* Gamified Actions */}
-      <Box>
+      <Box sx={{ mt: { xs: 4, md: 6 } }}>
         <Typography variant="h6" fontWeight={700} sx={{ mb: 3, color: '#425563', fontSize: { xs: '1.1rem', md: '1.25rem' } }}>
           Your Missions 🎮
         </Typography>

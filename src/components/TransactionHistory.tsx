@@ -130,7 +130,8 @@ export function TransactionHistory() {
       </Card>
 
       {/* Summary Cards */}
-      <Grid2 container spacing={{ xs: 2, md: 3 }}>
+      <Box sx={{ mt: { xs: 4, md: 6 } }}>
+        <Grid2 container spacing={{ xs: 2, md: 3 }}>
         <Grid2 size={{ xs: 6, md: 4 }}>
           <Card sx={{ 
             p: { xs: 2, md: 3 }, 
@@ -227,16 +228,18 @@ export function TransactionHistory() {
             </CardContent>
           </Card>
         </Grid2>
-      </Grid2>
+       </Grid2>
+      </Box>
 
       {/* Search */}
-      <Card sx={{ 
-        p: { xs: 2, md: 3 },
-        borderRadius: 4,
-        background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(254,249,252,0.95) 100%)',
-        border: '1px solid rgba(174, 50, 142, 0.1)',
-        backdropFilter: 'blur(20px)',
-      }}>
+      <Box sx={{ mt: { xs: 4, md: 6 } }}>
+        <Card sx={{ 
+          p: { xs: 2, md: 3 },
+          borderRadius: 4,
+          background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(254,249,252,0.95) 100%)',
+          border: '1px solid rgba(174, 50, 142, 0.1)',
+          backdropFilter: 'blur(20px)',
+        }}>
         <CardContent sx={{ p: 0 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
             <Search size={20} color="#425563" />
@@ -256,14 +259,15 @@ export function TransactionHistory() {
               }}
             />
           </Box>
-        </CardContent>
-      </Card>
+         </CardContent>
+       </Card>
+      </Box>
 
       {/* Add Transaction Component */}
       {showAddTransaction && <AddTransaction />}
 
       {/* Transactions List */}
-      <Box>
+      <Box sx={{ mt: { xs: 4, md: 6 } }}>
         <Typography variant="h6" fontWeight={700} sx={{ mb: 3, color: '#425563' }}>
           Recent Transactions ({filteredTransactions.length})
         </Typography>

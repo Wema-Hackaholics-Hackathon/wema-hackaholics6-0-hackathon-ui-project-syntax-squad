@@ -104,7 +104,7 @@ export function ALATLensApp() {
               <Box sx={{ 
                 display: 'flex',
                 flexDirection: 'column',
-                gap: { xs: 2, md: 3 }
+                gap: { xs: 4, md: 6 }
               }}>
                 {renderActiveView()}
               </Box>
