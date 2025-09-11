@@ -1,273 +1,278 @@
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
-import { Button } from "./ui/button"
-import { Badge } from "./ui/badge"
-import { Progress } from "./ui/progress"
-import { Switch } from "./ui/switch"
 import { 
   Target, 
-  PiggyBank, 
-  Zap, 
-  TrendingUp,
-  Coffee,
-  ShoppingCart,
-  Fuel,
-  Plus,
+  Zap,
   CheckCircle,
-  Clock
+  Plus
 } from "lucide-react"
+import Grid2 from "@mui/material/Grid2"
+import Box from "@mui/material/Box"
+import Typography from "@mui/material/Typography"
+import Button from "@mui/material/Button"
+import Switch from "@mui/material/Switch"
+import Card from "@mui/material/Card"
+import CardContent from "@mui/material/CardContent"
+import { useState } from "react"
 
 interface MicroAction {
   id: string
   name: string
   description: string
-  trigger: string
-  action: string
   isActive: boolean
   totalSaved: number
-  icon: any
-  category: string
-}
-
-interface SavingsGoal {
-  id: string
-  name: string
-  target: number
-  current: number
-  deadline: string
-  linkedActions: number
-  icon: any
+  emoji: string
+  color: string
 }
 
 const microActions: MicroAction[] = [
   {
     id: "1",
-    name: "Coffee Round-Up",
-    description: "Round up coffee purchases to the nearest ₦100 and save the difference",
-    trigger: "Coffee/Restaurant purchases",
-    action: "Round up + save difference",
+    name: "Round Up Savings",
+    description: "Round up purchases to the nearest ₦100",
     isActive: true,
-    totalSaved: 2450,
-    icon: Coffee,
-    category: "Round-Up Savings"
+    totalSaved: 2340,
+    emoji: "🔄",
+    color: "#10b981"
   },
   {
     id: "2", 
-    name: "Fuel Efficiency Bonus",
-    description: "Save ₦200 every time you spend less than ₦15,000 on fuel",
-    trigger: "Fuel purchase < ₦15,000",
-    action: "Save ₦200 bonus",
-    isActive: true,
-    totalSaved: 1800,
-    icon: Fuel,
-    category: "Bonus Savings"
-  },
-  {
-    id: "3",
-    name: "Shopping Limit Reward",
-    description: "Save 5% when grocery spending stays under ₦25,000/week",
-    trigger: "Weekly grocery < ₦25,000",
-    action: "Save 5% of purchase",
+    name: "Coffee Challenge",
+    description: "Skip 1 coffee per week, save ₦500",
     isActive: false,
     totalSaved: 0,
-    icon: ShoppingCart,
-    category: "Goal-Based"
-  },
-  {
-    id: "4",
-    name: "Weekend Surplus",
-    description: "Transfer any unspent weekend budget to savings on Monday",
-    trigger: "Monday morning",
-    action: "Save weekend surplus",
-    isActive: true,
-    totalSaved: 5200,
-    icon: PiggyBank,
-    category: "Budget-Based"
-  }
-]
-
-const savingsGoals: SavingsGoal[] = [
-  {
-    id: "1",
-    name: "Emergency Fund",
-    target: 500000,
-    current: 125000,
-    deadline: "Dec 2025",
-    linkedActions: 3,
-    icon: Target
-  },
-  {
-    id: "2",
-    name: "New Laptop",
-    target: 850000,
-    current: 340000,
-    deadline: "Mar 2025",
-    linkedActions: 2,
-    icon: Zap
+    emoji: "☕",
+    color: "#f59e0b"
   },
   {
     id: "3",
-    name: "Vacation Fund",
-    target: 300000,
-    current: 89000,
-    deadline: "Jun 2025",
-    linkedActions: 1,
-    icon: TrendingUp
+    name: "Smart Subscriptions",
+    description: "Auto-cancel unused subscriptions",
+    isActive: true,
+    totalSaved: 4200,
+    emoji: "🎯",
+    color: "#8b5cf6"
   }
 ]
 
-const formatCurrency = (amount: number) => {
-  return new Intl.NumberFormat('en-NG', {
-    style: 'currency',
-    currency: 'NGN'
-  }).format(amount)
-}
-
 export function MicroActions() {
+  const [actions, setActions] = useState(microActions)
+
+  const toggleAction = (actionId: string) => {
+    setActions(actions.map(action => 
+      action.id === actionId 
+        ? { ...action, isActive: !action.isActive }
+        : action
+    ))
+  }
+
+  const totalSavings = actions
+    .filter(action => action.isActive)
+    .reduce((sum, action) => sum + action.totalSaved, 0)
+
   return (
-    <div className="space-y-6">
-      {/* Active Micro-Actions */}
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between">
-          <div>
-            <CardTitle className="flex items-center gap-2">
-              <Zap className="h-5 w-5" />
-              Micro-Action Triggers
-            </CardTitle>
-            <p className="text-sm text-muted-foreground">
-              Automatic savings based on your spending patterns
-            </p>
-          </div>
-          <Button variant="outline" size="sm">
-            <Plus className="h-4 w-4 mr-1" />
-            New Rule
-          </Button>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {microActions.map((action) => (
-              <div key={action.id} className="flex items-center justify-between p-4 rounded-lg border bg-card">
-                <div className="flex items-center gap-4">
-                  <div className={`p-2 rounded-lg ${
-                    action.isActive ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-600'
-                  }`}>
-                    <action.icon className="h-4 w-4" />
-                  </div>
-                  
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <h4 className="font-medium text-sm">{action.name}</h4>
-                      <Badge variant="secondary" className="text-xs">
-                        {action.category}
-                      </Badge>
-                      {action.isActive && (
-                        <Badge variant="secondary" className="bg-green-100 text-green-800 text-xs">
-                          <CheckCircle className="h-3 w-3 mr-1" />
-                          Active
-                        </Badge>
-                      )}
-                    </div>
-                    <p className="text-sm text-muted-foreground mb-1">{action.description}</p>
-                    <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                      <span>Trigger: {action.trigger}</span>
-                      <span>•</span>
-                      <span>Total saved: {formatCurrency(action.totalSaved)}</span>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="flex items-center gap-3">
-                  <Switch checked={action.isActive} />
-                  <Button variant="ghost" size="sm">
-                    Edit
-                  </Button>
-                </div>
-              </div>
-            ))}
-          </div>
+    <div className="space-y-4 md:space-y-6">
+      {/* Header */}
+      <Card sx={{ 
+        p: { xs: 2, md: 3 }, 
+        borderRadius: 4, 
+        background: 'linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%)',
+        boxShadow: '0 12px 40px rgba(139, 92, 246, 0.3)',
+        border: 'none',
+        position: 'relative',
+        overflow: 'hidden',
+      }}>
+        <Box sx={{ 
+          position: 'absolute', 
+          top: -20, 
+          right: -20, 
+          fontSize: '120px', 
+          opacity: 0.1,
+          color: 'white',
+          pointerEvents: 'none'
+        }}>
+          ⚡
+        </Box>
+        <CardContent sx={{ position: 'relative', zIndex: 1 }}>
+          <Typography variant="h4" color="white" fontWeight={800} gutterBottom sx={{ 
+            fontSize: { xs: '1.5rem', md: '2rem' },
+            fontFamily: '"Inter", sans-serif'
+          }}>
+            Micro Actions ⚡
+          </Typography>
+          <Typography color="white" sx={{ opacity: 0.9, fontWeight: 500, fontSize: { xs: '0.9rem', md: '1rem' } }}>
+            Small actions, big savings! Set it and forget it.
+          </Typography>
         </CardContent>
       </Card>
 
-      {/* Savings Goals */}
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between">
-          <div>
-            <CardTitle className="flex items-center gap-2">
-              <Target className="h-5 w-5" />
-              Linked Savings Goals
-            </CardTitle>
-            <p className="text-sm text-muted-foreground">
-              Goals connected to your micro-actions
-            </p>
-          </div>
-          <Button variant="outline" size="sm">
-            <Plus className="h-4 w-4 mr-1" />
-            New Goal
-          </Button>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {savingsGoals.map((goal) => (
-              <div key={goal.id} className="p-4 rounded-lg border bg-card">
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-blue-100 rounded-lg">
-                      <goal.icon className="h-4 w-4 text-blue-600" />
-                    </div>
-                    <div>
-                      <h4 className="font-medium">{goal.name}</h4>
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <Clock className="h-3 w-3" />
-                        <span>Target: {goal.deadline}</span>
-                        <span>•</span>
-                        <span>{goal.linkedActions} micro-actions linked</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <p className="font-medium">{formatCurrency(goal.current)}</p>
-                    <p className="text-sm text-muted-foreground">of {formatCurrency(goal.target)}</p>
-                  </div>
-                </div>
-                
-                <div className="space-y-2">
-                  <Progress 
-                    value={(goal.current / goal.target) * 100} 
-                    className="h-2" 
-                  />
-                  <div className="flex justify-between text-xs text-muted-foreground">
-                    <span>{Math.round((goal.current / goal.target) * 100)}% complete</span>
-                    <span>{formatCurrency(goal.target - goal.current)} remaining</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+      {/* Total Savings */}
+      <Card sx={{ 
+        p: { xs: 2, md: 3 },
+        borderRadius: 4,
+        background: 'linear-gradient(135deg, #10b98115 0%, #10b98125 100%)',
+        border: '1px solid #10b98130',
+        backdropFilter: 'blur(20px)',
+      }}>
+        <CardContent sx={{ p: 0, textAlign: 'center' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 2, mb: 2 }}>
+            <CheckCircle size={24} color="#10b981" />
+            <Typography variant="h6" fontWeight={700} sx={{ color: '#10b981' }}>
+              Total Saved This Month
+            </Typography>
+          </Box>
+          <Typography variant="h3" fontWeight={800} sx={{ color: '#10b981', mb: 1 }}>
+            ₦{totalSavings.toLocaleString()}
+          </Typography>
+          <Typography variant="body2" sx={{ color: '#6b7280' }}>
+            From {actions.filter(a => a.isActive).length} active micro actions
+          </Typography>
         </CardContent>
       </Card>
 
-      {/* Performance Summary */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <PiggyBank className="h-5 w-5" />
-            Micro-Actions Performance
-          </CardTitle>
-        </CardHeader>
+      {/* Micro Actions List */}
+      <Box>
+        <Typography variant="h6" fontWeight={700} sx={{ mb: 3, color: '#425563' }}>
+          Your Micro Actions 🎯
+        </Typography>
+        <Grid2 container spacing={{ xs: 2, md: 3 }}>
+          {actions.map((action) => (
+            <Grid2 size={{ xs: 12, md: 6 }} key={action.id}>
+              <Card sx={{ 
+                p: { xs: 2, md: 3 },
+                borderRadius: 4,
+                background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(254,249,252,0.95) 100%)',
+                border: `1px solid ${action.color}20`,
+                backdropFilter: 'blur(20px)',
+                transition: 'all 0.3s ease',
+                position: 'relative',
+                overflow: 'hidden',
+                '&:hover': {
+                  transform: 'translateY(-4px)',
+                  boxShadow: `0 16px 48px ${action.color}20`,
+                }
+              }}>
+                <Box sx={{ 
+                  position: 'absolute', 
+                  top: -15, 
+                  right: -15, 
+                  fontSize: { xs: '60px', md: '80px' }, 
+                  opacity: 0.1 
+                }}>
+                  {action.emoji}
+                </Box>
+                <CardContent sx={{ position: 'relative', zIndex: 1, p: 0 }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                      <Box sx={{ 
+                        width: 40, 
+                        height: 40, 
+                        borderRadius: 2, 
+                        background: `${action.color}15`,
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        justifyContent: 'center',
+                        border: `1px solid ${action.color}30`,
+                      }}>
+                        <Typography sx={{ fontSize: '18px' }}>{action.emoji}</Typography>
+                      </Box>
+                      <Typography variant="h6" fontWeight={700} sx={{ 
+                        color: action.color,
+                        fontSize: { xs: '1rem', md: '1.1rem' }
+                      }}>
+                        {action.name}
+                      </Typography>
+                    </Box>
+                    <Switch
+                      checked={action.isActive}
+                      onChange={() => toggleAction(action.id)}
+                      sx={{
+                        '& .MuiSwitch-switchBase.Mui-checked': {
+                          color: action.color,
+                        },
+                        '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+                          backgroundColor: action.color,
+                        },
+                      }}
+                    />
+                  </Box>
+                  <Typography variant="body2" sx={{ 
+                    color: '#425563', 
+                    fontWeight: 500, 
+                    mb: 2,
+                    fontSize: { xs: '0.85rem', md: '0.9rem' }
+                  }}>
+                    {action.description}
+                  </Typography>
+                  {action.isActive && (
+                    <Box sx={{ 
+                      background: `${action.color}10`,
+                      borderRadius: 2,
+                      p: 1.5,
+                      border: `1px solid ${action.color}20`
+                    }}>
+                      <Typography variant="subtitle2" fontWeight={600} sx={{ color: action.color }}>
+                        💰 Saved: ₦{action.totalSaved.toLocaleString()}
+                      </Typography>
+                    </Box>
+                  )}
+                  {!action.isActive && (
+                    <Button
+                      fullWidth
+                      onClick={() => toggleAction(action.id)}
+                      startIcon={<Plus size={16} />}
+                      sx={{
+                        background: `linear-gradient(135deg, ${action.color} 0%, ${action.color}dd 100%)`,
+                        color: 'white',
+                        borderRadius: 3,
+                        fontWeight: 700,
+                        py: 1,
+                        '&:hover': {
+                          background: `linear-gradient(135deg, ${action.color}dd 0%, ${action.color}bb 100%)`,
+                        }
+                      }}
+                    >
+                      Activate
+                    </Button>
+                  )}
+                </CardContent>
+              </Card>
+            </Grid2>
+          ))}
+        </Grid2>
+      </Box>
+
+      {/* Suggestions */}
+      <Card sx={{ 
+        p: { xs: 2, md: 3 },
+        borderRadius: 4,
+        background: 'linear-gradient(135deg, #06b6d415 0%, #06b6d425 100%)',
+        border: '1px solid #06b6d430',
+      }}>
         <CardContent>
-          <div className="grid grid-cols-3 gap-4">
-            <div className="text-center p-3 rounded-lg bg-green-50 border border-green-200">
-              <p className="text-2xl font-medium text-green-600">₦9,450</p>
-              <p className="text-sm text-muted-foreground">Total Saved</p>
-            </div>
-            <div className="text-center p-3 rounded-lg bg-blue-50 border border-blue-200">
-              <p className="text-2xl font-medium text-blue-600">47</p>
-              <p className="text-sm text-muted-foreground">Actions This Month</p>
-            </div>
-            <div className="text-center p-3 rounded-lg bg-purple-50 border border-purple-200">
-              <p className="text-2xl font-medium text-purple-600">₦1,890</p>
-              <p className="text-sm text-muted-foreground">Avg. Monthly</p>
-            </div>
-          </div>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
+            <Target size={24} color="#06b6d4" />
+            <Typography variant="h6" fontWeight={700} sx={{ color: '#06b6d4' }}>
+              Suggested Actions 💡
+            </Typography>
+          </Box>
+          <Typography variant="body2" sx={{ color: '#425563', mb: 3 }}>
+            Based on your spending patterns, here are some actions that could save you money:
+          </Typography>
+          <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+            {['Weekend Spending Limit', 'Fuel Tracker', 'Subscription Monitor'].map((suggestion, index) => (
+              <Box key={index} sx={{ 
+                background: '#06b6d415',
+                border: '1px solid #06b6d430',
+                borderRadius: 2,
+                px: 2,
+                py: 1,
+                fontSize: '0.85rem',
+                color: '#06b6d4',
+                fontWeight: 600
+              }}>
+                {suggestion}
+              </Box>
+            ))}
+          </Box>
         </CardContent>
       </Card>
     </div>

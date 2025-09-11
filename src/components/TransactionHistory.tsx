@@ -1,4 +1,3 @@
-import { Card, CardContent } from "./ui/card"
 import { 
   ArrowUpRight, 
   ArrowDownLeft,
@@ -9,6 +8,8 @@ import Grid2 from "@mui/material/Grid2"
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import Button from "@mui/material/Button"
+import Card from "@mui/material/Card"
+import CardContent from "@mui/material/CardContent"
 import { useState } from "react"
 
 interface Transaction {
