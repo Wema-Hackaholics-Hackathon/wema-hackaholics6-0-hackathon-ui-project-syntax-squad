@@ -123,14 +123,7 @@ export function AuthOverlay({ onAuthSuccess }: AuthOverlayProps) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[9999] bg-background/80 dark:bg-slate-900/90 backdrop-blur-xl"
-      style={{ 
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        minHeight: '100vh',
-        padding: '1rem'
-      }}
+      className="fixed inset-0 z-[9999] grid place-items-center p-4 bg-background/80 dark:bg-slate-900/90 backdrop-blur-xl"
     >
       <motion.div
         initial={{ scale: 0.9, y: 20 }}
