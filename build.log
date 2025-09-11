@@ -1,7 +1,7 @@
  ⚠ Linting is disabled.
    ▲ Next.js 15.5.2
 
-   Creating an optimized production build ...
+  Creating an optimized production build ...
 Failed to compile.
 
 ./src/components/ui/button.tsx
