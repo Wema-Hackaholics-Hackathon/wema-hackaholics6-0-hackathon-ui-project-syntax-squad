@@ -1,11 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
-import { Badge } from "./ui/badge"
-import { Button } from "./ui/button"
 import { 
-  Brain, 
-  TrendingUp, 
-  Target, 
-  Lightbulb,
   ArrowRight,
   Zap,
   Trophy
@@ -14,12 +7,14 @@ import Grid2 from "@mui/material/Grid2"
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import { LinearProgress } from "@mui/material"
+import Card from "@mui/material/Card"
+import CardContent from "@mui/material/CardContent"
+import Button from "@mui/material/Button"
 
 interface SimpleInsight {
   id: string
   title: string
   description: string
-  impact: 'high' | 'medium' | 'low'
   emoji: string
   color: string
   actionText: string
@@ -30,7 +25,6 @@ const sparkInsights: SimpleInsight[] = [
     id: "1",
     title: "Save on Food Delivery 🍕",
     description: "Cook 2 more meals at home this week to save ₦3,500",
-    impact: "high",
     emoji: "🍳",
     color: "#10b981",
     actionText: "Start Cooking Challenge"
@@ -39,7 +33,6 @@ const sparkInsights: SimpleInsight[] = [
     id: "2", 
     title: "Subscription Detective 🔍",
     description: "Found 2 unused subscriptions worth ₦4,200/month",
-    impact: "high",
     emoji: "💰",
     color: "#f59e0b",
     actionText: "Cancel Subscriptions"
@@ -48,7 +41,6 @@ const sparkInsights: SimpleInsight[] = [
     id: "3",
     title: "Weekend Warrior 🎉",
     description: "You spend 40% more on weekends. Set a limit?",
-    impact: "medium",
     emoji: "🎯",
     color: "#8b5cf6",
     actionText: "Set Weekend Budget"
@@ -188,7 +180,6 @@ export function PaymentIntelligence() {
                     {insight.description}
                   </Typography>
                   <Button
-                    variant="contained"
                     fullWidth
                     endIcon={<ArrowRight size={16} />}
                     sx={{
@@ -309,7 +300,7 @@ export function PaymentIntelligence() {
             mb: 2,
             fontSize: { xs: '0.9rem', md: '1rem' }
           }}>
-            You saved ₦3,200 more than last week! Keep it up! 💪
+            You&apos;ve helped friends save ₦25,000 this month through smart splits! 💰
           </Typography>
           <LinearProgress 
             variant="determinate" 

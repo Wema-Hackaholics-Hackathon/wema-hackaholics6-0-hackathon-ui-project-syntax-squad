@@ -1,4 +1,4 @@
-import { ArrowRight, TrendingUp, Wallet, Trophy, Target } from "lucide-react";
+import { ArrowRight, TrendingUp, Wallet, Trophy } from "lucide-react";
 import Grid2 from "@mui/material/Grid2";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { LinearProgress } from "@mui/material";
+import { useState } from "react";
 
 interface DashboardOverviewProps {
   onNavigate: (view: string) => void;
@@ -50,6 +51,7 @@ const gamifiedActions = [
     view: "dashboard",
     emoji: "🎯",
     color: "#AE328E",
+    actionType: "savings"
   },
   {
     title: "Weekly Challenge 💪",
@@ -59,6 +61,7 @@ const gamifiedActions = [
     view: "intelligence",
     emoji: "⚡",
     color: "#8b5cf6",
+    actionType: "challenge"
   },
   {
     title: "Squad Goals 👥",
@@ -68,10 +71,32 @@ const gamifiedActions = [
     view: "social",
     emoji: "🤝",
     color: "#06b6d4",
+    actionType: "social"
   },
 ];
 
 export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [balanceVisible, setBalanceVisible] = useState(true);
+
+  const handleActionClick = (actionType: string, view: string) => {
+    switch (actionType) {
+      case 'savings':
+        setShowSuccess(true);
+        setTimeout(() => setShowSuccess(false), 2000);
+        break;
+      case 'challenge':
+      case 'social':
+        onNavigate(view);
+        break;
+      default:
+        onNavigate(view);
+    }
+  };
+
+  const toggleBalance = () => {
+    setBalanceVisible(!balanceVisible);
+  };
   return (
     <div className="space-y-4 md:space-y-6">
       {/* Welcome Section with Level */}
@@ -137,19 +162,21 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
       <Grid2 container spacing={{ xs: 2, md: 3 }}>
         {quickStats.map((stat, index) => (
           <Grid2 size={{ xs: 6, md: 6 }} key={index}>
-            <Card sx={{ 
-              p: { xs: 2, md: 3 }, 
-              borderRadius: 4,
-              background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(254,249,252,0.95) 100%)',
-              border: '1px solid rgba(174, 50, 142, 0.1)',
-              backdropFilter: 'blur(20px)',
-              transition: 'all 0.3s ease',
-              cursor: 'pointer',
-              '&:hover': {
-                transform: 'translateY(-4px) scale(1.02)',
-                boxShadow: '0 16px 48px rgba(174, 50, 142, 0.2)',
-              }
-            }}>
+            <Card 
+              onClick={toggleBalance}
+              sx={{ 
+                p: { xs: 2, md: 3 }, 
+                borderRadius: 4,
+                background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(254,249,252,0.95) 100%)',
+                border: '1px solid rgba(174, 50, 142, 0.1)',
+                backdropFilter: 'blur(20px)',
+                transition: 'all 0.3s ease',
+                cursor: 'pointer',
+                '&:hover': {
+                  transform: 'translateY(-4px) scale(1.02)',
+                  boxShadow: '0 16px 48px rgba(174, 50, 142, 0.2)',
+                }
+              }}>
               <Box sx={{ textAlign: 'center' }}>
                 <Box sx={{ 
                   width: 48, 
@@ -169,7 +196,7 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
                   {stat.title}
                 </Typography>
                 <Typography variant="h5" fontWeight={800} sx={{ color: stat.color, mb: 1, fontSize: { xs: '1.3rem', md: '1.5rem' } }}>
-                  {stat.value}
+                  {balanceVisible ? stat.value : '••••••'}
                 </Typography>
                 <Typography variant="caption" sx={{ 
                   color: stat.changeType === 'positive' ? '#10b981' : '#ef4444',
@@ -179,7 +206,7 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
                   py: 0.5,
                   borderRadius: 2,
                 }}>
-                  {stat.change}
+                  {balanceVisible ? stat.change : '•••'}
                 </Typography>
               </Box>
             </Card>
@@ -274,23 +301,25 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
                   <Button
                     variant="contained"
                     fullWidth
-                    onClick={() => onNavigate(action.view)}
+                    onClick={() => handleActionClick(action.actionType, action.view)}
                     endIcon={<ArrowRight size={16} />}
                     sx={{
-                      background: `linear-gradient(135deg, ${action.color} 0%, ${action.color}dd 100%)`,
+                      background: showSuccess && action.actionType === 'savings' 
+                        ? 'linear-gradient(135deg, #10b981 0%, #059669 100%)'
+                        : `linear-gradient(135deg, ${action.color} 0%, ${action.color}dd 100%)`,
                       color: 'white',
                       borderRadius: 3,
                       fontWeight: 700,
-                      py: 1,
-                      boxShadow: `0 6px 20px ${action.color}30`,
+                      py: 1.2,
+                      boxShadow: `0 8px 24px ${action.color}30`,
                       '&:hover': {
                         background: `linear-gradient(135deg, ${action.color}dd 0%, ${action.color}bb 100%)`,
-                        boxShadow: `0 8px 24px ${action.color}40`,
-                        transform: 'translateY(-1px)',
+                        boxShadow: `0 12px 32px ${action.color}40`,
+                        transform: 'translateY(-2px)',
                       }
                     }}
                   >
-                    {action.action}
+                    {showSuccess && action.actionType === 'savings' ? '✅ Boosted!' : action.action}
                   </Button>
                 </CardContent>
               </Card>
