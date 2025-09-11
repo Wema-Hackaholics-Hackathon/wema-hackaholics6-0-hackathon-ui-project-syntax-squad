@@ -136,15 +136,10 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
   return (
     <div>
       {/* Welcome Section with Level */}
-      <Card sx={{ 
-        p: { xs: 2, md: 3 }, 
-        borderRadius: 4, 
-        background: 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)',
-        boxShadow: '0 12px 40px rgba(174, 50, 142, 0.3)',
-        border: 'none',
-        position: 'relative',
-        overflow: 'hidden',
-      }}>
+      <Card className="p-6 rounded-2xl bg-gradient-to-br from-primary to-purple-600 shadow-xl border-none relative overflow-hidden"
+        sx={{ 
+          boxShadow: '0 12px 40px rgba(174, 50, 142, 0.3)',
+        }}>
         <Box sx={{ 
           position: 'absolute', 
           top: -20, 
@@ -235,13 +230,10 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
                 <Typography variant="h5" fontWeight={800} sx={{ color: stat.color, mb: 1, fontSize: { xs: '1.3rem', md: '1.5rem' } }}>
                   {balanceVisible ? stat.value : '••••••'}
                 </Typography>
-                <Typography variant="caption" sx={{ 
-                  color: stat.changeType === 'positive' ? '#AE328E' : '#425563',
+                <Typography variant="caption" className="text-sm font-medium px-2 py-1 rounded-lg" sx={{ 
+                  color: stat.changeType === 'positive' ? 'hsl(var(--primary))' : 'hsl(var(--muted-foreground))',
+                  backgroundColor: stat.changeType === 'positive' ? 'hsl(var(--primary)/.1)' : 'hsl(var(--muted)/.3)',
                   fontSize: { xs: '0.8rem', md: '0.9rem' },
-                  background: stat.changeType === 'positive' ? '#AE328E15' : '#42556315',
-                  px: 1,
-                  py: 0.5,
-                  borderRadius: 2,
                 }}>
                   {balanceVisible ? stat.change : '•••'}
                 </Typography>
@@ -254,26 +246,19 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
 
       {/* Gamified Actions */}
       <Box sx={{ mt: { xs: 4, md: 6 } }}>
-        <Typography variant="h6" fontWeight={700} sx={{ mb: 3, color: '#425563', fontSize: { xs: '1.1rem', md: '1.25rem' } }}>
+        <Typography variant="h6" fontWeight={700} className="text-foreground" sx={{ mb: 3, fontSize: { xs: '1.1rem', md: '1.25rem' } }}>
           Your Missions 🎮
         </Typography>
         <Grid2 container spacing={{ xs: 2, md: 3 }}>
           {gamifiedActions.map((action, index) => (
             <Grid2 size={{ xs: 12, md: 6, xl: 4 }} key={index}>
-              <Card sx={{ 
-                p: { xs: 2, md: 3 },
-                borderRadius: 4,
-                background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(254,249,252,0.95) 100%)',
-                border: `1px solid ${action.color}20`,
-                backdropFilter: 'blur(20px)',
-                transition: 'all 0.3s ease',
-                position: 'relative',
-                overflow: 'hidden',
-                '&:hover': {
-                  transform: 'translateY(-4px)',
-                  boxShadow: `0 16px 48px ${action.color}20`,
-                }
-              }}>
+              <Card className="p-6 rounded-2xl border border-border bg-card/80 backdrop-blur-lg hover:scale-[1.02] transition-all duration-300 relative overflow-hidden shadow-lg hover:shadow-xl"
+                sx={{ 
+                  border: `1px solid ${action.color}20`,
+                  '&:hover': {
+                    boxShadow: `0 16px 48px ${action.color}20`,
+                  }
+                }}>
                 <Box sx={{ 
                   position: 'absolute', 
                   top: -10, 
