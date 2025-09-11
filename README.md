@@ -1,76 +1,75 @@
-# Alat spark
+# ✨ Alat Spark
 
-
-
-## Team Members
-- Ilori Oluwagbenga
-- Nathaniel Anthony
-- Bakrin Rufaydah
-- Oyedeji Samuel
-
----
-
-## 🚀 Live Demo
-
-*   **Live Application:** [Alat spark](https://alat-spark.vercel.app/)
-*   **Recorded Demo:** [Link to your recorded demo explaining how your solution works using Loom].
-
+<div align="center">
+  <img src="public/logo.webp" alt="Alat Spark Logo" width="120" height="120"/>
+  
+  **Intelligent financial insights powered by modern technology**
+  
+  [![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)](https://alat-spark.vercel.app/)
+  [![Built with Next.js](https://img.shields.io/badge/Built%20with-Next.js-black)](https://nextjs.org/)
+</div>
 
 ---
 
-## 🎯 The Problem
+## 👥 Team Syntax Squad
+- **Ilori Oluwagbenga** - Full Stack Developer
+- **Nathaniel Anthony** - Frontend Developer  
+- **Bakrin Rufaydah** - UI/UX Designer
+- **Oyedeji Samuel** - Backend Developer
 
-*Which "How Might We..." question from the challenge brief are you tackling? Show the format by providing an example below.*
+---
 
-> **Example:** How might we help busy people organize their daily tasks more effectively?
+## 🎯 Overview
 
-## ✨ Our Solution
+Alat Spark reimagines financial management through intelligent insights and seamless user experiences. Our platform combines modern banking interfaces with smart analytics to help users better understand and control their financial journey.
 
-*Provide a short, high-level description of your project. What is your unique idea? What does it do? How does it solve the problem?*
-
-**Example:**
-"Our project, 'Alat spark,' is a clean and simple to-do list application. It allows users to add tasks, mark them as complete, and sort them by priority. The goal is to provide a straightforward tool to help users stay organized."
+### Key Features
+- 📊 **Dashboard Analytics** - Visual spending insights and trends
+- 💳 **Transaction Management** - Smart categorization and tracking
+- 🎯 **Financial Goals** - Personalized recommendations and alerts
+- 📱 **Mobile-First Design** - Responsive across all devices
 
 ---
 
 ## 🛠️ Tech Stack
 
-*List the major technologies, frameworks, and platforms you used to build your project.*
-
-*   **Frontend:** (e.g., React, Next.js, Tailwind CSS)
-*   **Backend:** (e.g., Node.js with Serverless Functions on Vercel)
-*   **Database:** (e.g., PostgreSQL via Supabase)
-*   **Deployment:** (e.g., Vercel)
-*   **AI/APIs:** (e.g., Google Gemini API)
+- **Frontend:** Next.js 15, React 19, TypeScript
+- **Styling:** Tailwind CSS, Framer Motion
+- **UI Components:** Radix UI, Lucide Icons
+- **Charts:** Recharts
+- **AI Integration:** Google Generative AI
+- **Deployment:** Vercel
 
 ---
 
-## ⚙️ How to Set Up and Run Locally (Optional)
+## 🚀 Quick Start
 
-*Briefly explain the steps to get your project running on a local machine.*
+```bash
+# Clone repository
+git clone <repository-url>
+cd syntaxsquad
 
-**Example:**
+# Install dependencies
+npm install
 
-1.  Clone the repository:
-    ```bash
-    git clone [your-repo-link]
-    ```
-2.  Navigate to the project directory:
-    ```bash
-    cd [project-directory]
-    ```
-3.  Install dependencies:
-    ```bash
-    npm install
-    ```
-4.  Create a `.env.local` file and add the necessary environment variables:
-    ```
-    DATABASE_URL=...
-    API_KEY=...
-    ```
-5.  Run the development server:
-    ```bash
-    npm run dev
-    ```
+# Start development server
+npm run dev
+```
 
-## Roadmap
+Visit `http://localhost:3000` to see the application.
+
+---
+
+## 🔮 Future Roadmap
+
+- Advanced AI-powered financial recommendations
+- Integration with multiple banking APIs
+- Enhanced data visualization and reporting
+- Mobile app development
+- Multi-currency support
+
+---
+
+<div align="center">
+  <strong>Built with ❤️ by Team Syntax Squad</strong>
+</div>
