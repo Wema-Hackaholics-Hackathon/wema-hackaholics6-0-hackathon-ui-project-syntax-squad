@@ -21,7 +21,7 @@ export default function EmotionCacheProvider({ children, options }: Props) {
   useServerInsertedHTML(() => (
     <style
       data-emotion={`${cache.key} ${Object.keys(cache.inserted).join(" ")}`}
-      // eslint-disable-next-line react/no-danger
+       
       dangerouslySetInnerHTML={{
         __html: Object.values(cache.inserted).join(" "),
       }}
