@@ -1,7 +1,7 @@
 import { Bell, X, Check, AlertTriangle, Info, DollarSign, Users, Target } from "lucide-react"
 import { useState } from "react"
 import { Button } from "./ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
+import { Card, CardContent } from "./ui/card"
 import { Badge } from "./ui/badge"
 import { ScrollArea } from "./ui/scroll-area"
 
@@ -98,12 +98,12 @@ export function NotificationsPanel({ isOpen, onClose }: NotificationsPanelProps)
     <>
       {/* Overlay */}
       <div 
-        className="fixed inset-0 bg-black/20 z-40 md:hidden"
+        className="fixed inset-0 bg-black/20 z-[1300] md:hidden"
         onClick={onClose}
       />
       
       {/* Panel */}
-      <div className="fixed top-0 right-0 h-full w-full md:w-96 bg-white border-l border-pink-200 shadow-alat-xl z-50 flex flex-col">
+      <div className="fixed top-0 right-0 h-full w-full md:w-96 bg-white border-l border-pink-200 shadow-alat-xl z-[1400] flex flex-col">
         {/* Header */}
         <div className="p-4 border-b border-pink-200 bg-gradient-alat">
           <div className="flex items-center justify-between">
