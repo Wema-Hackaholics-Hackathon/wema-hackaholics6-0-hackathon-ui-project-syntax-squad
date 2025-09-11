@@ -67,7 +67,7 @@ export function TransactionHistory() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <Typography variant="h6" color="#425563">Loading transactions...</Typography>
+        <Typography variant="h6" color="text.secondary">Loading transactions...</Typography>
       </div>
     )
   }

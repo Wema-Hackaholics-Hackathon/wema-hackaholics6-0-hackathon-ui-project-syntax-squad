@@ -123,20 +123,7 @@ export function AuthOverlay({ onAuthSuccess }: AuthOverlayProps) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        background: 'linear-gradient(135deg, rgba(174, 50, 142, 0.1) 0%, rgba(245, 230, 241, 0.3) 50%, rgba(255, 255, 255, 0.9) 100%)',
-        backdropFilter: 'blur(20px)',
-        zIndex: 9999,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '20px'
-      }}
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-5 bg-background/80 dark:bg-slate-900/90 backdrop-blur-xl"
     >
       <motion.div
         initial={{ scale: 0.9, y: 20 }}
@@ -147,7 +134,7 @@ export function AuthOverlay({ onAuthSuccess }: AuthOverlayProps) {
           sx={{
             maxWidth: { xs: 340, sm: 500 },
             width: { xs: '90%', sm: '100%' },
-            background: 'rgba(255, 255, 255, 0.95)',
+            background: 'hsl(var(--card))',
             backdropFilter: 'blur(20px)',
             boxShadow: `
               0 32px 64px rgba(174, 50, 142, 0.15),
@@ -156,7 +143,7 @@ export function AuthOverlay({ onAuthSuccess }: AuthOverlayProps) {
               inset 0 1px 0 rgba(255, 255, 255, 0.8)
             `,
             borderRadius: 4,
-            border: '1px solid rgba(174, 50, 142, 0.1)'
+            border: '1px solid hsl(var(--border))'
           }}
         >
           <CardContent sx={{ p: { xs: 3, sm: 4 } }}>

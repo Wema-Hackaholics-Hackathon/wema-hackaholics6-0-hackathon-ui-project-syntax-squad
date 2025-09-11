@@ -88,7 +88,9 @@ export function ALATLensApp() {
   return (
     <Box sx={{
       minHeight: '100vh',
-      background: 'linear-gradient(135deg, #ffffff 0%, #fef9fc 50%, rgba(245,230,241,0.3) 100%)',
+      background: theme.palette.mode === 'dark'
+        ? 'linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, rgba(42,42,42,0.9) 100%)'
+        : 'linear-gradient(135deg, #ffffff 0%, #fef9fc 50%, rgba(245,230,241,0.3) 100%)',
     }}>
       {/* Authentication Overlay */}
       {!currentUser && !isLoading && (
@@ -172,7 +174,9 @@ export function ALATLensApp() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            background: 'linear-gradient(135deg, #ffffff 0%, #fef9fc 50%, rgba(245,230,241,0.3) 100%)',
+            background: theme.palette.mode === 'dark' 
+              ? 'linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, rgba(42,42,42,0.9) 100%)'
+              : 'linear-gradient(135deg, #ffffff 0%, #fef9fc 50%, rgba(245,230,241,0.3) 100%)',
             zIndex: 9998
           }}
         >
@@ -190,7 +194,11 @@ export function ALATLensApp() {
                 animation: 'pulse 2s ease-in-out infinite'
               }}
             />
-            <Box sx={{ color: '#AE328E', fontWeight: 600, fontSize: '1.1rem' }}>
+            <Box sx={{ 
+              color: theme.palette.primary.main, 
+              fontWeight: 600, 
+              fontSize: '1.1rem' 
+            }}>
               Loading ALAT Spark...
             </Box>
           </Box>
