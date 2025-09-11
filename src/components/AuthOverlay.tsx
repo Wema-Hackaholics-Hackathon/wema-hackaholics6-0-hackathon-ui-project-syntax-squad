@@ -123,7 +123,7 @@ export function AuthOverlay({ onAuthSuccess }: AuthOverlayProps) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[9999] flex items-center justify-center min-h-screen w-screen p-4 bg-background/80 dark:bg-slate-900/90 backdrop-blur-xl"
+      className="fixed inset-0 z-[9999] flex items-center justify-center h-[100dvh] min-h-screen w-screen p-2 md:p-2 md:p-4 overflow-y-auto bg-background/80 dark:bg-slate-900/90 backdrop-blur-xl"
     >
       <motion.div
         initial={{ scale: 0.9, y: 20 }}
@@ -135,7 +135,7 @@ export function AuthOverlay({ onAuthSuccess }: AuthOverlayProps) {
             maxWidth: { xs: 340, sm: 500 },
             width: { xs: '90%', sm: '100%' },
             height: 'auto',
-            maxHeight: '90vh',
+            maxHeight: { xs: '100dvh', sm: '90vh' },
             overflowY: 'auto',
             background: 'var(--card)',
             backdropFilter: 'blur(20px)',
