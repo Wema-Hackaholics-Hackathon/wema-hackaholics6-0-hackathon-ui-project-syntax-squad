@@ -191,8 +191,8 @@ export function PersonalSpendingSummary() {
                   {Math.abs(incomeChange).toFixed(1)}% from last month
                 </p>
               </div>
-              <div className="p-2 bg-green-100 rounded-lg">
-                <ArrowUpRight className="h-5 w-5 text-green-600" />
+              <div className="p-2 rounded-lg" style={{ background: theme.palette.success.light }}>
+                <ArrowUpRight className="h-5 w-5" style={{ color: theme.palette.success.main }} />
               </div>
             </div>
           </CardContent>
@@ -209,8 +209,8 @@ export function PersonalSpendingSummary() {
                   {Math.abs(expenseChange).toFixed(1)}% from last month
                 </p>
               </div>
-              <div className="p-2 bg-red-100 rounded-lg">
-                <ArrowDownLeft className="h-5 w-5 text-red-600" />
+              <div className="p-2 rounded-lg" style={{ background: theme.palette.error.light }}>
+                <ArrowDownLeft className="h-5 w-5" style={{ color: theme.palette.error.main }} />
               </div>
             </div>
           </CardContent>
@@ -227,8 +227,8 @@ export function PersonalSpendingSummary() {
                   {Math.abs(savingsChange).toFixed(1)}% from last month
                 </p>
               </div>
-              <div className="p-2 bg-blue-100 rounded-lg">
-                <DollarSign className="h-5 w-5 text-blue-600" />
+              <div className="p-2 rounded-lg" style={{ background: theme.palette.info.light }}>
+                <DollarSign className="h-5 w-5" style={{ color: theme.palette.info.main }} />
               </div>
             </div>
           </CardContent>
@@ -244,8 +244,8 @@ export function PersonalSpendingSummary() {
                   {formatCurrency(totalBudget - currentMonth.expenses)} remaining
                 </p>
               </div>
-              <div className="p-2 bg-orange-100 rounded-lg">
-                <Target className="h-5 w-5 text-orange-600" />
+              <div className="p-2 rounded-lg" style={{ background: theme.palette.warning.light }}>
+                <Target className="h-5 w-5" style={{ color: theme.palette.warning.main }} />
               </div>
             </div>
             <Progress value={budgetUsed} className="mt-2 h-2" />
@@ -283,8 +283,8 @@ export function PersonalSpendingSummary() {
                       type="monotone"
                       dataKey="income"
                       stackId="1"
-                      stroke="#22C55E"
-                      fill="#22C55E"
+                      stroke={theme.palette.success.main}
+                      fill={theme.palette.success.main}
                       fillOpacity={0.6}
                       name="Income"
                     />
@@ -292,15 +292,15 @@ export function PersonalSpendingSummary() {
                       type="monotone"
                       dataKey="expenses"
                       stackId="2"
-                      stroke="#EF4444"
-                      fill="#EF4444"
+                      stroke={theme.palette.error.main}
+                      fill={theme.palette.error.main}
                       fillOpacity={0.6}
                       name="Expenses"
                     />
                     <Line
                       type="monotone"
                       dataKey="savings"
-                      stroke="#3B82F6"
+                      stroke={theme.palette.info.main}
                       strokeWidth={3}
                       name="Savings"
                     />
@@ -324,19 +324,19 @@ export function PersonalSpendingSummary() {
                     <XAxis dataKey="week" />
                     <YAxis tickFormatter={(value) => `₦${(value / 1000).toFixed(0)}k`} />
                     <Tooltip formatter={(value) => formatCurrency(Number(value))} />
-                    <Bar dataKey="budget" fill="#E5E7EB" name="Budget" />
-                    <Bar dataKey="spending" fill="#3B82F6" name="Actual Spending" />
+                    <Bar dataKey="budget" fill={theme.palette.grey[200] || '#E5E7EB'} name="Budget" />
+                    <Bar dataKey="spending" fill={theme.palette.info.main} name="Actual Spending" />
                   </BarChart>
                 </ResponsiveContainer>
                 
                 <div className="mt-4 grid grid-cols-2 gap-4">
-                  <div className="text-center p-3 rounded-lg bg-green-50">
+                  <div className="text-center p-3 rounded-lg" style={{ background: theme.palette.success.light }}>
                     <p className="text-sm text-muted-foreground">Avg. Under Budget</p>
-                    <p className="text-lg font-medium text-green-600">₦8,775</p>
+                    <p className="text-lg font-medium" style={{ color: theme.palette.success.main }}>₦8,775</p>
                   </div>
-                  <div className="text-center p-3 rounded-lg bg-blue-50">
+                  <div className="text-center p-3 rounded-lg" style={{ background: theme.palette.info.light }}>
                     <p className="text-sm text-muted-foreground">Best Week</p>
-                    <p className="text-lg font-medium text-blue-600">Week 4</p>
+                    <p className="text-lg font-medium" style={{ color: theme.palette.info.main }}>Week 4</p>
                   </div>
                 </div>
               </CardContent>
