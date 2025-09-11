@@ -123,7 +123,15 @@ export function AuthOverlay({ onAuthSuccess }: AuthOverlayProps) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[9999] flex items-center justify-center min-h-screen w-screen p-4 bg-background/80 dark:bg-slate-900/90 backdrop-blur-xl"
+      className="fixed inset-0 z-[9999] flex justify-center items-center w-screen p-2 md:p-4 bg-background/80 dark:bg-slate-900/90 backdrop-blur-xl"
+        style={{
+          minHeight: '100dvh',
+          minWidth: '100vw',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          overflowX: 'hidden',
+        }}
     >
       <motion.div
         initial={{ scale: 0.9, y: 20 }}
@@ -132,10 +140,12 @@ export function AuthOverlay({ onAuthSuccess }: AuthOverlayProps) {
       >
         <Card 
           sx={{
-            maxWidth: { xs: 340, sm: 500 },
-            width: { xs: '90%', sm: '100%' },
+            maxWidth: { xs: '100vw', sm: 500 },
+            overflowX: 'hidden',
+            width: { xs: '100vw', sm: '100%' },
+            boxSizing: 'border-box',
             height: 'auto',
-            maxHeight: '90vh',
+            maxHeight: { xs: '100dvh', sm: '90vh' },
             overflowY: 'auto',
             background: 'var(--card)',
             backdropFilter: 'blur(20px)',
@@ -149,7 +159,7 @@ export function AuthOverlay({ onAuthSuccess }: AuthOverlayProps) {
             border: '1px solid hsl(var(--border))'
           }}
         >
-          <CardContent sx={{ p: { xs: 3, sm: 4 } }}>
+          <CardContent sx={{ p: { xs: 1, sm: 4 } }}>
             {/* Header */}
             <Box sx={{ textAlign: 'center', mb: 4 }}>
               <motion.div
