@@ -1,18 +1,18 @@
-# [Project Title]
+# Alat spark
+
+
 
 ## Team Members
-- [Name 1]
-- [Name 2]
-- [Name 3]
-- [Name 4]
-- [Name 5]
+- Ilori Oluwagbenga
+- Nathaniel Anthony
+- Bakrin Rufaydah
+- Oyedeji Samuel
 
 ---
 
 ## 🚀 Live Demo
 
-*   **Live Application:** [Link to your deployed Vercel/Netlify/Render URL]
-*   **Backend API:** [Link to your live backend API endpoint URL, if separate]
+*   **Live Application:** [Alat spark](https://alat-spark.vercel.app/)
 *   **Recorded Demo:** [Link to your recorded demo explaining how your solution works using Loom].
 
 

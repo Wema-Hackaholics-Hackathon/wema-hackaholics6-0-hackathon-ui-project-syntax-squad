@@ -53,7 +53,9 @@ export function ALATLensApp() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50/50 via-white to-pink-100/30">
+    <div className="min-h-screen" style={{ 
+      background: 'linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(254,249,252,1) 50%, rgba(245,230,241,0.3) 100%)'
+    }}>
       <div className="flex h-screen overflow-hidden">
         <Sidebar 
           activeView={activeView} 
@@ -68,7 +70,9 @@ export function ALATLensApp() {
             onNavigate={handleNavigation}
           />
           
-          <main className="flex-1 overflow-y-auto bg-transparent">
+          <main className="flex-1 overflow-y-auto" style={{
+            background: 'transparent'
+          }}>
             <div className="h-full">
               {renderActiveView()}
             </div>

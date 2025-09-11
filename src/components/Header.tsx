@@ -11,9 +11,10 @@ import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import SearchIcon from "@mui/icons-material/Search";
 import SettingsIcon from "@mui/icons-material/Settings";
-import { alpha, styled } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import { NotificationsPanel } from "./NotificationsPanel";
 import { ProfileDropdown } from "./ProfileDropdown";
+import Image from "next/image";
 
 interface HeaderProps {
   onMenuClick?: () => void;
@@ -22,10 +23,17 @@ interface HeaderProps {
 
 const Search = styled('form')(({ theme }) => ({
   position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  borderRadius: theme.shape.borderRadius * 1.5,
+  background: 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(254,249,252,0.9) 100%)',
+  border: '1px solid rgba(174, 50, 142, 0.1)',
+  backdropFilter: 'blur(10px)',
   '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(254,249,252,0.95) 100%)',
+    border: '1px solid rgba(174, 50, 142, 0.2)',
+  },
+  '&:focus-within': {
+    border: '1px solid rgba(174, 50, 142, 0.4)',
+    boxShadow: '0 0 0 2px rgba(174, 50, 142, 0.1)',
   },
   marginLeft: 0,
   width: '100%',
@@ -74,7 +82,18 @@ export function Header({ onMenuClick, onNavigate }: HeaderProps) {
 
   return (
     <>
-      <AppBar position="sticky" color="default" elevation={1} sx={{ zIndex: 1201 }}>
+      <AppBar 
+        position="sticky" 
+        color="default" 
+        elevation={0}
+        sx={{ 
+          zIndex: 1201,
+          background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(254,249,252,0.95) 100%)',
+          backdropFilter: 'blur(20px)',
+          borderBottom: '1px solid rgba(174, 50, 142, 0.1)',
+          boxShadow: '0 1px 3px rgba(174, 50, 142, 0.1)'
+        }}
+      >
         <Toolbar>
           {/* Menu Button (Mobile) */}
           <IconButton
@@ -88,13 +107,57 @@ export function Header({ onMenuClick, onNavigate }: HeaderProps) {
           </IconButton>
 
           {/* Logo and Title */}
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mr: 2 }}>
-            <Box sx={{ width: 32, height: 32, bgcolor: 'primary.main', borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: 1 }}>
-              <Typography variant="subtitle2" color="white" fontWeight="bold">AL</Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mr: 2 }}>
+            <Box sx={{ 
+              width: 40, 
+              height: 40, 
+              borderRadius: 2, 
+              overflow: 'hidden',
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center',
+              background: 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)',
+              boxShadow: '0 4px 12px rgba(174, 50, 142, 0.25)',
+              position: 'relative'
+            }}>
+              <Image
+                src="/logo.webp"
+                alt="ALAT Logo"
+                width={32}
+                height={32}
+                style={{ objectFit: 'contain' }}
+                priority
+              />
             </Box>
-            <Typography variant="h6" noWrap component="div" sx={{ fontWeight: 'bold', color: 'primary.main' }}>
-              ALAT Spark
-            </Typography>
+            <Box>
+              <Typography 
+                variant="h6" 
+                noWrap 
+                component="div" 
+                sx={{ 
+                  fontWeight: 700, 
+                  background: 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)',
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  fontSize: '1.25rem',
+                  lineHeight: 1.2
+                }}
+              >
+                ALAT Spark
+              </Typography>
+              <Typography 
+                variant="caption" 
+                sx={{ 
+                  color: '#425563',
+                  fontWeight: 500,
+                  fontSize: '0.75rem',
+                  display: { xs: 'none', sm: 'block' }
+                }}
+              >
+                Financial Intelligence
+              </Typography>
+            </Box>
           </Box>
 
           {/* Search (hidden on xs) */}

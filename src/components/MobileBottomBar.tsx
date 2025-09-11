@@ -27,17 +27,35 @@ export function MobileBottomBar({ activeView = 'dashboard', onNavigate }: Mobile
 
   return (
     <Paper
-      sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 40, display: { xs: 'block', md: 'none' } }}
-      elevation={3}
+      sx={{ 
+        position: 'fixed', 
+        bottom: 0, 
+        left: 0, 
+        right: 0, 
+        zIndex: 40, 
+        display: { xs: 'block', md: 'none' },
+        background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(254,249,252,0.95) 100%)',
+        backdropFilter: 'blur(20px)',
+        borderTop: '1px solid rgba(174, 50, 142, 0.1)',
+      }}
+      elevation={0}
     >
       <BottomNavigation
         value={value}
         onChange={handleChange}
         showLabels
         sx={{
-          bgcolor: 'background.paper',
-          borderTop: 1,
-          borderColor: 'divider',
+          background: 'transparent',
+          '& .MuiBottomNavigationAction-root': {
+            color: '#425563',
+            '&.Mui-selected': {
+              color: '#AE328E',
+            },
+            '& .MuiBottomNavigationAction-label': {
+              fontSize: '0.75rem',
+              fontWeight: 500
+            }
+          }
         }}
       >
         {bottomNavItems.map((item) => (
@@ -45,7 +63,7 @@ export function MobileBottomBar({ activeView = 'dashboard', onNavigate }: Mobile
             key={item.id}
             label={item.name}
             value={item.id}
-            icon={<item.icon size={22} />}
+            icon={<item.icon size={22} color={value === item.id ? '#AE328E' : '#425563'} />}
           />
         ))}
       </BottomNavigation>

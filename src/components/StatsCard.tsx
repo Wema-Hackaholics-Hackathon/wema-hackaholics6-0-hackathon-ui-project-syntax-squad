@@ -12,28 +12,67 @@ interface StatsCardProps {
   icon: LucideIcon;
 }
 
-import { useTheme } from '@mui/material/styles';
-
 export function StatsCard({ title, value, change, changeType, icon: Icon }: StatsCardProps) {
-  const theme = useTheme();
   return (
-    <Card sx={{ p: 2, position: 'relative', overflow: 'hidden', background: (theme) => theme.custom?.gradients.soft }}>
+    <Card sx={{ 
+      p: 2, 
+      position: 'relative', 
+      overflow: 'hidden', 
+      background: 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(254,249,252,0.9) 100%)',
+      border: '1px solid rgba(174, 50, 142, 0.1)',
+      borderRadius: 3,
+      backdropFilter: 'blur(10px)',
+      boxShadow: '0 4px 20px rgba(174, 50, 142, 0.08)',
+      transition: 'all 0.3s ease',
+      '&:hover': {
+        transform: 'translateY(-2px)',
+        boxShadow: '0 8px 30px rgba(174, 50, 142, 0.15)',
+        border: '1px solid rgba(174, 50, 142, 0.2)',
+      }
+    }}>
       <CardContent sx={{ p: 0 }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1 }}>
-          <Typography variant="subtitle2" color="text.secondary" noWrap fontWeight={500}>
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
+          <Typography 
+            variant="subtitle2" 
+            sx={{ 
+              color: '#425563', 
+              fontWeight: 600,
+              fontSize: '0.875rem',
+              letterSpacing: '0.02em'
+            }}
+            noWrap
+          >
             {title}
           </Typography>
-          <Box sx={{ p: 1, borderRadius: '50%', bgcolor: 'primary.main', boxShadow: 1 }}>
-            <Icon size={16} color={theme.palette.common.white} />
+          <Box sx={{ 
+            p: 1.5, 
+            borderRadius: 2, 
+            background: 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)', 
+            boxShadow: '0 4px 12px rgba(174, 50, 142, 0.25)'
+          }}>
+            <Icon size={18} color="#ffffff" />
           </Box>
         </Box>
-        <Typography variant="h6" fontWeight="bold" sx={{ mb: 0.5, color: 'primary.main' }}>
+        <Typography 
+          variant="h5" 
+          fontWeight={700} 
+          sx={{ 
+            mb: 1,
+            background: 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)',
+            backgroundClip: 'text',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+          }}
+        >
           {value}
         </Typography>
         <Typography
-          variant="caption"
+          variant="body2"
           fontWeight={500}
-          color={changeType === 'positive' ? 'success.main' : 'error.main'}
+          sx={{
+            color: changeType === 'positive' ? '#10b981' : '#ef4444',
+            fontSize: '0.8rem'
+          }}
         >
           {change} from last month
         </Typography>
