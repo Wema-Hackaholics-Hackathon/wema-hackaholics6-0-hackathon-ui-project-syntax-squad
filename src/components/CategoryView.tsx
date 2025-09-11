@@ -171,11 +171,11 @@ export function CategoryView() {
   const totalBudget = categoryData.reduce((sum, cat) => sum + (cat.budget || 0), 0)
 
   return (
-    <div className="space-y-6">
+    <div>
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl mb-2">Spending by Category</h1>
+          <h1>Spending by Category</h1>
           <p className="text-muted-foreground">
             Analyze your spending patterns across different categories with AI-powered insights
           </p>
