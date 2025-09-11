@@ -1,101 +1,56 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useTheme } from 'next-themes'
 import { IconButton, Tooltip } from '@mui/material'
-import { LightMode, DarkMode, SettingsBrightness } from '@mui/icons-material'
-
-type ThemeMode = 'system' | 'light' | 'dark'
+import { Sun, Moon, Monitor } from 'lucide-react'
 
 interface ThemeSwitcherProps {
   size?: 'small' | 'medium' | 'large'
 }
 
 export function ThemeSwitcher({ size = 'medium' }: ThemeSwitcherProps) {
-  const [themeMode, setThemeMode] = useState<ThemeMode>('system')
-  const [systemTheme, setSystemTheme] = useState<'light' | 'dark'>('light')
+  const [mounted, setMounted] = useState(false)
+  const { theme, setTheme } = useTheme()
 
   useEffect(() => {
-    // Get saved theme from localStorage or default to system
-    const savedTheme = localStorage.getItem('theme-mode') as ThemeMode
-    if (savedTheme && ['system', 'light', 'dark'].includes(savedTheme)) {
-      setThemeMode(savedTheme)
-    }
-
-    // Detect system theme preference
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-    setSystemTheme(mediaQuery.matches ? 'dark' : 'light')
-
-    // Listen for system theme changes
-    const handleSystemThemeChange = (e: MediaQueryListEvent) => {
-      setSystemTheme(e.matches ? 'dark' : 'light')
-      applyTheme(themeMode, e.matches ? 'dark' : 'light')
-    }
-
-    mediaQuery.addEventListener('change', handleSystemThemeChange)
-
-    // Apply initial theme
-    applyTheme(savedTheme || 'system', mediaQuery.matches ? 'dark' : 'light')
-
-    return () => {
-      mediaQuery.removeEventListener('change', handleSystemThemeChange)
-    }
+    setMounted(true)
   }, [])
 
-  const applyTheme = (mode: ThemeMode, currentSystemTheme: 'light' | 'dark') => {
-    const root = document.documentElement
-    
-    // Remove existing theme classes
-    root.classList.remove('light', 'dark')
-    
-    // Apply theme based on mode
-    if (mode === 'system') {
-      root.classList.add(currentSystemTheme)
-    } else {
-      root.classList.add(mode)
-    }
-
-    // Dispatch custom event for theme providers to listen
-    window.dispatchEvent(new CustomEvent('theme-change', { 
-      detail: { 
-        mode, 
-        activeTheme: mode === 'system' ? currentSystemTheme : mode 
-      } 
-    }))
+  if (!mounted) {
+    return (
+      <IconButton color="inherit" size={size}>
+        <Monitor size={20} />
+      </IconButton>
+    )
   }
 
   const handleThemeToggle = () => {
-    const modes: ThemeMode[] = ['system', 'light', 'dark']
-    const currentIndex = modes.indexOf(themeMode)
-    const nextMode = modes[(currentIndex + 1) % modes.length]
-    
-    setThemeMode(nextMode)
-    localStorage.setItem('theme-mode', nextMode)
-    applyTheme(nextMode, systemTheme)
+    const themes = ['system', 'light', 'dark']
+    const currentIndex = themes.indexOf(theme || 'system')
+    const nextTheme = themes[(currentIndex + 1) % themes.length]
+    setTheme(nextTheme)
   }
 
   const getIcon = () => {
-    switch (themeMode) {
-      case 'system':
-        return <SettingsBrightness />
+    switch (theme) {
       case 'light':
-        return <LightMode />
+        return <Sun size={20} />
       case 'dark':
-        return <DarkMode />
+        return <Moon size={20} />
       default:
-        return <SettingsBrightness />
+        return <Monitor size={20} />
     }
   }
 
   const getTooltip = () => {
-    switch (themeMode) {
-      case 'system':
-        return `System theme (currently ${systemTheme})`
+    switch (theme) {
       case 'light':
-        return 'Light theme'
+        return 'Switch to dark theme'
       case 'dark':
-        return 'Dark theme'
+        return 'Switch to system theme'
       default:
-        return 'Theme switcher'
+        return 'Switch to light theme'
     }
   }
 
@@ -108,7 +63,7 @@ export function ThemeSwitcher({ size = 'medium' }: ThemeSwitcherProps) {
         sx={{
           transition: 'all 0.2s ease-in-out',
           '&:hover': {
-            transform: 'scale(1.1)',
+            transform: 'scale(1.05)',
           }
         }}
       >
