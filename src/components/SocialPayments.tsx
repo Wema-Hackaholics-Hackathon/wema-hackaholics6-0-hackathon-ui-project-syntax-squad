@@ -8,6 +8,17 @@ import Avatar from "@mui/material/Avatar";
 import Grid2 from "@mui/material/Grid2";
 import { LinearProgress } from "@mui/material";
 import { useState } from "react";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import TextField from "@mui/material/TextField";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import Checkbox from "@mui/material/Checkbox";
+import ListItemText from "@mui/material/ListItemText";
+import { SelectChangeEvent } from "@mui/material/Select";
 
 interface QuickAction {
   id: string
@@ -86,11 +97,39 @@ const groupGoals = [
   { name: "Office Pizza Party 🍕", progress: 80, current: "₦12,000", target: "₦15,000", members: 8 },
 ]
 
+const friends: string[] = ["Sarah", "Mike", "Alex", "Emma", "John"];
+
+const challenges = [
+  { id: "1", name: "Weekend Trip Fund 🏖️", author: "Sarah" },
+  { id: "2", name: "Office Pizza Party 🍕", author: "Mike" },
+];
+
 export function SocialPayments() {
   const [sharedAchievement, setSharedAchievement] = useState(false);
   const [activeActions, setActiveActions] = useState<string[]>([]);
+  const [splitBillOpen, setSplitBillOpen] = useState(false);
+  const [billName, setBillName] = useState('');
+  const [amount, setAmount] = useState('');
+  const [selectedFriends, setSelectedFriends] = useState<string[]>([]);
+  const [sendPaymentOpen, setSendPaymentOpen] = useState(false);
+  const [selectedFriend, setSelectedFriend] = useState('');
+  const [sendAmount, setSendAmount] = useState('');
+  const [joinChallengeOpen, setJoinChallengeOpen] = useState(false);
+  const [selectedChallenge, setSelectedChallenge] = useState('');
 
   const handleActionClick = (actionId: string) => {
+    if (actionId === "1") {
+      setSplitBillOpen(true);
+      return;
+    }
+    if (actionId === "3") {
+      setSendPaymentOpen(true);
+      return;
+    }
+    if (actionId === "2") {
+      setJoinChallengeOpen(true);
+      return;
+    }
     if (!activeActions.includes(actionId)) {
       setActiveActions([...activeActions, actionId]);
       // Simulate loading state
@@ -104,6 +143,29 @@ export function SocialPayments() {
     setSharedAchievement(true);
     setTimeout(() => setSharedAchievement(false), 2000);
   };
+
+  const handleFriendsChange = (event: SelectChangeEvent<typeof selectedFriends>) => {
+    const { value } = event.target;
+    setSelectedFriends(
+      typeof value === 'string' ? value.split(',') : value,
+    );
+  };
+
+  const handleSplitSubmit = () => {
+    console.log({ billName, amount, selectedFriends });
+    setSplitBillOpen(false);
+  };
+
+  const handleSendSubmit = () => {
+    console.log({ selectedFriend, sendAmount });
+    setSendPaymentOpen(false);
+  };
+
+  const handleJoinSubmit = () => {
+    console.log({ selectedChallenge });
+    setJoinChallengeOpen(false);
+  };
+
   return (
     <div className="space-y-4 md:space-y-6">
       {/* Connect Header */}
@@ -475,6 +537,99 @@ export function SocialPayments() {
           </Button>
         </CardContent>
       </Card>
+      <Dialog open={splitBillOpen} onClose={() => setSplitBillOpen(false)}>
+        <DialogTitle>Split a Bill</DialogTitle>
+        <DialogContent>
+          <TextField
+            label="Bill Name"
+            value={billName}
+            onChange={(e) => setBillName(e.target.value)}
+            fullWidth
+            sx={{ mb: 2 }}
+          />
+          <TextField
+            label="Amount (₦)"
+            type="number"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            fullWidth
+            sx={{ mb: 2 }}
+          />
+          <FormControl fullWidth sx={{ mb: 2 }}>
+            <InputLabel>Select Friends</InputLabel>
+            <Select
+              multiple
+              value={selectedFriends}
+              onChange={handleFriendsChange}
+              renderValue={(selected) => selected.join(', ')}
+            >
+              {friends.map((name) => (
+                <MenuItem key={name} value={name}>
+                  <Checkbox checked={selectedFriends.indexOf(name) > -1} />
+                  <ListItemText primary={name} />
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <Button onClick={handleSplitSubmit} variant="contained" fullWidth>
+            Submit
+          </Button>
+        </DialogContent>
+      </Dialog>
+      <Dialog open={sendPaymentOpen} onClose={() => setSendPaymentOpen(false)}>
+        <DialogTitle>Send Payment</DialogTitle>
+        <DialogContent>
+          <FormControl fullWidth sx={{ mb: 2 }}>
+            <InputLabel>Select Friend</InputLabel>
+            <Select
+              value={selectedFriend}
+              onChange={(e) => setSelectedFriend(e.target.value as string)}
+            >
+              {friends.map((name) => (
+                <MenuItem key={name} value={name}>
+                  {name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <TextField
+            label="Amount (₦)"
+            type="number"
+            value={sendAmount}
+            onChange={(e) => setSendAmount(e.target.value)}
+            fullWidth
+            sx={{ mb: 2 }}
+          />
+          <Button onClick={handleSendSubmit} variant="contained" fullWidth>
+            Submit
+          </Button>
+        </DialogContent>
+      </Dialog>
+      <Dialog open={joinChallengeOpen} onClose={() => setJoinChallengeOpen(false)}>
+        <DialogTitle>Join Challenge</DialogTitle>
+        <DialogContent>
+          <FormControl fullWidth sx={{ mb: 2 }}>
+            <InputLabel>Select Challenge</InputLabel>
+            <Select
+              value={selectedChallenge}
+              onChange={(e) => setSelectedChallenge(e.target.value as string)}
+              renderValue={(selected) => challenges.find(c => c.id === selected)?.name || ''}
+            >
+              {challenges.map((challenge) => (
+                <MenuItem key={challenge.id} value={challenge.id}>
+                  <Box>
+                    <Typography>{challenge.name}</Typography>
+                    <Typography variant="caption">by {challenge.author}</Typography>
+                  </Box>
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <Button onClick={handleJoinSubmit} variant="contained" fullWidth>
+            Submit
+          </Button>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
