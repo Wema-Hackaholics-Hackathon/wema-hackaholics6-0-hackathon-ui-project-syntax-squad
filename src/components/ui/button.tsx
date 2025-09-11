@@ -1,57 +1,86 @@
+"use client";
+
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
-import { cva, type VariantProps } from "class-variance-authority";
+import MuiButton, { type ButtonProps as MuiButtonProps } from "@mui/material/Button";
 
 import { cn } from "./utils";
 
-const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
-  {
-    variants: {
-      variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        destructive:
-          "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
-        outline:
-          "border bg-background text-foreground hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
-        secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost:
-          "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
-        link: "text-primary underline-offset-4 hover:underline",
-      },
-      size: {
-        default: "h-9 px-4 py-2 has-[>svg]:px-3",
-        sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
-        lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
-        icon: "size-9 rounded-md",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
-    },
-  },
-);
+type OurVariant = "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
+type OurSize = "default" | "sm" | "lg" | "icon";
 
-const Button = React.forwardRef<
-  HTMLButtonElement,
-  React.ComponentProps<"button"> &
-    VariantProps<typeof buttonVariants> & {
-      asChild?: boolean;
+export function buttonVariants(opts?: { variant?: OurVariant; size?: OurSize; className?: string }) {
+  const variant = opts?.variant ?? "default";
+  const size = opts?.size ?? "default";
+  return `mui-button-${variant} mui-button-size-${size}`;
+}
+
+type ButtonProps = Omit<MuiButtonProps, "variant" | "size"> & {
+  variant?: OurVariant;
+  size?: OurSize;
+  asChild?: boolean;
+  className?: string;
+};
+
+function mapVariantToMui(variant: OurVariant) {
+  switch (variant) {
+    case "destructive":
+      return { variant: "contained" as const, color: "error" as const };
+    case "outline":
+      return { variant: "outlined" as const, color: "primary" as const };
+    case "secondary":
+      return { variant: "contained" as const, color: "secondary" as const };
+    case "ghost":
+      return { variant: "text" as const, color: "inherit" as const };
+    case "link":
+      return { variant: "text" as const, color: "primary" as const };
+    default:
+      return { variant: "contained" as const, color: "primary" as const };
+  }
+}
+
+function mapSizeToMui(size: OurSize) {
+  switch (size) {
+    case "sm":
+      return "small" as const;
+    case "lg":
+      return "large" as const;
+    case "icon":
+      return "medium" as const;
+    default:
+      return "medium" as const;
+  }
+}
+
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant = "default", size = "default", asChild = false, children, ...props }, ref) => {
+    if (asChild) {
+      const Comp = Slot as any;
+      return (
+        <Comp data-slot="button" className={cn(className)} ref={ref as any} {...(props as any)}>
+          {children}
+        </Comp>
+      );
     }
->(({ className, variant, size, asChild = false, ...props }, ref) => {
-  const Comp = asChild ? Slot : "button";
 
-  return (
-    <Comp
-      data-slot="button"
-      className={cn(buttonVariants({ variant, size, className }))}
-      ref={ref}
-      {...props}
-    />
-  );
-});
+    const mui = mapVariantToMui(variant);
+    const muiSize = mapSizeToMui(size);
+
+    return (
+      <MuiButton
+        data-slot="button"
+        variant={mui.variant}
+        color={mui.color}
+        size={muiSize}
+        className={cn(className)}
+        ref={ref}
+        {...(props as MuiButtonProps)}
+      >
+        {children}
+      </MuiButton>
+    );
+  }
+);
 
 Button.displayName = "Button";
 
