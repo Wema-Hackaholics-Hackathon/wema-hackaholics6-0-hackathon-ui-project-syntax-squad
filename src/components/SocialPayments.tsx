@@ -1,4 +1,15 @@
 import { Users, Plus, Split, Trophy, Target, Share, Clock, CheckCircle, AlertCircle } from "lucide-react";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Avatar from "@mui/material/Avatar";
+import Chip from "@mui/material/Chip";
+import Divider from "@mui/material/Divider";
+import Grid from "@mui/material/Grid";
+import LinearProgress from "@mui/material/LinearProgress";
 
 
 interface BillSplit {
@@ -152,7 +163,10 @@ const getStatusIcon = (status: string) => {
 
 // ...keep all the data and helper functions as before...
 
+import { useTheme } from '@mui/material/styles';
+
 export function SocialPayments() {
+  const theme = useTheme();
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
       {/* Bill Splitting */}
@@ -174,8 +188,8 @@ export function SocialPayments() {
             {billSplits.map((split) => (
               <Box key={split.id} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', p: 2, borderRadius: 2, border: 1, borderColor: 'divider', bgcolor: 'background.paper' }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                  <Box sx={{ p: 1, bgcolor: 'blue.100', borderRadius: 1 }}>
-                    <Split size={18} color="#1976d2" />
+                  <Box sx={{ p: 1, bgcolor: theme.palette.primary.light, borderRadius: 1 }}>
+                    <Split size={18} color={theme.palette.primary.main} />
                   </Box>
                   <Box>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5 }}>
@@ -333,7 +347,7 @@ export function SocialPayments() {
             </Grid>
             <Grid item xs={4}>
               <Box sx={{ textAlign: 'center', p: 2, borderRadius: 2, bgcolor: 'green.50', border: 1, borderColor: 'green.200' }}>
-                <Typography variant="h4" sx={{ color: '#2e7d32' }}>8</Typography>
+                <Typography variant="h4" sx={{ color: theme.palette.secondary.main }}>8</Typography>
                 <Typography variant="body2" color="text.secondary">Active Friends</Typography>
               </Box>
             </Grid>

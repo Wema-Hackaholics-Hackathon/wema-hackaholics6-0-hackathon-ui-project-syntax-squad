@@ -26,7 +26,10 @@ interface ProfileDropdownProps {
   onNavigate?: (view: string) => void;
 }
 
+import { useTheme } from '@mui/material/styles';
+
 export function ProfileDropdown({ onNavigate }: ProfileDropdownProps) {
+  const theme = useTheme();
   const profileData = {
     name: "John Doe",
     email: "john.doe@example.com",
@@ -69,7 +72,7 @@ export function ProfileDropdown({ onNavigate }: ProfileDropdownProps) {
         <Avatar
           src={profileData.avatar}
           alt={profileData.name}
-          sx={{ width: 36, height: 36, bgcolor: 'primary.main', color: 'white', fontWeight: 'bold' }}
+          sx={{ width: 36, height: 36, bgcolor: theme.palette.primary.main, color: 'white', fontWeight: 'bold' }}
         >
           {!profileData.avatar ? profileData.name.split(' ').map(n => n[0]).join('') : null}
         </Avatar>
@@ -83,8 +86,8 @@ export function ProfileDropdown({ onNavigate }: ProfileDropdownProps) {
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       >
         {/* Profile Header */}
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, p: 2, bgcolor: 'orange.50' }}>
-          <Avatar sx={{ width: 48, height: 48, bgcolor: 'orange.400', color: 'white', fontWeight: 'bold' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, p: 2, bgcolor: theme.palette.primary.light }}>
+          <Avatar sx={{ width: 48, height: 48, bgcolor: theme.palette.primary.main, color: 'white', fontWeight: 'bold' }}>
             {profileData.name.split(' ').map(n => n[0]).join('')}
           </Avatar>
           <Box sx={{ flex: 1, minWidth: 0 }}>
@@ -93,7 +96,7 @@ export function ProfileDropdown({ onNavigate }: ProfileDropdownProps) {
                 {profileData.name}
               </Typography>
               {profileData.isPremium && (
-                <Chip icon={<Star size={14} />} label="Pro" size="small" sx={{ bgcolor: 'orange.400', color: 'white', fontWeight: 500, ml: 1 }} />
+                <Chip icon={<Star size={14} />} label="Pro" size="small" sx={{ bgcolor: theme.palette.primary.main, color: 'white', fontWeight: 500, ml: 1 }} />
               )}
             </Box>
             <Typography variant="body2" color="orange" noWrap>
@@ -123,7 +126,7 @@ export function ProfileDropdown({ onNavigate }: ProfileDropdownProps) {
         <MenuItem>
           <ListItemIcon><Shield size={18} /></ListItemIcon>
           <ListItemText primary="Security Center" secondary="2FA, privacy settings" />
-          <Chip label="Secure" size="small" sx={{ bgcolor: 'green.100', color: 'green.700', fontSize: 12 }} />
+          <Chip label="Secure" size="small" sx={{ bgcolor: theme.palette.secondary.light, color: theme.palette.secondary.main, fontSize: 12 }} />
         </MenuItem>
         <MenuItem onClick={() => handleMenuAction('help')}>
           <ListItemIcon><HelpCircle size={18} /></ListItemIcon>
@@ -132,7 +135,7 @@ export function ProfileDropdown({ onNavigate }: ProfileDropdownProps) {
         </MenuItem>
         <Divider />
         {/* Quick Actions */}
-        <Box sx={{ p: 2, bgcolor: 'orange.50' }}>
+        <Box sx={{ p: 2, bgcolor: theme.palette.primary.light }}>
           <Typography variant="caption" color="orange" fontWeight={600} sx={{ mb: 1, textTransform: 'uppercase', letterSpacing: 1 }}>
             Quick Actions
           </Typography>
@@ -147,7 +150,7 @@ export function ProfileDropdown({ onNavigate }: ProfileDropdownProps) {
         </Box>
         <Divider />
         {/* Logout */}
-        <MenuItem onClick={() => handleMenuAction('logout')} sx={{ color: 'red' }}>
+        <MenuItem onClick={() => handleMenuAction('logout')} sx={{ color: theme.palette.primary.main }}>
           <ListItemIcon><LogOut size={18} color="#E53935" /></ListItemIcon>
           <ListItemText primary="Sign Out" secondary="Log out of your account" />
         </MenuItem>

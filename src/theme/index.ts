@@ -18,7 +18,7 @@ declare module '@mui/material/styles' {
 const common: ThemeOptions = {
   palette: {
     primary: { main: '#AE328E', light: '#c13a9e', dark: '#8c256d', contrastText: '#ffffff' },
-    secondary: { main: '#f5e6f1', contrastText: '#425563' },
+    secondary: { main: '#425563', contrastText: '#ffffff' },
     error: { main: '#dc2626' },
     warning: { main: '#f59e0b' },
     success: { main: '#10b981' },
