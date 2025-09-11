@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 
 interface DashboardOverviewProps {
   onNavigate: (view: string) => void;
@@ -45,19 +46,19 @@ const recentInsights = [
     title: "Spending Pattern Alert",
     description: "You've spent 23% more on food delivery this week",
     action: "View Intelligence",
-    view: "intelligence",
+    href: "/view-intelligence",
   },
   {
     title: "Savings Opportunity",
     description: "Round up ₦2,340 from recent transactions",
     action: "Create Action",
-    view: "micro-actions",
+    href: "/create-action",
   },
   {
     title: "Bill Reminder",
     description: "Split electricity bill with 3 roommates",
     action: "Split Bill",
-    view: "social",
+    href: "/split-bill",
   },
 ];
 
@@ -121,6 +122,7 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
     const fetchAndStore = async () => {
       try {
         const res = await fetch("http://localhost:3000/api/balance", { cache: "no-store" });
+        // const res = await fetch("https://alat-spark.vercel.app/api/balance", { cache: "no-store" }); 
         if (!res.ok) return;
         const json = (await res.json()) as {
           totalBalance: number;
@@ -222,10 +224,11 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
                   {insight.description}
                 </Typography>
                 <Button
+                  component={Link}
+                  href={insight.href}
                   variant="contained"
                   color="primary"
                   fullWidth
-                  onClick={() => onNavigate(insight.view)}
                   endIcon={<ArrowRight size={18} />}
                 >
                   {insight.action}
