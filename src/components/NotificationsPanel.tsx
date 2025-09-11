@@ -103,15 +103,15 @@ export function NotificationsPanel({ isOpen, onClose }: NotificationsPanelProps)
       />
       
       {/* Panel */}
-      <div className="fixed top-0 right-0 h-full w-full md:w-96 bg-white border-l border-pink-200 shadow-alat-xl z-[1400] flex flex-col">
+      <div className="fixed top-0 right-0 h-full w-full md:w-96 bg-white border-l border-pink-200 shadow-[0_10px_25px_rgba(174,50,142,0.15)] z-[1400] flex flex-col backdrop-blur-sm">
         {/* Header */}
-        <div className="p-4 border-b border-pink-200 bg-gradient-alat">
+        <div className="p-4 border-b border-pink-200 bg-gradient-to-r from-[#AE328E] to-[#c13a9e]">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <Bell className="h-5 w-5 text-white" />
               <h2 className="font-semibold text-white">Notifications</h2>
               {unreadCount > 0 && (
-                <Badge variant="secondary" className="bg-white/20 text-white border-white/30">
+                <Badge variant="secondary" className="bg-white/20 text-white border-white/30 backdrop-blur-sm">
                   {unreadCount}
                 </Badge>
               )}
@@ -120,7 +120,7 @@ export function NotificationsPanel({ isOpen, onClose }: NotificationsPanelProps)
               variant="ghost" 
               size="icon" 
               onClick={onClose}
-              className="h-8 w-8 text-white hover:bg-white/20"
+              className="h-8 w-8 text-white hover:bg-white/20 transition-colors"
             >
               <X className="h-4 w-4" />
             </Button>
@@ -128,12 +128,12 @@ export function NotificationsPanel({ isOpen, onClose }: NotificationsPanelProps)
         </div>
 
         {/* Actions */}
-        <div className="p-4 border-b border-pink-200 bg-pink-50/30">
+        <div className="p-4 border-b border-pink-200 bg-gradient-to-b from-pink-50/50 to-white">
           <Button 
             variant="outline" 
             size="sm" 
             onClick={markAllAsRead}
-            className="w-full border-pink-200 text-[#425563] hover:bg-pink-100"
+            className="w-full border-pink-200 text-[#425563] hover:bg-pink-100 transition-colors"
             disabled={unreadCount === 0}
           >
             <Check className="mr-2 h-4 w-4" />
@@ -156,14 +156,16 @@ export function NotificationsPanel({ isOpen, onClose }: NotificationsPanelProps)
                 return (
                   <Card 
                     key={notification.id}
-                    className={`hover-lift cursor-pointer transition-all duration-200 ${
-                      !notification.read ? 'border-pink-300 bg-pink-50/50' : 'border-pink-200/50'
+                    className={`cursor-pointer transition-all duration-200 hover:shadow-md hover:-translate-y-0.5 ${
+                      !notification.read 
+                        ? 'border-pink-300 bg-gradient-to-r from-pink-50 to-white shadow-sm' 
+                        : 'border-pink-200/50 hover:border-pink-300'
                     }`}
                     onClick={() => markAsRead(notification.id)}
                   >
                     <CardContent className="p-4">
                       <div className="flex gap-3">
-                        <div className={`p-2 rounded-full ${getNotificationColor(notification.type)}`}>
+                        <div className={`p-2 rounded-full ${getNotificationColor(notification.type)} flex-shrink-0`}>
                           <IconComponent className="h-4 w-4" />
                         </div>
                         <div className="flex-1 min-w-0">
@@ -174,13 +176,13 @@ export function NotificationsPanel({ isOpen, onClose }: NotificationsPanelProps)
                               {notification.title}
                             </h4>
                             {!notification.read && (
-                              <div className="w-2 h-2 bg-gradient-alat rounded-full flex-shrink-0 ml-2"></div>
+                              <div className="w-2 h-2 bg-gradient-to-r from-[#AE328E] to-[#c13a9e] rounded-full flex-shrink-0 ml-2 animate-pulse"></div>
                             )}
                           </div>
-                          <p className="text-sm text-[#AE328E] mb-2 line-clamp-2">
+                          <p className="text-sm text-[#AE328E] mb-2 line-clamp-2 leading-relaxed">
                             {notification.message}
                           </p>
-                          <p className="text-xs text-[#425563]/70">
+                          <p className="text-xs text-[#425563]/70 font-medium">
                             {notification.time}
                           </p>
                         </div>

@@ -4,13 +4,6 @@ import {
   Bell, 
   Shield, 
   Palette, 
-  CreditCard, 
-  Globe, 
-  Moon, 
-  Sun, 
-  Smartphone,
-  Eye,
-  EyeOff,
   ChevronRight,
   Save,
   Camera
@@ -147,10 +140,10 @@ export function SettingsPage({ onBack }: SettingsPageProps) {
                 <div className="space-y-2">
                   <Label htmlFor="location" className="text-orange-900">Location</Label>
                   <Select defaultValue="nigeria">
-                    <SelectTrigger className="border-orange-200 focus:border-orange-400">
+                    <SelectTrigger className="border-orange-200 focus:border-orange-400 hover:border-orange-300 transition-colors">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="z-[1600]">
                       <SelectItem value="nigeria">Nigeria</SelectItem>
                       <SelectItem value="ghana">Ghana</SelectItem>
                       <SelectItem value="kenya">Kenya</SelectItem>
