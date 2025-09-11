@@ -158,7 +158,7 @@ export function PaymentIntelligence() {
       </Card>
 
       {/* Smart Insights */}
-      <Box>
+      <Box sx={{ mt: { xs: 4, md: 6 } }}>
         <Typography variant="h6" fontWeight={700} sx={{ mb: 3, color: '#425563', fontSize: { xs: '1.1rem', md: '1.25rem' } }}>
           Your Power-Ups 🚀
         </Typography>
@@ -248,10 +248,10 @@ export function PaymentIntelligence() {
             </Grid2>
           ))}
         </Grid2>
-      </Box>
+       </Box>
 
       {/* Spending Breakdown */}
-      <Box>
+      <Box sx={{ mt: { xs: 4, md: 6 } }}>
         <Typography variant="h6" fontWeight={700} sx={{ mb: 3, color: '#425563', fontSize: { xs: '1.1rem', md: '1.25rem' } }}>
           Where Your Money Goes 💸
         </Typography>
