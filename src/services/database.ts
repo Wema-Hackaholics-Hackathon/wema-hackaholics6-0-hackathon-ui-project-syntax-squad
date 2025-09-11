@@ -10,30 +10,37 @@ import {
 // Simple reactive local storage implementation without external dependencies
 class LocalDatabase {
   private listeners: { [key: string]: Array<(data: any) => void> } = {}
+  private isClient: boolean
 
   constructor() {
-    // Initialize empty arrays if not exist
-    if (!localStorage.getItem('alat-users')) {
-      localStorage.setItem('alat-users', '[]')
-    }
-    if (!localStorage.getItem('alat-transactions')) {
-      localStorage.setItem('alat-transactions', '[]')
-    }
-    if (!localStorage.getItem('alat-accounts')) {
-      localStorage.setItem('alat-accounts', '[]')
-    }
-    if (!localStorage.getItem('alat-social-connections')) {
-      localStorage.setItem('alat-social-connections', '[]')
-    }
-    if (!localStorage.getItem('alat-notifications')) {
-      localStorage.setItem('alat-notifications', '[]')
-    }
-    if (!localStorage.getItem('alat-analytics')) {
-      localStorage.setItem('alat-analytics', '[]')
+    this.isClient = typeof window !== 'undefined'
+    
+    if (this.isClient) {
+      // Initialize empty arrays if not exist
+      if (!localStorage.getItem('alat-users')) {
+        localStorage.setItem('alat-users', '[]')
+      }
+      if (!localStorage.getItem('alat-transactions')) {
+        localStorage.setItem('alat-transactions', '[]')
+      }
+      if (!localStorage.getItem('alat-accounts')) {
+        localStorage.setItem('alat-accounts', '[]')
+      }
+      if (!localStorage.getItem('alat-social-connections')) {
+        localStorage.setItem('alat-social-connections', '[]')
+      }
+      if (!localStorage.getItem('alat-notifications')) {
+        localStorage.setItem('alat-notifications', '[]')
+      }
+      if (!localStorage.getItem('alat-analytics')) {
+        localStorage.setItem('alat-analytics', '[]')
+      }
     }
   }
 
   private getData<T>(key: string): T[] {
+    if (!this.isClient) return []
+    
     try {
       return JSON.parse(localStorage.getItem(key) || '[]')
     } catch (error) {
@@ -43,6 +50,8 @@ class LocalDatabase {
   }
 
   private setData<T>(key: string, data: T[]): void {
+    if (!this.isClient) return
+    
     try {
       localStorage.setItem(key, JSON.stringify(data))
       this.notifyListeners(key, data)
@@ -261,6 +270,8 @@ class LocalDatabase {
 
   // Clear all data (for development/testing)
   async clearAllData(): Promise<void> {
+    if (!this.isClient) return
+
     localStorage.removeItem('alat-users')
     localStorage.removeItem('alat-transactions')
     localStorage.removeItem('alat-accounts')

@@ -1,7 +1,7 @@
 # SyntaxSquad - Project Enhancement Roadmap
 
 ## 🎯 Overview
-Transform the static ALAT Lens app into a dynamic, interactive fullstack experience with 3D effects, local database integration, mock authentication, and QR code functionality.
+Transform the static ALAT Spark app into a dynamic, interactive fullstack experience with 3D effects, local database integration, mock authentication, and QR code functionality.
 
 ## 📋 Core Features to Implement
 
