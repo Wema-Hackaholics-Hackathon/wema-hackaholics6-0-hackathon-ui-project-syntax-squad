@@ -178,29 +178,18 @@ export function ALATLensApp() {
         >
           <Box sx={{ textAlign: 'center' }}>
             <Box 
+              component="img"
+              src="/logo.webp"
+              alt="ALAT Logo"
               sx={{
-                width: 60,
-                height: 60,
-                borderRadius: '50%',
-                background: 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
+                width: 80,
+                height: 80,
                 mx: 'auto',
                 mb: 2,
-                boxShadow: '0 8px 20px rgba(174, 50, 142, 0.3)',
+                filter: 'drop-shadow(0 8px 20px rgba(174, 50, 142, 0.3))',
                 animation: 'pulse 2s ease-in-out infinite'
               }}
-            >
-              <Box 
-                sx={{
-                  width: 24,
-                  height: 24,
-                  borderRadius: '50%',
-                  backgroundColor: 'white'
-                }}
-              />
-            </Box>
+            />
             <Box sx={{ color: '#AE328E', fontWeight: 600, fontSize: '1.1rem' }}>
               Loading ALAT Spark...
             </Box>

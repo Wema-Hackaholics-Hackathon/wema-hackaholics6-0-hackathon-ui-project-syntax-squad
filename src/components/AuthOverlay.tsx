@@ -167,18 +167,21 @@ export function AuthOverlay({ onAuthSuccess }: AuthOverlayProps) {
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
               >
-                <Shield 
-                  size={48} 
-                  style={{ 
-                    color: '#AE328E',
-                    filter: 'drop-shadow(0 4px 8px rgba(174, 50, 142, 0.3))'
-                  }} 
+                <Box 
+                  component="img"
+                  src="/logo.webp"
+                  alt="ALAT Logo"
+                  sx={{
+                    width: 64,
+                    height: 64,
+                    filter: 'drop-shadow(0 4px 8px rgba(174, 50, 142, 0.3))',
+                    mb: 2
+                  }}
                 />
               </motion.div>
               <Typography 
                 variant="h4" 
                 sx={{ 
-                  mt: 2, 
                   fontWeight: 700,
                   background: 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)',
                   backgroundClip: 'text',
