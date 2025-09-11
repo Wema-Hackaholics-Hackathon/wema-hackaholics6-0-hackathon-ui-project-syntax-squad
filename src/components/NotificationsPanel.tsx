@@ -17,7 +17,7 @@ interface Notification {
   message: string
   time: string
   read: boolean
-  icon: any
+  icon: React.ComponentType<{ className?: string }>
 }
 
 const mockNotifications: Notification[] = [
@@ -148,7 +148,7 @@ export function NotificationsPanel({ isOpen, onClose }: NotificationsPanelProps)
               <div className="text-center py-8">
                 <Bell className="h-12 w-12 mx-auto text-pink-300 mb-3" />
                 <p className="text-[#AE328E] font-medium">No notifications</p>
-                <p className="text-[#425563] text-sm">You're all caught up!</p>
+                <p className="text-[#425563] text-sm">You&apos;re all caught up!</p>
               </div>
             ) : (
               notifications.map((notification) => {
