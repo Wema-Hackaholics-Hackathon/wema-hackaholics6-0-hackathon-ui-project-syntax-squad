@@ -81,7 +81,7 @@ export function ProfileDropdown({ onNavigate }: ProfileDropdownProps) {
         anchorEl={anchorEl}
         open={open}
         onClose={() => setAnchorEl(null)}
-        PaperProps={{ sx: { width: 320, borderRadius: 2, p: 0 } }}
+        slotProps={{ paper: { sx: { width: 320, borderRadius: 2, p: 0 } } }}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       >

@@ -10,82 +10,67 @@ import Typography from "@mui/material/Typography"
 import Button from "@mui/material/Button"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { dataService, Transaction } from "../services/dataService"
+import { AddTransaction } from "./AddTransaction"
 
-interface Transaction {
-  id: string
-  description: string
-  amount: number
-  type: 'income' | 'expense'
-  category: string
-  date: string
-  emoji: string
-}
-
-const mockTransactions: Transaction[] = [
-  {
-    id: "1",
-    description: "Salary Payment",
-    amount: 120000,
-    type: 'income',
-    category: 'Salary',
-    date: '2024-01-15',
-    emoji: '💰'
-  },
-  {
-    id: "2", 
-    description: "Uber Ride",
-    amount: -2500,
-    type: 'expense',
-    category: 'Transport',
-    date: '2024-01-14',
-    emoji: '🚗'
-  },
-  {
-    id: "3",
-    description: "Grocery Shopping",
-    amount: -8500,
-    type: 'expense', 
-    category: 'Food',
-    date: '2024-01-14',
-    emoji: '🛒'
-  },
-  {
-    id: "4",
-    description: "Netflix Subscription",
-    amount: -2900,
-    type: 'expense',
-    category: 'Entertainment',
-    date: '2024-01-13',
-    emoji: '🎬'
-  },
-  {
-    id: "5",
-    description: "Freelance Work",
-    amount: 25000,
-    type: 'income',
-    category: 'Freelance',
-    date: '2024-01-12',
-    emoji: '💻'
+const getCategoryEmoji = (category: string): string => {
+  const emojiMap: Record<string, string> = {
+    food: '🍽️',
+    transport: '🚗',
+    entertainment: '🎬',
+    utilities: '⚡',
+    bills: '📱',
+    shopping: '🛒',
+    health: '⚕️',
+    education: '📚',
+    salary: '💰',
+    business: '💼',
+    investment: '📈',
+    other: '💫'
   }
-]
+  return emojiMap[category] || '💳'
+}
 
 export function TransactionHistory() {
   const [searchTerm, setSearchTerm] = useState('')
   const [showAddTransaction, setShowAddTransaction] = useState(false)
+  const [transactions, setTransactions] = useState<Transaction[]>([])
+  const [loading, setLoading] = useState(true)
 
-  const filteredTransactions = mockTransactions.filter(transaction => 
+  useEffect(() => {
+    // Simulate loading delay for better UX
+    setTimeout(() => {
+      setTransactions(dataService.getTransactions())
+      setLoading(false)
+    }, 500)
+  }, [])
+
+  const filteredTransactions = transactions.filter(transaction => 
     transaction.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    transaction.category.toLowerCase().includes(searchTerm.toLowerCase())
+    transaction.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    transaction.merchant.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
-  const totalIncome = mockTransactions
-    .filter(t => t.type === 'income')
+  const totalIncome = transactions
+    .filter(t => t.type === 'credit')
     .reduce((sum, t) => sum + t.amount, 0)
 
-  const totalExpense = mockTransactions
-    .filter(t => t.type === 'expense')
+  const totalExpense = transactions
+    .filter(t => t.type === 'debit')
     .reduce((sum, t) => sum + Math.abs(t.amount), 0)
+
+  const handleAddTransaction = () => {
+    setShowAddTransaction(!showAddTransaction)
+  }
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <Typography variant="h6" color="#6b7280">Loading transactions...</Typography>
+      </div>
+    )
+  }
 
   return (
     <div className="space-y-4 md:space-y-6">
@@ -124,7 +109,7 @@ export function TransactionHistory() {
               </Typography>
             </Box>
             <Button
-              onClick={() => setShowAddTransaction(!showAddTransaction)}
+              onClick={handleAddTransaction}
               sx={{
                 background: 'rgba(255,255,255,0.2)',
                 color: 'white',
@@ -274,6 +259,9 @@ export function TransactionHistory() {
         </CardContent>
       </Card>
 
+      {/* Add Transaction Component */}
+      {showAddTransaction && <AddTransaction />}
+
       {/* Transactions List */}
       <Box>
         <Typography variant="h6" fontWeight={700} sx={{ mb: 3, color: '#425563' }}>
@@ -301,64 +289,39 @@ export function TransactionHistory() {
                       width: 48, 
                       height: 48, 
                       borderRadius: 3, 
-                      background: transaction.type === 'income' ? '#10b98115' : '#ef444415',
+                      background: transaction.type === 'credit' ? '#10b98115' : '#ef444415',
                       display: 'flex', 
                       alignItems: 'center', 
                       justifyContent: 'center',
-                      border: transaction.type === 'income' ? '1px solid #10b98130' : '1px solid #ef444430',
+                      border: transaction.type === 'credit' ? '1px solid #10b98130' : '1px solid #ef444430',
                     }}>
-                      <Typography sx={{ fontSize: '20px' }}>{transaction.emoji}</Typography>
+                      <Typography sx={{ fontSize: '20px' }}>{getCategoryEmoji(transaction.category)}</Typography>
                     </Box>
                     <Box>
                       <Typography variant="subtitle1" fontWeight={600} sx={{ color: '#425563' }}>
                         {transaction.description}
                       </Typography>
                       <Typography variant="caption" sx={{ color: '#6b7280' }}>
-                        {transaction.category} • {new Date(transaction.date).toLocaleDateString()}
+                        {transaction.merchant} • {new Date(transaction.date).toLocaleDateString()}
                       </Typography>
                     </Box>
                   </Box>
-                  <Typography variant="h6" fontWeight={700} sx={{ 
-                    color: transaction.type === 'income' ? '#10b981' : '#ef4444'
-                  }}>
-                    {transaction.type === 'income' ? '+' : ''}₦{Math.abs(transaction.amount).toLocaleString()}
-                  </Typography>
+                  <Box sx={{ textAlign: 'right' }}>
+                    <Typography variant="h6" fontWeight={700} sx={{ 
+                      color: transaction.type === 'credit' ? '#10b981' : '#ef4444'
+                    }}>
+                      {transaction.type === 'credit' ? '+' : '-'}₦{Math.abs(transaction.amount).toLocaleString()}
+                    </Typography>
+                    <Typography variant="caption" sx={{ color: '#6b7280' }}>
+                      {transaction.paymentMethod}
+                    </Typography>
+                  </Box>
                 </Box>
               </CardContent>
             </Card>
           ))}
         </Box>
       </Box>
-
-      {/* Add Transaction Demo */}
-      {showAddTransaction && (
-        <Card sx={{ 
-          p: { xs: 2, md: 3 },
-          borderRadius: 4,
-          background: 'linear-gradient(135deg, #06b6d415 0%, #06b6d425 100%)',
-          border: '1px solid #06b6d430',
-        }}>
-          <CardContent>
-            <Typography variant="h6" fontWeight={700} sx={{ mb: 2, color: '#06b6d4' }}>
-              Quick Add Transaction 💫
-            </Typography>
-            <Typography variant="body2" sx={{ color: '#425563', mb: 2 }}>
-              This is a demo! In a real app, you'd have a form here to add new transactions.
-            </Typography>
-            <Button
-              onClick={() => setShowAddTransaction(false)}
-              sx={{
-                background: 'linear-gradient(135deg, #06b6d4 0%, #0891b2 100%)',
-                color: 'white',
-                borderRadius: 2,
-                fontWeight: 700,
-              }}
-            >
-              Close Demo
-            </Button>
-          </CardContent>
-        </Card>
-      )}
     </div>
   )
 }

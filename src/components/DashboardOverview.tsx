@@ -6,7 +6,8 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { LinearProgress } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { dataService, User } from "../services/dataService";
 
 interface DashboardOverviewProps {
   onNavigate: (view: string) => void;
@@ -23,67 +24,94 @@ interface QuickStatItem {
   color: string;
 }
 
-const quickStats: QuickStatItem[] = [
-  {
-    title: "Your Stash 💰",
-    value: "₦47,500",
-    change: "+15.2%",
-    changeType: "positive",
-    icon: Wallet,
-    color: "#10b981",
-  },
-  {
-    title: "This Week 🔥",
-    value: "₦12,300",
-    change: "+8.1%",
-    changeType: "positive",
-    icon: TrendingUp,
-    color: "#f59e0b",
-  },
-];
-
-const gamifiedActions = [
-  {
-    title: "Level Up Your Savings! 🚀",
-    description: "Save ₦5,000 more to unlock Premium features",
-    progress: 75,
-    action: "Boost Stash",
-    view: "dashboard",
-    emoji: "🎯",
-    color: "#AE328E",
-    actionType: "savings"
-  },
-  {
-    title: "Weekly Challenge 💪",
-    description: "Spend less than ₦15,000 this week",
-    progress: 60,
-    action: "View Progress",
-    view: "intelligence",
-    emoji: "⚡",
-    color: "#8b5cf6",
-    actionType: "challenge"
-  },
-  {
-    title: "Squad Goals 👥",
-    description: "Split 3 bills with friends this month",
-    progress: 33,
-    action: "Find Friends",
-    view: "social",
-    emoji: "🤝",
-    color: "#06b6d4",
-    actionType: "social"
-  },
-];
-
 export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
   const [showSuccess, setShowSuccess] = useState(false);
   const [balanceVisible, setBalanceVisible] = useState(true);
+  const [userData, setUserData] = useState<User | null>(null);
+  const [totalBalance, setTotalBalance] = useState(0);
+  const [weeklySpending, setWeeklySpending] = useState(0);
+
+  useEffect(() => {
+    // Load user data and financial stats
+    const user = dataService.getUser();
+    const balance = dataService.getTotalBalance();
+    const transactions = dataService.getTransactions();
+    
+    // Calculate this week's spending (last 7 days)
+    const oneWeekAgo = new Date();
+    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+    const weeklyTransactions = transactions.filter(t => 
+      t.type === 'debit' && new Date(t.date) >= oneWeekAgo
+    );
+    const weeklyTotal = weeklyTransactions.reduce((sum, t) => sum + Math.abs(t.amount), 0);
+    
+    setUserData(user);
+    setTotalBalance(balance);
+    setWeeklySpending(weeklyTotal);
+  }, []);
+
+  const quickStats: QuickStatItem[] = [
+    {
+      title: "Your Balance 💰",
+      value: `₦${totalBalance.toLocaleString()}`,
+      change: "+15.2%",
+      changeType: "positive",
+      icon: Wallet,
+      color: "#10b981",
+    },
+    {
+      title: "This Week 🔥",
+      value: `₦${weeklySpending.toLocaleString()}`,
+      change: "+8.1%",
+      changeType: "positive",
+      icon: TrendingUp,
+      color: "#f59e0b",
+    },
+  ];
+
+  const gamifiedActions = [
+    {
+      title: "Level Up Your Savings! 🚀",
+      description: "Save ₦5,000 more to unlock Premium features",
+      progress: 75,
+      action: "Boost Stash",
+      view: "dashboard",
+      emoji: "🎯",
+      color: "#AE328E",
+      actionType: "savings"
+    },
+    {
+      title: "Weekly Challenge 💪",
+      description: `Spend less than ₦15,000 this week (Current: ₦${weeklySpending.toLocaleString()})`,
+      progress: Math.max(0, 100 - (weeklySpending / 15000) * 100),
+      action: "View Progress",
+      view: "intelligence",
+      emoji: "⚡",
+      color: "#8b5cf6",
+      actionType: "challenge"
+    },
+    {
+      title: "Squad Goals 👥",
+      description: "Split 3 bills with friends this month",
+      progress: 33,
+      action: "Find Friends",
+      view: "social",
+      emoji: "🤝",
+      color: "#06b6d4",
+      actionType: "social"
+    },
+  ];
 
   const handleActionClick = (actionType: string, view: string) => {
     switch (actionType) {
       case 'savings':
-        setShowSuccess(true);
-        setTimeout(() => setShowSuccess(false), 2000);
+        // Simulate adding to savings
+        const savingsGoals = dataService.getSavingsGoals();
+        if (savingsGoals.length > 0) {
+          dataService.updateSavingsGoal(savingsGoals[0].id, 1000);
+          setShowSuccess(true);
+          setTimeout(() => setShowSuccess(false), 3000);
+        }
         break;
       case 'challenge':
       case 'social':
@@ -97,6 +125,14 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
   const toggleBalance = () => {
     setBalanceVisible(!balanceVisible);
   };
+
+  if (!userData) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <Typography variant="h6" color="#6b7280">Loading dashboard...</Typography>
+      </div>
+    );
+  }
   return (
     <div className="space-y-4 md:space-y-6">
       {/* Welcome Section with Level */}

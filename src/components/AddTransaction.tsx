@@ -15,8 +15,6 @@ import {
   Receipt,
   Brain,
   Zap,
-  Calendar,
-  MapPin,
   Tag
 } from "lucide-react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog"
@@ -64,7 +62,7 @@ const paymentMethods = [
   'Mobile Money'
 ]
 
-const commonMerchants = {
+const commonMerchants: Record<string, string[]> = {
   food: ['Shoprite', 'KFC', 'Dominos', 'Starbucks', 'Mr. Biggs', 'Chicken Republic'],
   transport: ['Uber Nigeria', 'Bolt', 'Total Energies', 'Mobil', 'Oando', 'NIPCO'],
   entertainment: ['Netflix', 'Spotify', 'DSTV', 'Showmax', 'Apple Music', 'YouTube Premium'],
@@ -349,7 +347,7 @@ export function AddTransaction() {
                   <SelectValue placeholder="Select or type merchant" />
                 </SelectTrigger>
                 <SelectContent>
-                  {availableMerchants.map(merchant => (
+                  {availableMerchants.map((merchant: string) => (
                     <SelectItem key={merchant} value={merchant}>
                       {merchant}
                     </SelectItem>

@@ -1,0 +1,93 @@
+{
+  "user": {
+    "id": "user_001",
+    "name": "Adebayo Johnson",
+    "email": "adebayo.johnson@alat.ng",
+    "avatar": "",
+    "isPremium": true,
+    "level": 3,
+    "xp": 850,
+    "title": "Money Master",
+    "joinDate": "2024-01-15"
+  },
+  "accounts": [
+    {
+      "id": "acc_001",
+      "name": "ALAT Savings",
+      "type": "savings",
+      "balance": 847580.25,
+      "currency": "NGN",
+      "accountNumber": "2074****892",
+      "isDefault": true,
+      "status": "active"
+    },
+    {
+      "id": "acc_002", 
+      "name": "ALAT Current",
+      "type": "current",
+      "balance": 125000.00,
+      "currency": "NGN",
+      "accountNumber": "2074****456",
+      "isDefault": false,
+      "status": "active"
+    }
+  ],
+  "savingsGoals": [
+    {
+      "id": "goal_001",
+      "name": "Emergency Fund",
+      "targetAmount": 500000.00,
+      "currentAmount": 285000.00,
+      "progress": 57,
+      "deadline": "2025-06-30",
+      "category": "emergency",
+      "color": "#10b981"
+    },
+    {
+      "id": "goal_002",
+      "name": "Vacation Fund",
+      "targetAmount": 200000.00,
+      "currentAmount": 65000.00,
+      "progress": 32.5,
+      "deadline": "2025-12-25",
+      "category": "travel",
+      "color": "#06b6d4"
+    },
+    {
+      "id": "goal_003",
+      "name": "Gadget Fund",
+      "targetAmount": 150000.00,
+      "currentAmount": 89000.00,
+      "progress": 59.3,
+      "deadline": "2025-03-15",
+      "category": "shopping",
+      "color": "#8b5cf6"
+    }
+  ],
+  "microActions": [
+    {
+      "id": "micro_001",
+      "name": "Round Up Savings",
+      "type": "round_up",
+      "isActive": true,
+      "totalSaved": 15420.50,
+      "description": "Round up purchases to nearest ₦100"
+    },
+    {
+      "id": "micro_002",
+      "name": "Transport Fund",
+      "type": "category_save",
+      "isActive": true,
+      "totalSaved": 8750.00,
+      "description": "Save 20% of transport expenses"
+    },
+    {
+      "id": "micro_003",
+      "name": "Subscription Saver",
+      "type": "subscription_match",
+      "isActive": true,
+      "totalSaved": 12500.00,
+      "description": "Save equivalent to subscription payments"
+    }
+  ]
+}
