@@ -129,7 +129,7 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
   if (!userData) {
     return (
       <div className="flex items-center justify-center h-64">
-        <Typography variant="h6" color="#425563">Loading dashboard...</Typography>
+        <Typography variant="h6" color="text.secondary">Loading dashboard...</Typography>
       </div>
     );
   }

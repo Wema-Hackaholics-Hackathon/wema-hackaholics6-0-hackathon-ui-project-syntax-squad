@@ -51,12 +51,18 @@ export const light = createTheme({
 
 export const dark = createTheme({
   ...common,
-  palette: { ...common.palette, mode: 'dark', background: { default: '#2a2a35', paper: '#34303d' }, text: { primary: '#ffffff' } },
+  palette: { 
+    ...common.palette, 
+    mode: 'dark', 
+    background: { default: '#1a1a1a', paper: '#2a2a2a' }, 
+    text: { primary: '#ffffff', secondary: '#b0b0b0' },
+    primary: { main: '#c13a9e', light: '#d44fb0', dark: '#8c256d', contrastText: '#ffffff' },
+  },
   custom: {
     gradients: {
       primary: 'linear-gradient(135deg,#c13a9e 0%,#d44fb0 50%,#e65fc2 100%)',
-      secondary: 'linear-gradient(135deg,#5a4553 0%,#6b4c63 50%,#7c5573 100%)',
-      soft: 'linear-gradient(135deg,#4a3543 0%,#5a4553 50%,#6b4c63 100%)',
+      secondary: 'linear-gradient(135deg,#2a2a2a 0%,#3a3a3a 50%,#4a4a4a 100%)',
+      soft: 'linear-gradient(135deg,#1a1a1a 0%,#2a2a2a 50%,#3a3a3a 100%)',
       fiord: 'linear-gradient(135deg,#506373 0%,#5e7183 50%,#6c7f93 100%)',
     },
     shadows: {
