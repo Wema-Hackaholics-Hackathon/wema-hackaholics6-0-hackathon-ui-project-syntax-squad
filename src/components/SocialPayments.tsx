@@ -1,20 +1,16 @@
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
-import { Button } from "./ui/button"
-import { Badge } from "./ui/badge"
-import { Avatar } from "./ui/avatar"
-import { Progress } from "./ui/progress"
-import { 
-  Users, 
-  Plus, 
-  Split,
-  Trophy,
-  Target,
-  Share,
-  Clock,
-  CheckCircle,
-  AlertCircle,
-  Zap
-} from "lucide-react"
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Avatar from "@mui/material/Avatar";
+import Chip from "@mui/material/Chip";
+import Divider from "@mui/material/Divider";
+import Grid from "@mui/material/Grid";
+import LinearProgress from "@mui/material/LinearProgress";
+import { Users, Plus, Split, Trophy, Target, Share, Clock, CheckCircle, AlertCircle } from "lucide-react";
+
 
 interface BillSplit {
   id: string
@@ -164,218 +160,208 @@ const getStatusIcon = (status: string) => {
   }
 }
 
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Avatar from "@mui/material/Avatar";
+import Chip from "@mui/material/Chip";
+import Divider from "@mui/material/Divider";
+import Grid from "@mui/material/Grid";
+import LinearProgress from "@mui/material/LinearProgress";
+
+// ...keep all the data and helper functions as before...
+
 export function SocialPayments() {
   return (
-    <div className="space-y-6">
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
       {/* Bill Splitting */}
       <Card>
-        <CardHeader className="flex flex-row items-center justify-between">
-          <div>
-            <CardTitle className="flex items-center gap-2">
-              <Split className="h-5 w-5" />
-              Bill Splitting
-            </CardTitle>
-            <p className="text-sm text-muted-foreground">
-              Split expenses with friends and colleagues
-            </p>
-          </div>
-          <Button variant="outline" size="sm">
-            <Plus className="h-4 w-4 mr-1" />
-            Split Bill
-          </Button>
-        </CardHeader>
+        <CardHeader
+          title={
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <Split size={22} />
+              <Typography variant="h6">Bill Splitting</Typography>
+            </Box>
+          }
+          subheader={<Typography variant="body2" color="text.secondary">Split expenses with friends and colleagues</Typography>}
+          action={
+            <Button variant="outlined" size="small" startIcon={<Plus size={16} />}>Split Bill</Button>
+          }
+        />
         <CardContent>
-          <div className="space-y-4">
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             {billSplits.map((split) => (
-              <div key={split.id} className="flex items-center justify-between p-4 rounded-lg border bg-card">
-                <div className="flex items-center gap-4">
-                  <div className="p-2 bg-blue-100 rounded-lg">
-                    <Split className="h-4 w-4 text-blue-600" />
-                  </div>
-                  
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <h4 className="font-medium text-sm">{split.title}</h4>
-                      <Badge variant="secondary" className={getStatusColor(split.status)}>
-                        {getStatusIcon(split.status)}
-                        <span className="ml-1 capitalize">{split.status}</span>
-                      </Badge>
-                    </div>
-                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                      <span>{formatCurrency(split.total)} • {split.participants} people</span>
-                      <span>•</span>
-                      <span>Created by {split.createdBy}</span>
-                      <span>•</span>
-                      <span>Due {split.dueDate}</span>
-                    </div>
-                    <p className="text-sm font-medium text-blue-600 mt-1">
+              <Box key={split.id} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', p: 2, borderRadius: 2, border: 1, borderColor: 'divider', bgcolor: 'background.paper' }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                  <Box sx={{ p: 1, bgcolor: 'blue.100', borderRadius: 1 }}>
+                    <Split size={18} color="#1976d2" />
+                  </Box>
+                  <Box>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5 }}>
+                      <Typography variant="subtitle2" fontWeight={500}>{split.title}</Typography>
+                      <Chip
+                        label={split.status.charAt(0).toUpperCase() + split.status.slice(1)}
+                        size="small"
+                        color={split.status === 'completed' ? 'success' : split.status === 'partial' ? 'warning' : 'error'}
+                        icon={split.status === 'completed' ? <CheckCircle size={14} /> : split.status === 'partial' ? <Clock size={14} /> : <AlertCircle size={14} />}
+                        sx={{ ml: 1 }}
+                      />
+                    </Box>
+                    <Typography variant="body2" color="text.secondary">
+                      {formatCurrency(split.total)} • {split.participants} people • Created by {split.createdBy} • Due {split.dueDate}
+                    </Typography>
+                    <Typography variant="body2" color="primary" fontWeight={600} sx={{ mt: 0.5 }}>
                       Your share: {formatCurrency(split.yourShare)}
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="flex items-center gap-2">
-                  {split.status !== 'completed' && (
-                    <Button variant="outline" size="sm">
-                      {split.status === 'pending' ? 'Pay Share' : 'View Details'}
-                    </Button>
-                  )}
-                </div>
-              </div>
+                    </Typography>
+                  </Box>
+                </Box>
+                {split.status !== 'completed' && (
+                  <Button variant="outlined" size="small">
+                    {split.status === 'pending' ? 'Pay Share' : 'View Details'}
+                  </Button>
+                )}
+              </Box>
             ))}
-          </div>
+          </Box>
         </CardContent>
       </Card>
 
       {/* Group Savings Challenges */}
       <Card>
-        <CardHeader className="flex flex-row items-center justify-between">
-          <div>
-            <CardTitle className="flex items-center gap-2">
-              <Trophy className="h-5 w-5" />
-              Group Savings Challenges
-            </CardTitle>
-            <p className="text-sm text-muted-foreground">
-              Save together and achieve common goals
-            </p>
-          </div>
-          <Button variant="outline" size="sm">
-            <Plus className="h-4 w-4 mr-1" />
-            Create Challenge
-          </Button>
-        </CardHeader>
+        <CardHeader
+          title={
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <Trophy size={22} />
+              <Typography variant="h6">Group Savings Challenges</Typography>
+            </Box>
+          }
+          subheader={<Typography variant="body2" color="text.secondary">Save together and achieve common goals</Typography>}
+          action={
+            <Button variant="outlined" size="small" startIcon={<Plus size={16} />}>Create Challenge</Button>
+          }
+        />
         <CardContent>
-          <div className="space-y-4">
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             {groupChallenges.map((challenge) => (
-              <div key={challenge.id} className="p-4 rounded-lg border bg-card">
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-purple-100 rounded-lg">
-                      <Target className="h-4 w-4 text-purple-600" />
-                    </div>
-                    <div>
-                      <h4 className="font-medium">{challenge.name}</h4>
-                      <p className="text-sm text-muted-foreground">{challenge.description}</p>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <p className="font-medium">{formatCurrency(challenge.current)}</p>
-                    <p className="text-sm text-muted-foreground">of {formatCurrency(challenge.target)}</p>
-                  </div>
-                </div>
-                
-                <div className="space-y-2 mb-3">
-                  <Progress 
-                    value={(challenge.current / challenge.target) * 100} 
-                    className="h-2" 
-                  />
-                  <div className="flex justify-between text-xs text-muted-foreground">
+              <Box key={challenge.id} sx={{ p: 2, borderRadius: 2, border: 1, borderColor: 'divider', bgcolor: 'background.paper' }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1 }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <Box sx={{ p: 1, bgcolor: 'purple.100', borderRadius: 1 }}>
+                      <Target size={18} color="#9c27b0" />
+                    </Box>
+                    <Box>
+                      <Typography variant="subtitle2" fontWeight={500}>{challenge.name}</Typography>
+                      <Typography variant="body2" color="text.secondary">{challenge.description}</Typography>
+                    </Box>
+                  </Box>
+                  <Box sx={{ textAlign: 'right' }}>
+                    <Typography fontWeight={600}>{formatCurrency(challenge.current)}</Typography>
+                    <Typography variant="body2" color="text.secondary">of {formatCurrency(challenge.target)}</Typography>
+                  </Box>
+                </Box>
+                <Box sx={{ mb: 1 }}>
+                  <LinearProgress variant="determinate" value={(challenge.current / challenge.target) * 100} sx={{ height: 8, borderRadius: 4 }} />
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, color: 'text.secondary', mt: 0.5 }}>
                     <span>{challenge.participants} participants • {Math.round((challenge.current / challenge.target) * 100)}% complete</span>
                     <span>Ends {challenge.endDate}</span>
-                  </div>
-                </div>
-                
-                <div className="flex items-center justify-between">
-                  <div className="text-sm">
-                    <span className="text-muted-foreground">Your contribution: </span>
-                    <span className="font-medium text-green-600">{formatCurrency(challenge.yourContribution)}</span>
-                  </div>
-                  <Button variant="outline" size="sm">
-                    Contribute
-                  </Button>
-                </div>
-              </div>
+                  </Box>
+                </Box>
+                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <Typography variant="body2">
+                    <span style={{ color: '#757575' }}>Your contribution: </span>
+                    <span style={{ color: '#2e7d32', fontWeight: 600 }}>{formatCurrency(challenge.yourContribution)}</span>
+                  </Typography>
+                  <Button variant="outlined" size="small">Contribute</Button>
+                </Box>
+              </Box>
             ))}
-          </div>
+          </Box>
         </CardContent>
       </Card>
 
       {/* Shared Expenses */}
       <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Share className="h-5 w-5" />
-            Recent Shared Expenses
-          </CardTitle>
-          <p className="text-sm text-muted-foreground">
-            Track expenses paid by you or others
-          </p>
-        </CardHeader>
+        <CardHeader
+          title={
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <Share size={22} />
+              <Typography variant="h6">Recent Shared Expenses</Typography>
+            </Box>
+          }
+          subheader={<Typography variant="body2" color="text.secondary">Track expenses paid by you or others</Typography>}
+        />
         <CardContent>
-          <div className="space-y-4">
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             {sharedExpenses.map((expense) => (
-              <div key={expense.id} className="flex items-center justify-between p-3 rounded-lg border bg-card">
-                <div className="flex items-center gap-4">
-                  <Avatar className="h-8 w-8">
-                    <span className="flex items-center justify-center w-full h-full">
-                      {expense.paidBy === 'You' ? 'Y' : expense.paidBy.substring(0, 2)}
-                    </span>
+              <Box key={expense.id} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', p: 2, borderRadius: 2, border: 1, borderColor: 'divider', bgcolor: 'background.paper' }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                  <Avatar sx={{ width: 32, height: 32, bgcolor: 'primary.light', color: 'primary.main', fontWeight: 'bold' }}>
+                    {expense.paidBy === 'You' ? 'Y' : expense.paidBy.substring(0, 2)}
                   </Avatar>
-                  
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <h4 className="font-medium text-sm">{expense.description}</h4>
-                      {expense.settled ? (
-                        <Badge variant="secondary" className="bg-green-100 text-green-800 text-xs">
-                          <CheckCircle className="h-3 w-3 mr-1" />
-                          Settled
-                        </Badge>
-                      ) : (
-                        <Badge variant="secondary" className="bg-yellow-100 text-yellow-800 text-xs">
-                          <Clock className="h-3 w-3 mr-1" />
-                          Pending
-                        </Badge>
-                      )}
-                    </div>
-                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                      <span>Paid by {expense.paidBy}</span>
-                      <span>•</span>
-                      <span>{expense.participants.length} people</span>
-                      <span>•</span>
-                      <span>{expense.date}</span>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="text-right">
-                  <p className="font-medium">{formatCurrency(expense.amount)}</p>
+                  <Box>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5 }}>
+                      <Typography variant="subtitle2" fontWeight={500}>{expense.description}</Typography>
+                      <Chip
+                        label={expense.settled ? 'Settled' : 'Pending'}
+                        size="small"
+                        color={expense.settled ? 'success' : 'warning'}
+                        icon={expense.settled ? <CheckCircle size={14} /> : <Clock size={14} />}
+                        sx={{ ml: 1 }}
+                      />
+                    </Box>
+                    <Typography variant="body2" color="text.secondary">
+                      Paid by {expense.paidBy} • {expense.participants.length} people • {expense.date}
+                    </Typography>
+                  </Box>
+                </Box>
+                <Box sx={{ textAlign: 'right' }}>
+                  <Typography fontWeight={600}>{formatCurrency(expense.amount)}</Typography>
                   {!expense.settled && (
-                    <Button variant="ghost" size="sm" className="text-xs">
-                      Settle Up
-                    </Button>
+                    <Button variant="text" size="small">Settle Up</Button>
                   )}
-                </div>
-              </div>
+                </Box>
+              </Box>
             ))}
-          </div>
+          </Box>
         </CardContent>
       </Card>
 
       {/* Social Stats */}
       <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Users className="h-5 w-5" />
-            Social Activity
-          </CardTitle>
-        </CardHeader>
+        <CardHeader
+          title={
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <Users size={22} />
+              <Typography variant="h6">Social Activity</Typography>
+            </Box>
+          }
+        />
         <CardContent>
-          <div className="grid grid-cols-3 gap-4">
-            <div className="text-center p-3 rounded-lg bg-blue-50 border border-blue-200">
-              <p className="text-2xl font-medium text-blue-600">15</p>
-              <p className="text-sm text-muted-foreground">Bills Split</p>
-            </div>
-            <div className="text-center p-3 rounded-lg bg-purple-50 border border-purple-200">
-              <p className="text-2xl font-medium text-purple-600">₦37K</p>
-              <p className="text-sm text-muted-foreground">Group Savings</p>
-            </div>
-            <div className="text-center p-3 rounded-lg bg-green-50 border border-green-200">
-              <p className="text-2xl font-medium text-green-600">8</p>
-              <p className="text-sm text-muted-foreground">Active Friends</p>
-            </div>
-          </div>
+          <Grid container spacing={2}>
+            <Grid item xs={4}>
+              <Box sx={{ textAlign: 'center', p: 2, borderRadius: 2, bgcolor: 'blue.50', border: 1, borderColor: 'blue.200' }}>
+                <Typography variant="h4" color="primary.main">15</Typography>
+                <Typography variant="body2" color="text.secondary">Bills Split</Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={4}>
+              <Box sx={{ textAlign: 'center', p: 2, borderRadius: 2, bgcolor: 'purple.50', border: 1, borderColor: 'purple.200' }}>
+                <Typography variant="h4" sx={{ color: '#9c27b0' }}>₦37K</Typography>
+                <Typography variant="body2" color="text.secondary">Group Savings</Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={4}>
+              <Box sx={{ textAlign: 'center', p: 2, borderRadius: 2, bgcolor: 'green.50', border: 1, borderColor: 'green.200' }}>
+                <Typography variant="h4" sx={{ color: '#2e7d32' }}>8</Typography>
+                <Typography variant="body2" color="text.secondary">Active Friends</Typography>
+              </Box>
+            </Grid>
+          </Grid>
         </CardContent>
       </Card>
-    </div>
-  )
+    </Box>
+  );
 }
