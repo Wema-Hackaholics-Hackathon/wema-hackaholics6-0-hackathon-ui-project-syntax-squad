@@ -1,14 +1,3 @@
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardHeader from "@mui/material/CardHeader";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Avatar from "@mui/material/Avatar";
-import Chip from "@mui/material/Chip";
-import Divider from "@mui/material/Divider";
-import Grid from "@mui/material/Grid";
-import LinearProgress from "@mui/material/LinearProgress";
 import { Users, Plus, Split, Trophy, Target, Share, Clock, CheckCircle, AlertCircle } from "lucide-react";
 
 
@@ -160,17 +149,6 @@ const getStatusIcon = (status: string) => {
   }
 }
 
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardHeader from "@mui/material/CardHeader";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Avatar from "@mui/material/Avatar";
-import Chip from "@mui/material/Chip";
-import Divider from "@mui/material/Divider";
-import Grid from "@mui/material/Grid";
-import LinearProgress from "@mui/material/LinearProgress";
 
 // ...keep all the data and helper functions as before...
 
