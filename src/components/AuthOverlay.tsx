@@ -140,9 +140,10 @@ export function AuthOverlay({ onAuthSuccess }: AuthOverlayProps) {
       >
         <Card 
           sx={{
-            maxWidth: { xs: '100vw', sm: 500 },
+            maxWidth: { xs: 'calc(100vw - 32px)', sm: 500 },
+            mx: { xs: 2, sm: 'auto' },
             overflowX: 'hidden',
-            width: { xs: '100vw', sm: '100%' },
+            width: { xs: '100%', sm: '100%' },
             boxSizing: 'border-box',
             height: 'auto',
             maxHeight: { xs: '100dvh', sm: '90vh' },
