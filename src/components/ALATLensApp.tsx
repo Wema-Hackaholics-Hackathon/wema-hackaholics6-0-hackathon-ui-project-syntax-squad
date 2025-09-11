@@ -59,7 +59,12 @@ export function ALATLensApp() {
       minHeight: '100vh',
       background: 'linear-gradient(135deg, #ffffff 0%, #fef9fc 50%, rgba(245,230,241,0.3) 100%)',
     }}>
-      <Box sx={{ display: 'flex', height: '100vh', overflow: 'hidden' }}>
+      {/* Header - Fixed at top */}
+      <Header 
+        onNavigate={handleNavigation}
+      />
+      
+      <Box sx={{ display: 'flex', height: 'calc(100vh - 64px)', overflow: 'hidden' }}>
         {/* Expandable Sidebar - Hidden on mobile */}
         {!isMobile && (
           <ExpandableSidebar 
@@ -81,10 +86,6 @@ export function ALATLensApp() {
             transition: 'margin-left 300ms cubic-bezier(0.4, 0, 0.2, 1)',
           }}
         >
-          <Header 
-            onNavigate={handleNavigation}
-          />
-          
           <Box 
             component="main" 
             sx={{

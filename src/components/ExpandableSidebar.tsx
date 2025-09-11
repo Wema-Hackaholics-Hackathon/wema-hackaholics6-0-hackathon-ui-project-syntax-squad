@@ -65,6 +65,8 @@ export function ExpandableSidebar({
           boxShadow: '4px 0 24px rgba(174, 50, 142, 0.08)',
           transition: 'width 300ms cubic-bezier(0.4, 0, 0.2, 1)',
           overflowX: 'hidden',
+          top: '64px', // Position below header
+          height: 'calc(100vh - 64px)', // Adjust height to account for header
         },
       }}
     >
@@ -73,7 +75,7 @@ export function ExpandableSidebar({
         onClick={onToggle}
         sx={{
           position: 'absolute',
-          top: 24,
+          top: 16,
           right: -12,
           width: 24,
           height: 24,
@@ -91,52 +93,6 @@ export function ExpandableSidebar({
       </IconButton>
 
       <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%', p: 2 }}>
-        {/* Logo and Title */}
-        <Box sx={{ 
-          display: 'flex', 
-          alignItems: 'center', 
-          mb: 4,
-          justifyContent: isExpanded ? 'flex-start' : 'center',
-          gap: isExpanded ? 1.5 : 0
-        }}>
-          <Box sx={{
-            width: 32,
-            height: 32,
-            borderRadius: 1.5,
-            background: 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            boxShadow: '0 4px 12px rgba(174, 50, 142, 0.3)',
-          }}>
-            <Image
-              src="/logo.webp"
-              alt="ALAT Logo"
-              width={20}
-              height={20}
-              style={{ objectFit: 'contain' }}
-              priority
-            />
-          </Box>
-          {isExpanded && (
-            <Box>
-              <Typography variant="h6" sx={{ 
-                fontWeight: 700,
-                background: 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)',
-                backgroundClip: 'text',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                lineHeight: 1.2
-              }}>
-                ALAT Spark
-              </Typography>
-              <Typography variant="caption" sx={{ color: '#6b7280' }}>
-                Money made fun 💫
-              </Typography>
-            </Box>
-          )}
-        </Box>
-
         {/* Main Navigation */}
         <Box sx={{ flexGrow: 1 }}>
           <List sx={{ p: 0 }}>
