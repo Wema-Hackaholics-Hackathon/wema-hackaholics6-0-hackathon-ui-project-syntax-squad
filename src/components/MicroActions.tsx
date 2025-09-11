@@ -68,7 +68,7 @@ export function MicroActions() {
     .reduce((sum, action) => sum + action.totalSaved, 0)
 
   return (
-    <div className="space-y-4 md:space-y-6">
+    <div>
       {/* Header */}
       <Card sx={{ 
         p: { xs: 2, md: 3 }, 

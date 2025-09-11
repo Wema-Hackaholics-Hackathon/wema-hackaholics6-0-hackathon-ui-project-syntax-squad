@@ -42,10 +42,10 @@ export function SettingsPage({ onBack }: SettingsPageProps) {
   }
 
   return (
-    <div className="space-y-6">
+    <div>
       {/* Header */}
-      <div className="mb-6">
-        <div className="flex items-center gap-3 mb-2">
+      <div>
+        <div>
           {onBack && (
             <Button variant="ghost" size="icon" onClick={onBack} className="h-8 w-8">
               <ChevronRight className="h-4 w-4 rotate-180" />
@@ -73,7 +73,7 @@ export function SettingsPage({ onBack }: SettingsPageProps) {
         </TabsList>
 
         {/* Profile Tab */}
-        <TabsContent value="profile" className="space-y-6">
+        <TabsContent value="profile">
           <Card className="shadow-purple border-purple-200/50">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-purple-900">
