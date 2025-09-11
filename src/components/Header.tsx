@@ -10,7 +10,7 @@ import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import SearchIcon from "@mui/icons-material/Search";
-import SettingsIcon from "@mui/icons-material/Settings";
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from './ui/dropdown-menu';
 import { ThemeSwitcher } from "./ThemeSwitcher";
 import { styled } from "@mui/material/styles";
 import Image from "next/image";
@@ -188,28 +188,36 @@ export function Header({ onNavigate }: HeaderProps) {
           {/* Theme Switcher (Desktop) */}
           <ThemeSwitcher />
 
-          {/* Settings (Desktop) */}
-          <IconButton color="inherit" sx={{ display: { xs: 'none', md: 'flex' } }} onClick={() => onNavigate?.('settings')}>
-            <SettingsIcon />
-          </IconButton>
+          
 
-          {/* Profile */}
-          <IconButton sx={{ p: 0 }} onClick={() => onNavigate?.('profile')}>
-            <Avatar
-              src={profileData.avatar}
-              alt={profileData.name}
-              sx={{ 
-                width: 36, 
-                height: 36, 
-                bgcolor: '#AE328E', 
-                color: 'white', 
-                fontWeight: 'bold',
-                fontSize: '0.875rem'
-              }}
-            >
-              {!profileData.avatar ? getInitials(profileData.name) : null}
-            </Avatar>
-          </IconButton>
+          {/* Account Dropdown */}
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from './ui/dropdown-menu';
+
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <IconButton sx={{ p: 0 }}>
+      <Avatar
+        src={profileData.avatar}
+        alt={profileData.name}
+        sx={{ 
+          width: 36, 
+          height: 36, 
+          bgcolor: '#AE328E', 
+          color: 'white', 
+          fontWeight: 'bold',
+          fontSize: '0.875rem'
+        }}
+      >
+        {!profileData.avatar ? getInitials(profileData.name) : null}
+      </Avatar>
+    </IconButton>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent align="end">
+    <DropdownMenuItem onClick={() => onNavigate?.('settings')}>Settings</DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem onClick={() => {/* TODO: implement logout */}}>Log out</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
         </Box>
       </Toolbar>
     </AppBar>
