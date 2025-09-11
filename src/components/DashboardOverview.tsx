@@ -136,10 +136,8 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
   return (
     <div>
       {/* Welcome Section with Level */}
-      <Card className="p-6 rounded-2xl bg-card shadow-xl border-none relative overflow-hidden"
-        sx={{ 
-          boxShadow: '0 12px 40px rgba(174, 50, 142, 0.3)',
-        }}>
+<Card className="p-6 rounded-2xl shadow-xl border-none relative overflow-hidden"
+        sx={{ background: 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)', boxShadow: '0 12px 40px rgba(174, 50, 142, 0.3)' }}>
         <Box sx={{ 
           position: 'absolute', 
           top: -20, 
