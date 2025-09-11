@@ -7,13 +7,15 @@ import Typography from "@mui/material/Typography";
 import Badge from "@mui/material/Badge";
 import InputBase from "@mui/material/InputBase";
 import Box from "@mui/material/Box";
+import Avatar from "@mui/material/Avatar";
 import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import SearchIcon from "@mui/icons-material/Search";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { styled } from "@mui/material/styles";
-import { NotificationsPanel } from "./NotificationsPanel";
-import { ProfileDropdown } from "./ProfileDropdown";
+import { NotificationsDropdown } from "./NotificationsDropdown";
+import { SettingsDropdown } from "./SettingsDropdown";
+import { ProfileDropdownMenu } from "./ProfileDropdownMenu";
 import Image from "next/image";
 
 interface HeaderProps {
@@ -57,7 +59,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
     width: '100%',
@@ -69,141 +70,182 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export function Header({ onMenuClick, onNavigate }: HeaderProps) {
   const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const [settingsOpen, setSettingsOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const unreadNotifications = 3;
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      // Handle search logic here
       console.log("Searching for:", searchQuery);
     }
   };
 
+  const profileData = {
+    name: "John Doe",
+    email: "john.doe@example.com",
+    avatar: "",
+  };
+
+  const getInitials = (name: string) => {
+    return name.split(' ').map(n => n[0]).join('').toUpperCase();
+  };
+
   return (
-    <>
-      <AppBar 
-        position="sticky" 
-        color="default" 
-        elevation={0}
-        sx={{ 
-          zIndex: 1201,
-          background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(254,249,252,0.95) 100%)',
-          backdropFilter: 'blur(20px)',
-          borderBottom: '1px solid rgba(174, 50, 142, 0.1)',
-          boxShadow: '0 1px 3px rgba(174, 50, 142, 0.1)'
-        }}
-      >
-        <Toolbar>
-          {/* Menu Button (Mobile) */}
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={onMenuClick}
-            sx={{ mr: 2, display: { md: 'none' } }}
-          >
-            <MenuIcon />
+    <AppBar 
+      position="sticky" 
+      color="default" 
+      elevation={0}
+      sx={{ 
+        zIndex: 1201,
+        background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(254,249,252,0.95) 100%)',
+        backdropFilter: 'blur(20px)',
+        borderBottom: '1px solid rgba(174, 50, 142, 0.1)',
+        boxShadow: '0 1px 3px rgba(174, 50, 142, 0.1)'
+      }}
+    >
+      <Toolbar>
+        {/* Menu Button (Mobile) */}
+        <IconButton
+          edge="start"
+          color="inherit"
+          aria-label="open drawer"
+          onClick={onMenuClick}
+          sx={{ mr: 2, display: { md: 'none' } }}
+        >
+          <MenuIcon />
+        </IconButton>
+
+        {/* Logo and Title */}
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mr: 2 }}>
+          <Box sx={{ 
+            width: 40, 
+            height: 40, 
+            borderRadius: 2, 
+            overflow: 'hidden',
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center',
+            background: 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)',
+            boxShadow: '0 4px 12px rgba(174, 50, 142, 0.25)',
+            position: 'relative'
+          }}>
+            <Image
+              src="/logo.webp"
+              alt="ALAT Logo"
+              width={32}
+              height={32}
+              style={{ objectFit: 'contain' }}
+              priority
+            />
+          </Box>
+          <Box>
+            <Typography 
+              variant="h6" 
+              noWrap 
+              component="div" 
+              sx={{ 
+                fontWeight: 700, 
+                background: 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)',
+                backgroundClip: 'text',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                fontSize: '1.25rem',
+                lineHeight: 1.2
+              }}
+            >
+              ALAT Spark
+            </Typography>
+            <Typography 
+              variant="caption" 
+              sx={{ 
+                color: '#425563',
+                fontWeight: 500,
+                fontSize: '0.75rem',
+                display: { xs: 'none', sm: 'block' }
+              }}
+            >
+              Financial Intelligence
+            </Typography>
+          </Box>
+        </Box>
+
+        {/* Search (hidden on xs) */}
+        <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
+          <Search onSubmit={handleSearch}>
+            <SearchIconWrapper>
+              <SearchIcon color="primary" />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search transactions, insights..."
+              inputProps={{ 'aria-label': 'search' }}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </Search>
+        </Box>
+
+        {/* Actions */}
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          {/* Search Icon (Mobile) */}
+          <IconButton color="inherit" sx={{ display: { sm: 'none' } }}>
+            <SearchIcon />
           </IconButton>
 
-          {/* Logo and Title */}
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mr: 2 }}>
-            <Box sx={{ 
-              width: 40, 
-              height: 40, 
-              borderRadius: 2, 
-              overflow: 'hidden',
-              display: 'flex', 
-              alignItems: 'center', 
-              justifyContent: 'center',
-              background: 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)',
-              boxShadow: '0 4px 12px rgba(174, 50, 142, 0.25)',
-              position: 'relative'
-            }}>
-              <Image
-                src="/logo.webp"
-                alt="ALAT Logo"
-                width={32}
-                height={32}
-                style={{ objectFit: 'contain' }}
-                priority
-              />
-            </Box>
-            <Box>
-              <Typography 
-                variant="h6" 
-                noWrap 
-                component="div" 
-                sx={{ 
-                  fontWeight: 700, 
-                  background: 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)',
-                  backgroundClip: 'text',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  fontSize: '1.25rem',
-                  lineHeight: 1.2
-                }}
-              >
-                ALAT Spark
-              </Typography>
-              <Typography 
-                variant="caption" 
-                sx={{ 
-                  color: '#425563',
-                  fontWeight: 500,
-                  fontSize: '0.75rem',
-                  display: { xs: 'none', sm: 'block' }
-                }}
-              >
-                Financial Intelligence
-              </Typography>
-            </Box>
+          {/* Notifications Dropdown */}
+          <NotificationsDropdown
+            trigger={
+              <IconButton color="inherit">
+                <Badge badgeContent={unreadNotifications} color="error">
+                  <NotificationsIcon />
+                </Badge>
+              </IconButton>
+            }
+            isOpen={notificationsOpen}
+            onOpenChange={setNotificationsOpen}
+          />
+
+          {/* Settings Dropdown (Desktop) */}
+          <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+            <SettingsDropdown
+              trigger={
+                <IconButton color="inherit">
+                  <SettingsIcon />
+                </IconButton>
+              }
+              isOpen={settingsOpen}
+              onOpenChange={setSettingsOpen}
+              onNavigate={onNavigate}
+            />
           </Box>
 
-          {/* Search (hidden on xs) */}
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
-            <Search onSubmit={handleSearch}>
-              <SearchIconWrapper>
-                <SearchIcon color="primary" />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search transactions, insights..."
-                inputProps={{ 'aria-label': 'search' }}
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-            </Search>
-          </Box>
-
-          {/* Actions */}
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            {/* Search Icon (Mobile) */}
-            <IconButton color="inherit" sx={{ display: { sm: 'none' } }}>
-              <SearchIcon />
-            </IconButton>
-
-            {/* Notifications */}
-            <IconButton color="inherit" onClick={() => setNotificationsOpen(true)}>
-              <Badge badgeContent={unreadNotifications} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-
-            {/* Settings (Desktop) */}
-            <IconButton color="inherit" sx={{ display: { xs: 'none', md: 'flex' } }} onClick={() => onNavigate?.('settings')}>
-              <SettingsIcon />
-            </IconButton>
-
-            {/* Profile Dropdown */}
-            <ProfileDropdown onNavigate={onNavigate} />
-          </Box>
-        </Toolbar>
-      </AppBar>
-
-      <NotificationsPanel
-        isOpen={notificationsOpen}
-        onClose={() => setNotificationsOpen(false)}
-      />
-    </>
+          {/* Profile Dropdown */}
+          <ProfileDropdownMenu
+            trigger={
+              <IconButton sx={{ p: 0 }}>
+                <Avatar
+                  src={profileData.avatar}
+                  alt={profileData.name}
+                  sx={{ 
+                    width: 36, 
+                    height: 36, 
+                    bgcolor: '#AE328E', 
+                    color: 'white', 
+                    fontWeight: 'bold',
+                    fontSize: '0.875rem'
+                  }}
+                >
+                  {!profileData.avatar ? getInitials(profileData.name) : null}
+                </Avatar>
+              </IconButton>
+            }
+            isOpen={profileOpen}
+            onOpenChange={setProfileOpen}
+            onNavigate={onNavigate}
+          />
+        </Box>
+      </Toolbar>
+    </AppBar>
   );
 }
