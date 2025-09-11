@@ -8,7 +8,6 @@ import Badge from "@mui/material/Badge";
 import InputBase from "@mui/material/InputBase";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
-import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import SearchIcon from "@mui/icons-material/Search";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -16,7 +15,6 @@ import { styled } from "@mui/material/styles";
 import Image from "next/image";
 
 interface HeaderProps {
-  onMenuClick?: () => void;
   onNavigate?: (view: string) => void;
 }
 
@@ -65,7 +63,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export function Header({ onMenuClick, onNavigate }: HeaderProps) {
+export function Header({ onNavigate }: HeaderProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const unreadNotifications = 3;
 
@@ -100,17 +98,6 @@ export function Header({ onMenuClick, onNavigate }: HeaderProps) {
       }}
     >
       <Toolbar>
-        {/* Menu Button (Mobile) */}
-        <IconButton
-          edge="start"
-          color="inherit"
-          aria-label="open drawer"
-          onClick={onMenuClick}
-          sx={{ mr: 2, display: { md: 'none' } }}
-        >
-          <MenuIcon />
-        </IconButton>
-
         {/* Logo and Title */}
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mr: 2 }}>
           <Box sx={{ 
