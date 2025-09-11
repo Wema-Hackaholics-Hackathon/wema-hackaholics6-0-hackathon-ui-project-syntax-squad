@@ -87,6 +87,23 @@ const groupGoals = [
 ]
 
 export function SocialPayments() {
+  const [sharedAchievement, setSharedAchievement] = useState(false);
+  const [activeActions, setActiveActions] = useState<string[]>([]);
+
+  const handleActionClick = (actionId: string) => {
+    if (!activeActions.includes(actionId)) {
+      setActiveActions([...activeActions, actionId]);
+      // Simulate loading state
+      setTimeout(() => {
+        // Action completed
+      }, 1000);
+    }
+  };
+
+  const handleShareAchievement = () => {
+    setSharedAchievement(true);
+    setTimeout(() => setSharedAchievement(false), 2000);
+  };
   return (
     <div className="space-y-4 md:space-y-6">
       {/* Connect Header */}
@@ -213,22 +230,27 @@ export function SocialPayments() {
                   </Typography>
                   <Button
                     fullWidth
+                    onClick={() => handleActionClick(action.id)}
                     endIcon={<Plus size={16} />}
                     sx={{
-                      background: `linear-gradient(135deg, ${action.color} 0%, ${action.color}dd 100%)`,
+                      background: activeActions.includes(action.id)
+                        ? 'linear-gradient(135deg, #10b981 0%, #059669 100%)'
+                        : `linear-gradient(135deg, ${action.color} 0%, ${action.color}dd 100%)`,
                       color: 'white',
                       borderRadius: 3,
                       fontWeight: 700,
                       py: 1.2,
                       boxShadow: `0 8px 24px ${action.color}30`,
                       '&:hover': {
-                        background: `linear-gradient(135deg, ${action.color}dd 0%, ${action.color}bb 100%)`,
+                        background: activeActions.includes(action.id)
+                          ? 'linear-gradient(135deg, #059669 0%, #047857 100%)'
+                          : `linear-gradient(135deg, ${action.color}dd 0%, ${action.color}bb 100%)`,
                         boxShadow: `0 12px 32px ${action.color}40`,
                         transform: 'translateY(-2px)',
                       }
                     }}
                   >
-                    {action.actionText}
+                    {activeActions.includes(action.id) ? '✅ Started!' : action.actionText}
                   </Button>
                 </CardContent>
               </Card>
@@ -428,9 +450,12 @@ export function SocialPayments() {
             You&apos;ve helped friends save ₦25,000 this month through smart splits! 💰
           </Typography>
           <Button
+            onClick={handleShareAchievement}
             startIcon={<Share size={18} />}
             sx={{
-              background: 'linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%)',
+              background: sharedAchievement 
+                ? 'linear-gradient(135deg, #10b981 0%, #059669 100%)'
+                : 'linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%)',
               color: 'white',
               borderRadius: 3,
               fontWeight: 700,
@@ -438,13 +463,15 @@ export function SocialPayments() {
               py: 1,
               boxShadow: '0 6px 20px #f59e0b30',
               '&:hover': {
-                background: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)',
+                background: sharedAchievement 
+                  ? 'linear-gradient(135deg, #059669 0%, #047857 100%)'
+                  : 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)',
                 boxShadow: '0 8px 24px #f59e0b40',
                 transform: 'translateY(-1px)',
               }
             }}
           >
-            Share Achievement
+            {sharedAchievement ? '✅ Shared!' : 'Share Achievement'}
           </Button>
         </CardContent>
       </Card>
