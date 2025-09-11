@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import alertsData from "@/app/data/mock-alerts.json";
+import alertsData from "@/mocks/mock-alerts.json";
 
 export async function GET() {
   const alerts = alertsData.alerts;
