@@ -11,6 +11,7 @@ import Avatar from "@mui/material/Avatar";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import SearchIcon from "@mui/icons-material/Search";
 import SettingsIcon from "@mui/icons-material/Settings";
+import { ThemeSwitcher } from "./ThemeSwitcher";
 import { styled } from "@mui/material/styles";
 import Image from "next/image";
 
@@ -183,6 +184,9 @@ export function Header({ onNavigate }: HeaderProps) {
               <NotificationsIcon />
             </Badge>
           </IconButton>
+
+          {/* Theme Switcher (Desktop) */}
+          <ThemeSwitcher />
 
           {/* Settings (Desktop) */}
           <IconButton color="inherit" sx={{ display: { xs: 'none', md: 'flex' } }} onClick={() => onNavigate?.('settings')}>
