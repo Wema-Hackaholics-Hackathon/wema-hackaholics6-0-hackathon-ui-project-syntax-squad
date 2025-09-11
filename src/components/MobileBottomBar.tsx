@@ -32,9 +32,9 @@ export function MobileBottomBar({ activeView = 'dashboard', onNavigate }: Mobile
         right: 0, 
         zIndex: 40, 
         display: { xs: 'block', md: 'none' },
-        background: 'linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(254,249,252,0.98) 100%)',
+        background: 'var(--card)',
         backdropFilter: 'blur(20px)',
-        borderTop: '1px solid rgba(174, 50, 142, 0.1)',
+        borderTop: '1px solid var(--border)',
         borderRadius: '24px 24px 0 0',
         boxShadow: '0 -8px 32px rgba(174, 50, 142, 0.15)',
         mx: 0,
@@ -52,12 +52,12 @@ export function MobileBottomBar({ activeView = 'dashboard', onNavigate }: Mobile
           px: 2,
           py: 1,
           '& .MuiBottomNavigationAction-root': {
-            color: '#425563',
+            color: 'var(--foreground)',
             borderRadius: 3,
             transition: 'all 0.2s ease-in-out',
             '&.Mui-selected': {
-              color: '#AE328E',
-              background: 'linear-gradient(135deg, rgba(174, 50, 142, 0.1) 0%, rgba(193, 58, 158, 0.1) 100%)',
+              color: 'var(--primary-foreground)',
+              background: 'var(--primary)',
               transform: 'scale(1.05)',
               boxShadow: '0 4px 16px rgba(174, 50, 142, 0.2)',
             },
@@ -74,7 +74,7 @@ export function MobileBottomBar({ activeView = 'dashboard', onNavigate }: Mobile
             key={item.id}
             label={item.name}
             value={item.id}
-            icon={<item.icon size={24} color={value === item.id ? '#AE328E' : '#425563'} strokeWidth={2.5} />}
+            icon={<item.icon size={24} color={value === item.id ? 'var(--primary-foreground)' : 'var(--foreground)'} strokeWidth={2.5} />}
           />
         ))}
       </BottomNavigation>
