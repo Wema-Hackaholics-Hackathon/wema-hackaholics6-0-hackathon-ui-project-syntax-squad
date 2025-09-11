@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
 import { Badge } from "./ui/badge"
+import { useTheme } from "@mui/material/styles";
 import { 
   ArrowDownLeft, 
   ArrowUpRight, 
@@ -58,32 +59,34 @@ const financialActivities = [
   }
 ]
 
-const getActivityColor = (status: string, type: string) => {
+const getActivityColor = (status: string, type: string, theme: any) => {
   if (type === "payment") {
-    return status === "income" 
-      ? 'bg-green-100 text-green-800' 
-      : 'bg-red-100 text-red-800'
+    return status === "income"
+      ? { backgroundColor: theme.palette.success.light, color: theme.palette.success.dark }
+      : { backgroundColor: theme.palette.error.light, color: theme.palette.error.dark }
   }
-  
+
   switch (status) {
     case 'completed':
-      return 'bg-green-100 text-green-800'
+      return { backgroundColor: theme.palette.success.light, color: theme.palette.success.dark }
     case 'actionable':
-      return 'bg-blue-100 text-blue-800'
+      return { backgroundColor: theme.palette.primary.light, color: theme.palette.primary.dark }
     case 'pending':
-      return 'bg-yellow-100 text-yellow-800'
+      return { backgroundColor: theme.palette.warning.light, color: theme.palette.warning.dark }
     default:
-      return 'bg-gray-100 text-gray-800'
+      return { backgroundColor: theme.palette.background.default, color: theme.palette.text.secondary }
   }
 }
 
-const getActivityIcon = (activity: typeof financialActivities[0]) => {
+const getActivityIcon = (activity: typeof financialActivities[0], theme: any) => {
   const IconComponent = activity.icon
-  const iconColor = activity.type === "payment" 
-    ? (activity.status === "income" ? "text-green-600" : "text-red-600")
-    : "text-blue-600"
-  
-  return <IconComponent className={`h-4 w-4 ${iconColor}`} />
+  let color
+  if (activity.type === "payment") {
+    color = activity.status === "income" ? theme.palette.success.main : theme.palette.error.main
+  } else {
+    color = theme.palette.primary.main
+  }
+  return <IconComponent style={{ width: 16, height: 16, color }} />
 }
 
 const formatAmount = (amount?: number) => {
@@ -92,6 +95,7 @@ const formatAmount = (amount?: number) => {
 }
 
 export function FinancialActivity() {
+  const theme = useTheme();
   return (
     <Card>
       <CardHeader>
@@ -118,9 +122,9 @@ export function FinancialActivity() {
                     </span>
                   )}
                 </p>
-                <p className="text-xs text-muted-foreground">{activity.time}</p>
+                <p className="text-xs" style={{ color: theme.palette.text.secondary }}>{activity.time}</p>
               </div>
-              <Badge variant="secondary" className={getActivityColor(activity.status, activity.type)}>
+              <Badge variant="secondary" style={getActivityColor(activity.status, activity.type, theme)}>
                 {activity.status}
               </Badge>
             </div>
