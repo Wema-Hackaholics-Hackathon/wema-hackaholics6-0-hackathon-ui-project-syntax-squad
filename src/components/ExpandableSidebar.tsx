@@ -65,8 +65,8 @@ export function ExpandableSidebar({
           boxShadow: '4px 0 24px rgba(174, 50, 142, 0.08)',
           transition: 'width 300ms cubic-bezier(0.4, 0, 0.2, 1)',
           overflowX: 'hidden',
-          top: '64px', // Position below header
-          height: 'calc(100vh - 64px)', // Adjust height to account for header
+          top: '64px',
+          height: 'calc(100vh - 64px)',
         },
       }}
     >
@@ -119,7 +119,7 @@ export function ExpandableSidebar({
                         '&:hover': {
                           background: isActive 
                             ? 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)'
-                             : 'hsl(var(--accent))',
+                            : 'hsl(var(--accent))',
                           color: isActive ? 'white' : '#AE328E',
                           transform: 'translateY(-1px)',
                         },

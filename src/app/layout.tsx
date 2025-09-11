@@ -11,7 +11,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Alat Spark",
-  description: "Alat with a Gen Z spark",
+  description: "Alat, with a spark for Gen Z",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
