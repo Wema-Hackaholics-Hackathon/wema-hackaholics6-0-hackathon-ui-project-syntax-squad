@@ -51,12 +51,6 @@ export function ALATLensApp() {
     setCurrentUser(user)
   }
 
-  const handleLogout = () => {
-    authService.logout()
-    setCurrentUser(null)
-    setActiveView('dashboard')
-  }
-
   const renderActiveView = () => {
     switch (activeView) {
       case 'dashboard':
@@ -82,8 +76,6 @@ export function ALATLensApp() {
         return <DashboardOverview onNavigate={handleNavigation} />
     }
   }
-
-  const sidebarWidth = sidebarExpanded ? 240 : 64
 
   return (
     <Box sx={{

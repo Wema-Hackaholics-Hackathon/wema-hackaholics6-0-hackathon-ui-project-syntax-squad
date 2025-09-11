@@ -1,7 +1,6 @@
 'use client'
 
 import { Wallet, Zap, Users, User, LogOut, ChevronLeft, ChevronRight } from "lucide-react"
-import Image from "next/image"
 import { 
   Drawer, 
   Box, 
@@ -10,7 +9,6 @@ import {
   ListItemButton, 
   ListItemIcon, 
   ListItemText, 
-  Typography, 
   Divider,
   IconButton,
   Tooltip

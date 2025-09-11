@@ -11,7 +11,6 @@ import {
   Target,
   Brain,
   Zap,
-  CreditCard,
   ArrowUpRight,
   ArrowDownLeft,
   DollarSign,
@@ -21,7 +20,7 @@ import {
   Coffee,
   Smartphone
 } from "lucide-react"
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart as RechartsPieChart, Pie, Cell, LineChart, Line, Area, AreaChart } from 'recharts'
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart as RechartsPieChart, Pie, Cell, Area, AreaChart } from 'recharts'
 
 const monthlyData = [
   { month: 'Oct', income: 450000, expenses: 285000, savings: 165000 },
