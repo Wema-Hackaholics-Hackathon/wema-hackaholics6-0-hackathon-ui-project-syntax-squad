@@ -135,8 +135,8 @@ export function TransactionHistory() {
           <Card sx={{ 
             p: { xs: 2, md: 3 }, 
             borderRadius: 4,
-            background: 'linear-gradient(135deg, #10b98115 0%, #10b98125 100%)',
-            border: '1px solid #10b98130',
+            background: 'linear-gradient(135deg, #AE328E15 0%, #AE328E25 100%)',
+            border: '1px solid #AE328E30',
             backdropFilter: 'blur(20px)',
           }}>
             <CardContent sx={{ p: 0, textAlign: 'center' }}>
@@ -144,15 +144,15 @@ export function TransactionHistory() {
                 width: 48, 
                 height: 48, 
                 borderRadius: 3, 
-                background: '#10b98115',
+                background: '#AE328E15',
                 display: 'flex', 
                 alignItems: 'center', 
                 justifyContent: 'center',
                 mx: 'auto',
                 mb: 2,
-                border: '2px solid #10b98130',
+                border: '2px solid #AE328E30',
               }}>
-                <ArrowUpRight size={24} color="#10b981" strokeWidth={2.5} />
+                <ArrowUpRight size={24} color="#AE328E" strokeWidth={2.5} />
               </Box>
               <Typography variant="subtitle2" color="#425563" fontWeight={600} sx={{ mb: 1 }}>
                 Income
