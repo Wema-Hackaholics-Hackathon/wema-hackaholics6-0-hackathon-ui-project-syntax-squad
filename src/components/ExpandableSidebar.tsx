@@ -1,0 +1,250 @@
+'use client'
+
+import { Wallet, Zap, Users, User, LogOut, ChevronLeft, ChevronRight } from "lucide-react"
+import Image from "next/image"
+import { 
+  Drawer, 
+  Box, 
+  List, 
+  ListItem, 
+  ListItemButton, 
+  ListItemIcon, 
+  ListItemText, 
+  Typography, 
+  Divider,
+  IconButton,
+  Tooltip
+} from "@mui/material"
+
+interface ExpandableSidebarProps {
+  activeView?: string
+  onViewChange?: (view: string) => void
+  isExpanded: boolean
+  onToggle: () => void
+}
+
+const navigation = [
+  { name: 'Stash', icon: Wallet, id: 'dashboard' },
+  { name: 'Sparks', icon: Zap, id: 'intelligence' },
+  { name: 'Connect', icon: Users, id: 'social' },
+]
+
+const bottomActions = [
+  { name: 'Profile', icon: User, id: 'profile' },
+  { name: 'Log Out', icon: LogOut, id: 'logout' },
+]
+
+export function ExpandableSidebar({ 
+  activeView = 'dashboard', 
+  onViewChange, 
+  isExpanded,
+  onToggle 
+}: ExpandableSidebarProps) {
+  const handleItemClick = (id: string) => {
+    if (id === 'logout') {
+      console.log('Logout clicked')
+      return
+    }
+    onViewChange?.(id)
+  }
+
+  const sidebarWidth = isExpanded ? 240 : 64
+
+  return (
+    <Drawer
+      variant="permanent"
+      sx={{
+        width: sidebarWidth,
+        flexShrink: 0,
+        '& .MuiDrawer-paper': {
+          width: sidebarWidth,
+          boxSizing: 'border-box',
+          background: 'linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(254,249,252,0.95) 50%, rgba(245,230,241,0.3) 100%)',
+          backdropFilter: 'blur(20px)',
+          borderRight: '1px solid rgba(174, 50, 142, 0.1)',
+          boxShadow: '4px 0 24px rgba(174, 50, 142, 0.08)',
+          transition: 'width 300ms cubic-bezier(0.4, 0, 0.2, 1)',
+          overflowX: 'hidden',
+        },
+      }}
+    >
+      {/* Toggle Button */}
+      <IconButton
+        onClick={onToggle}
+        sx={{
+          position: 'absolute',
+          top: 24,
+          right: -12,
+          width: 24,
+          height: 24,
+          bgcolor: 'white',
+          border: '1px solid rgba(174, 50, 142, 0.2)',
+          zIndex: 1,
+          '&:hover': {
+            bgcolor: '#AE328E',
+            color: 'white',
+          },
+          boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+        }}
+      >
+        {isExpanded ? <ChevronLeft size={12} /> : <ChevronRight size={12} />}
+      </IconButton>
+
+      <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%', p: 2 }}>
+        {/* Logo and Title */}
+        <Box sx={{ 
+          display: 'flex', 
+          alignItems: 'center', 
+          mb: 4,
+          justifyContent: isExpanded ? 'flex-start' : 'center',
+          gap: isExpanded ? 1.5 : 0
+        }}>
+          <Box sx={{
+            width: 32,
+            height: 32,
+            borderRadius: 1.5,
+            background: 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxShadow: '0 4px 12px rgba(174, 50, 142, 0.3)',
+          }}>
+            <Image
+              src="/logo.webp"
+              alt="ALAT Logo"
+              width={20}
+              height={20}
+              style={{ objectFit: 'contain' }}
+              priority
+            />
+          </Box>
+          {isExpanded && (
+            <Box>
+              <Typography variant="h6" sx={{ 
+                fontWeight: 700,
+                background: 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)',
+                backgroundClip: 'text',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                lineHeight: 1.2
+              }}>
+                ALAT Spark
+              </Typography>
+              <Typography variant="caption" sx={{ color: '#6b7280' }}>
+                Money made fun 💫
+              </Typography>
+            </Box>
+          )}
+        </Box>
+
+        {/* Main Navigation */}
+        <Box sx={{ flexGrow: 1 }}>
+          <List sx={{ p: 0 }}>
+            {navigation.map((item) => {
+              const isActive = activeView === item.id
+              const IconComponent = item.icon
+              
+              return (
+                <ListItem key={item.id} disablePadding sx={{ mb: 0.5 }}>
+                  <Tooltip title={!isExpanded ? item.name : ''} placement="right">
+                    <ListItemButton
+                      onClick={() => handleItemClick(item.id)}
+                      sx={{
+                        borderRadius: 1.5,
+                        minHeight: 48,
+                        justifyContent: isExpanded ? 'initial' : 'center',
+                        px: 2,
+                        background: isActive 
+                          ? 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)'
+                          : 'transparent',
+                        color: isActive ? 'white' : '#374151',
+                        transform: isActive ? 'translateY(-1px)' : 'none',
+                        boxShadow: isActive ? '0 4px 12px rgba(174, 50, 142, 0.3)' : 'none',
+                        '&:hover': {
+                          background: isActive 
+                            ? 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)'
+                            : 'rgba(174, 50, 142, 0.05)',
+                          color: isActive ? 'white' : '#AE328E',
+                          transform: 'translateY(-1px)',
+                        },
+                        transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)',
+                      }}
+                    >
+                      <ListItemIcon sx={{
+                        minWidth: 0,
+                        mr: isExpanded ? 1.5 : 'auto',
+                        justifyContent: 'center',
+                        color: 'inherit',
+                      }}>
+                        <IconComponent size={20} strokeWidth={2.5} />
+                      </ListItemIcon>
+                      {isExpanded && (
+                        <ListItemText 
+                          primary={item.name} 
+                          primaryTypographyProps={{
+                            fontSize: '0.875rem',
+                            fontWeight: 500,
+                          }}
+                        />
+                      )}
+                    </ListItemButton>
+                  </Tooltip>
+                </ListItem>
+              )
+            })}
+          </List>
+        </Box>
+
+        {/* Bottom Actions */}
+        <Box>
+          <Divider sx={{ mb: 2, borderColor: 'rgba(107, 114, 128, 0.2)' }} />
+          <List sx={{ p: 0 }}>
+            {bottomActions.map((item) => {
+              const IconComponent = item.icon
+              
+              return (
+                <ListItem key={item.id} disablePadding sx={{ mb: 0.25 }}>
+                  <Tooltip title={!isExpanded ? item.name : ''} placement="right">
+                    <ListItemButton
+                      onClick={() => handleItemClick(item.id)}
+                      sx={{
+                        borderRadius: 1.5,
+                        minHeight: 40,
+                        justifyContent: isExpanded ? 'initial' : 'center',
+                        px: 2,
+                        color: '#6b7280',
+                        '&:hover': {
+                          backgroundColor: item.id === 'logout' ? 'rgba(239, 68, 68, 0.05)' : 'rgba(107, 114, 128, 0.05)',
+                          color: item.id === 'logout' ? '#ef4444' : '#374151',
+                        },
+                        transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)',
+                      }}
+                    >
+                      <ListItemIcon sx={{
+                        minWidth: 0,
+                        mr: isExpanded ? 1.5 : 'auto',
+                        justifyContent: 'center',
+                        color: 'inherit',
+                      }}>
+                        <IconComponent size={16} strokeWidth={2} />
+                      </ListItemIcon>
+                      {isExpanded && (
+                        <ListItemText 
+                          primary={item.name} 
+                          primaryTypographyProps={{
+                            fontSize: '0.875rem',
+                            fontWeight: 500,
+                          }}
+                        />
+                      )}
+                    </ListItemButton>
+                  </Tooltip>
+                </ListItem>
+              )
+            })}
+          </List>
+        </Box>
+      </Box>
+    </Drawer>
+  )
+}
