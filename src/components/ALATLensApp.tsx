@@ -62,17 +62,19 @@ export function ALATLensApp() {
           onClose={() => setSidebarOpen(false)}
         />
         
-        <div className="flex-1 flex flex-col overflow-hidden md:ml-[280px]">
+        <div className="flex-1 flex flex-col overflow-hidden md:ml-[300px]">
           <Header 
             onMenuClick={() => setSidebarOpen(true)}
             onNavigate={handleNavigation}
           />
           
-          <main className="flex-1 overflow-y-auto p-4 md:p-6" style={{
+          <main className="flex-1 overflow-y-auto px-4 py-4 md:px-8 md:py-6 pb-20 md:pb-6" style={{
             background: 'transparent'
           }}>
             <div className="h-full max-w-7xl mx-auto">
-              {renderActiveView()}
+              <div className="space-y-4 md:space-y-6">
+                {renderActiveView()}
+              </div>
             </div>
           </main>
           

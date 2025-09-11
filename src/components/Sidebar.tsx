@@ -1,4 +1,4 @@
-import { Brain, CreditCard, Home, Users, Target, Receipt, X } from "lucide-react";
+import { Wallet, Zap, Users, User, LogOut, X } from "lucide-react";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -19,16 +19,23 @@ interface SidebarProps {
 }
 
 const navigation = [
-  { name: 'Dashboard', icon: Home, id: 'dashboard' },
-  { name: 'Transactions', icon: Receipt, id: 'transactions' },
-  { name: 'Payment Intelligence', icon: Brain, id: 'intelligence' },
-  { name: 'Micro-Actions', icon: Target, id: 'micro-actions' },
-  { name: 'Social Payments', icon: Users, id: 'social' },
-  { name: 'Bank Connections', icon: CreditCard, id: 'banking' },
+  { name: 'Stash', icon: Wallet, id: 'dashboard' },
+  { name: 'Sparks', icon: Zap, id: 'intelligence' },
+  { name: 'Connect', icon: Users, id: 'social' },
+];
+
+const bottomActions = [
+  { name: 'Profile', icon: User, id: 'profile' },
+  { name: 'Log Out', icon: LogOut, id: 'logout' },
 ];
 
 export function Sidebar({ activeView = 'dashboard', onViewChange, isOpen = false, onClose }: SidebarProps) {
   const handleItemClick = (id: string) => {
+    if (id === 'logout') {
+      // Handle logout logic here
+      console.log('Logout clicked');
+      return;
+    }
     onViewChange?.(id);
     if (window.innerWidth < 768) {
       onClose?.();
@@ -41,8 +48,8 @@ export function Sidebar({ activeView = 'dashboard', onViewChange, isOpen = false
       height: '100%', 
       display: 'flex', 
       flexDirection: 'column', 
-      px: 2, 
-      py: 2,
+      px: 3, 
+      py: 3,
       background: 'linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(254,249,252,0.98) 100%)',
       backdropFilter: 'blur(20px)'
     }}>
@@ -53,37 +60,38 @@ export function Sidebar({ activeView = 'dashboard', onViewChange, isOpen = false
         </IconButton>
       </Box>
       {/* Logo and Title */}
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3, px: 1 }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 4, px: 1 }}>
         <Box sx={{ 
-          width: 44, 
-          height: 44, 
-          borderRadius: 2.5, 
+          width: 48, 
+          height: 48, 
+          borderRadius: 3, 
           overflow: 'hidden',
           display: 'flex', 
           alignItems: 'center', 
           justifyContent: 'center',
           background: 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)',
-          boxShadow: '0 4px 12px rgba(174, 50, 142, 0.25)',
+          boxShadow: '0 8px 24px rgba(174, 50, 142, 0.3)',
           position: 'relative'
         }}>
           <Image
             src="/logo.webp"
             alt="ALAT Logo"
-            width={36}
-            height={36}
+            width={32}
+            height={32}
             style={{ objectFit: 'contain' }}
             priority
           />
         </Box>
         <Box>
           <Typography 
-            variant="subtitle1" 
-            fontWeight={700}
+            variant="h6" 
+            fontWeight={800}
             sx={{
               background: 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)',
               backgroundClip: 'text',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
+              fontFamily: '"Inter", sans-serif',
             }}
           >
             ALAT Spark
@@ -92,17 +100,18 @@ export function Sidebar({ activeView = 'dashboard', onViewChange, isOpen = false
             variant="caption" 
             sx={{ 
               color: '#425563',
-              fontWeight: 500,
-              fontSize: '0.75rem'
+              fontWeight: 600,
+              fontSize: '0.75rem',
+              fontFamily: '"Inter", sans-serif',
             }}
           >
-            Financial Intelligence
+            Money made fun 💫
           </Typography>
         </Box>
       </Box>
-      <Divider sx={{ mb: 2 }} />
+      <Divider sx={{ mb: 3, opacity: 0.3 }} />
       {/* Main Navigation */}
-      <List sx={{ '& .MuiListItemButton-root': { borderRadius: 2, mb: 0.5 } }}>
+      <List sx={{ '& .MuiListItemButton-root': { borderRadius: 3, mb: 1, py: 1.5 } }}>
         {navigation.map((item) => (
           <ListItem key={item.id} disablePadding>
             <ListItemButton 
@@ -112,29 +121,36 @@ export function Sidebar({ activeView = 'dashboard', onViewChange, isOpen = false
                 '&.Mui-selected': {
                   background: 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)',
                   color: 'white',
-                  boxShadow: '0 4px 12px rgba(174, 50, 142, 0.25)',
+                  boxShadow: '0 8px 24px rgba(174, 50, 142, 0.3)',
+                  transform: 'translateY(-1px)',
                   '&:hover': {
                     background: 'linear-gradient(135deg, #c13a9e 0%, #d44fb0 100%)',
+                    transform: 'translateY(-2px)',
+                    boxShadow: '0 12px 32px rgba(174, 50, 142, 0.4)',
                   },
                   '& .MuiListItemIcon-root': {
                     color: 'white'
                   }
                 },
                 '&:hover': {
-                  background: 'linear-gradient(135deg, rgba(174, 50, 142, 0.05) 0%, rgba(193, 58, 158, 0.05) 100%)',
-                }
+                  background: 'linear-gradient(135deg, rgba(174, 50, 142, 0.08) 0%, rgba(193, 58, 158, 0.08) 100%)',
+                  transform: 'translateY(-1px)',
+                  boxShadow: '0 4px 16px rgba(174, 50, 142, 0.15)',
+                },
+                transition: 'all 0.2s ease-in-out',
               }}
             >
-              <ListItemIcon sx={{ minWidth: 40 }}>
-                <item.icon size={20} color={activeView === item.id ? 'white' : '#425563'} />
+              <ListItemIcon sx={{ minWidth: 44 }}>
+                <item.icon size={22} color={activeView === item.id ? 'white' : '#425563'} strokeWidth={2.5} />
               </ListItemIcon>
               <ListItemText>
                 <Typography
                   variant="body2"
                   sx={{
-                    fontWeight: activeView === item.id ? 600 : 500,
-                    fontSize: '0.875rem',
-                    color: activeView === item.id ? 'white' : '#425563'
+                    fontWeight: activeView === item.id ? 700 : 600,
+                    fontSize: '0.95rem',
+                    color: activeView === item.id ? 'white' : '#425563',
+                    fontFamily: '"Inter", sans-serif',
                   }}
                 >
                   {item.name}
@@ -145,6 +161,48 @@ export function Sidebar({ activeView = 'dashboard', onViewChange, isOpen = false
         ))}
       </List>
       <Box sx={{ flexGrow: 1 }} />
+      {/* Bottom Actions - Desktop Only */}
+      <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+        <Divider sx={{ mb: 2, opacity: 0.3 }} />
+        <List sx={{ '& .MuiListItemButton-root': { borderRadius: 3, mb: 0.5, py: 1 } }}>
+          {bottomActions.map((item) => (
+            <ListItem key={item.id} disablePadding>
+              <ListItemButton 
+                onClick={() => handleItemClick(item.id)}
+                sx={{
+                  '&:hover': {
+                    background: item.id === 'logout' 
+                      ? 'linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(220, 38, 38, 0.08) 100%)'
+                      : 'linear-gradient(135deg, rgba(174, 50, 142, 0.08) 0%, rgba(193, 58, 158, 0.08) 100%)',
+                  },
+                  transition: 'all 0.2s ease-in-out',
+                }}
+              >
+                <ListItemIcon sx={{ minWidth: 40 }}>
+                  <item.icon 
+                    size={20} 
+                    color={item.id === 'logout' ? '#ef4444' : '#425563'} 
+                    strokeWidth={2}
+                  />
+                </ListItemIcon>
+                <ListItemText>
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      fontWeight: 600,
+                      fontSize: '0.875rem',
+                      color: item.id === 'logout' ? '#ef4444' : '#425563',
+                      fontFamily: '"Inter", sans-serif',
+                    }}
+                  >
+                    {item.name}
+                  </Typography>
+                </ListItemText>
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+      </Box>
       {/* Mobile bottom spacing */}
       <Box sx={{ height: 60, display: { xs: 'block', md: 'none' } }} />
     </Box>
@@ -162,10 +220,11 @@ export function Sidebar({ activeView = 'dashboard', onViewChange, isOpen = false
         sx={{ 
           display: { xs: 'block', md: 'none' }, 
           '& .MuiDrawer-paper': { 
-            width: 280,
+            width: 300,
             background: 'linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(254,249,252,0.98) 100%)',
             backdropFilter: 'blur(20px)',
-            borderRight: '1px solid rgba(174, 50, 142, 0.1)'
+            borderRight: '1px solid rgba(174, 50, 142, 0.1)',
+            boxShadow: '8px 0 32px rgba(174, 50, 142, 0.1)',
           } 
         }}
       >
@@ -179,13 +238,14 @@ export function Sidebar({ activeView = 'dashboard', onViewChange, isOpen = false
         sx={{ 
           display: { xs: 'none', md: 'block' }, 
           '& .MuiDrawer-paper': { 
-            width: 280, 
+            width: 300, 
             boxSizing: 'border-box',
             background: 'linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(254,249,252,0.98) 100%)',
             backdropFilter: 'blur(20px)',
             borderRight: '1px solid rgba(174, 50, 142, 0.1)',
-            top: 64, // Account for header height
-            height: 'calc(100vh - 64px)' // Adjust height to not overlap header
+            boxShadow: '8px 0 32px rgba(174, 50, 142, 0.1)',
+            top: 64,
+            height: 'calc(100vh - 64px)'
           } 
         }}
       >

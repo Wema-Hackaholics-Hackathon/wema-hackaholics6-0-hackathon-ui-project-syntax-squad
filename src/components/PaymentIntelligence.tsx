@@ -1,342 +1,339 @@
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
 import { Badge } from "./ui/badge"
-import { Progress } from "./ui/progress"
 import { Button } from "./ui/button"
 import { 
   Brain, 
   TrendingUp, 
-  AlertTriangle, 
   Target, 
   Lightbulb,
-  Shield,
-  Clock,
   ArrowRight,
-  CheckCircle,
-  XCircle
+  Zap,
+  Trophy
 } from "lucide-react"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "./ui/tooltip"
+import Grid2 from "@mui/material/Grid2"
+import Box from "@mui/material/Box"
+import Typography from "@mui/material/Typography"
+import { LinearProgress } from "@mui/material"
 
-interface Insight {
+interface SimpleInsight {
   id: string
-  type: 'optimization' | 'risk' | 'trend' | 'prediction'
   title: string
   description: string
   impact: 'high' | 'medium' | 'low'
-  confidence: number
-  actionable: boolean
+  emoji: string
+  color: string
+  actionText: string
 }
 
-interface SpendingPattern {
-  category: string
-  amount: number
-  trend: 'increasing' | 'decreasing' | 'stable'
-  percentage: number
-  prediction: number
-}
-
-const insights: Insight[] = [
+const sparkInsights: SimpleInsight[] = [
   {
     id: "1",
-    type: "optimization",
-    title: "Optimize Software Subscriptions",
-    description: "You have 3 overlapping design tools. Consolidating could save $180/month.",
+    title: "Save on Food Delivery 🍕",
+    description: "Cook 2 more meals at home this week to save ₦3,500",
     impact: "high",
-    confidence: 92,
-    actionable: true
+    emoji: "🍳",
+    color: "#10b981",
+    actionText: "Start Cooking Challenge"
   },
   {
-    id: "2",
-    type: "risk",
-    title: "Unusual Spending Pattern Detected",
-    description: "Marketing expenses are 340% above normal for this time of month.",
-    impact: "medium",
-    confidence: 87,
-    actionable: true
+    id: "2", 
+    title: "Subscription Detective 🔍",
+    description: "Found 2 unused subscriptions worth ₦4,200/month",
+    impact: "high",
+    emoji: "💰",
+    color: "#f59e0b",
+    actionText: "Cancel Subscriptions"
   },
   {
     id: "3",
-    type: "trend",
-    title: "Project Revenue Trending Up",
-    description: "Client payments have increased 45% over the last quarter.",
-    impact: "high",
-    confidence: 95,
-    actionable: false
-  },
-  {
-    id: "4",
-    type: "prediction",
-    title: "Cash Flow Projection",
-    description: "Based on current patterns, expect $12K surplus by month-end.",
+    title: "Weekend Warrior 🎉",
+    description: "You spend 40% more on weekends. Set a limit?",
     impact: "medium",
-    confidence: 78,
-    actionable: false
+    emoji: "🎯",
+    color: "#8b5cf6",
+    actionText: "Set Weekend Budget"
   }
 ]
 
-const spendingPatterns: SpendingPattern[] = [
-  {
-    category: "Software & Tools",
-    amount: 850,
-    trend: "increasing",
-    percentage: 15,
-    prediction: 920
-  },
-  {
-    category: "Marketing",
-    amount: 2500,
-    trend: "increasing",
-    percentage: 45,
-    prediction: 2800
-  },
-  {
-    category: "Office Expenses",
-    amount: 320,
-    trend: "stable",
-    percentage: 5,
-    prediction: 315
-  },
-  {
-    category: "Professional Services",
-    amount: 1200,
-    trend: "decreasing",
-    percentage: -12,
-    prediction: 1050
-  }
+const spendingCategories = [
+  { name: "Food & Drinks 🍔", amount: "₦25,400", percentage: 35, color: "#ef4444" },
+  { name: "Transport 🚗", amount: "₦18,200", percentage: 25, color: "#3b82f6" },
+  { name: "Entertainment 🎬", amount: "₦14,600", percentage: 20, color: "#8b5cf6" },
+  { name: "Shopping 🛍️", amount: "₦10,950", percentage: 15, color: "#10b981" },
+  { name: "Other 📦", amount: "₦3,650", percentage: 5, color: "#6b7280" }
 ]
-
-const getInsightIcon = (type: string) => {
-  switch (type) {
-    case 'optimization':
-      return <Target className="h-4 w-4" />
-    case 'risk':
-      return <AlertTriangle className="h-4 w-4" />
-    case 'trend':
-      return <TrendingUp className="h-4 w-4" />
-    case 'prediction':
-      return <Brain className="h-4 w-4" />
-    default:
-      return <Lightbulb className="h-4 w-4" />
-  }
-}
-
-const getInsightColor = (type: string) => {
-  switch (type) {
-    case 'optimization':
-      return 'text-blue-600 bg-blue-100'
-    case 'risk':
-      return 'text-red-600 bg-red-100'
-    case 'trend':
-      return 'text-green-600 bg-green-100'
-    case 'prediction':
-      return 'text-[#AE328E] bg-pink-100'
-    default:
-      return 'text-[#425563] bg-gray-100'
-  }
-}
-
-const getImpactColor = (impact: string) => {
-  switch (impact) {
-    case 'high':
-      return 'bg-red-100 text-red-800'
-    case 'medium':
-      return 'bg-yellow-100 text-yellow-800'
-    case 'low':
-      return 'bg-green-100 text-green-800'
-    default:
-      return 'bg-gray-100 text-gray-800'
-  }
-}
-
-const getTrendIcon = (trend: string) => {
-  switch (trend) {
-    case 'increasing':
-      return <TrendingUp className="h-3 w-3 text-red-600" />
-    case 'decreasing':
-      return <TrendingUp className="h-3 w-3 text-green-600 rotate-180" />
-    default:
-      return <div className="h-3 w-3 rounded-full bg-gray-400" />
-  }
-}
 
 export function PaymentIntelligence() {
   return (
-    <div className="space-y-6">
-      {/* AI Insights Card */}
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="p-2 bg-pink-100 rounded-lg">
-              <Brain className="h-5 w-5 text-[#AE328E]" />
-            </div>
-            <div>
-              <CardTitle>AI Payment Insights</CardTitle>
-              <p className="text-sm text-muted-foreground">Smart analysis of your financial patterns</p>
-            </div>
-          </div>
-          <Badge variant="secondary" className="bg-green-100 text-green-800">
-            <Shield className="h-3 w-3 mr-1" />
-            Active
-          </Badge>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {insights.map((insight) => (
-              <div key={insight.id} className="p-4 rounded-lg border bg-card hover:bg-accent/50 transition-colors">
-                <div className="flex items-start justify-between mb-2">
-                  <div className="flex items-center gap-3">
-                    <div className={`p-2 rounded-lg ${getInsightColor(insight.type)}`}>
-                      {getInsightIcon(insight.type)}
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        <h4 className="font-medium text-sm">{insight.title}</h4>
-                        <Badge variant="secondary" className={getImpactColor(insight.impact)}>
-                          {insight.impact} impact
-                        </Badge>
-                      </div>
-                      <p className="text-sm text-muted-foreground">{insight.description}</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="flex items-center justify-between mt-3">
-                  <div className="flex items-center gap-4">
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger>
-                          <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                            <Brain className="h-3 w-3" />
-                            <span>{insight.confidence}% confidence</span>
-                          </div>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>AI confidence level for this insight</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                    
-                    <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                      <Clock className="h-3 w-3" />
-                      <span>Updated 2h ago</span>
-                    </div>
-                  </div>
-                  
-                  {insight.actionable && (
-                    <Button variant="outline" size="sm" className="text-xs">
-                      Take Action
-                      <ArrowRight className="h-3 w-3 ml-1" />
-                    </Button>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
+    <div className="space-y-4 md:space-y-6">
+      {/* Sparks Header */}
+      <Card sx={{ 
+        p: { xs: 2, md: 3 }, 
+        borderRadius: 4, 
+        background: 'linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%)',
+        boxShadow: '0 12px 40px rgba(139, 92, 246, 0.3)',
+        border: 'none',
+        position: 'relative',
+        overflow: 'hidden',
+      }}>
+        <Box sx={{ 
+          position: 'absolute', 
+          top: -20, 
+          right: -20, 
+          fontSize: '120px', 
+          opacity: 0.1,
+          color: 'white',
+          pointerEvents: 'none'
+        }}>
+          ⚡
+        </Box>
+        <CardContent sx={{ position: 'relative', zIndex: 1 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
+            <Box sx={{ 
+              background: 'rgba(255,255,255,0.2)', 
+              borderRadius: 2, 
+              p: 1, 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: 1 
+            }}>
+              <Zap size={20} color="white" />
+              <Typography color="white" sx={{ fontWeight: 700, fontSize: '0.9rem' }}>
+                AI Powered
+              </Typography>
+            </Box>
+            <Box sx={{ 
+              background: 'rgba(255,255,255,0.2)', 
+              borderRadius: 2, 
+              px: 1.5, 
+              py: 0.5 
+            }}>
+              <Typography color="white" sx={{ fontWeight: 600, fontSize: '0.8rem' }}>
+                95% Accuracy 🎯
+              </Typography>
+            </Box>
+          </Box>
+          <Typography variant="h4" color="white" fontWeight={800} gutterBottom sx={{ 
+            fontSize: { xs: '1.5rem', md: '2rem' },
+            fontFamily: '"Inter", sans-serif'
+          }}>
+            Your Money Sparks ⚡
+          </Typography>
+          <Typography color="white" sx={{ opacity: 0.9, fontWeight: 500, fontSize: { xs: '0.9rem', md: '1rem' } }}>
+            Smart insights to level up your finances!
+          </Typography>
         </CardContent>
       </Card>
 
-      {/* Smart Spending Analysis */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <TrendingUp className="h-5 w-5" />
-            Smart Spending Analysis
-          </CardTitle>
-          <p className="text-sm text-muted-foreground">
-            AI-powered category analysis with predictions
-          </p>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {spendingPatterns.map((pattern, index) => (
-              <div key={index} className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="font-medium text-sm">{pattern.category}</span>
-                    {getTrendIcon(pattern.trend)}
-                  </div>
-                  <div className="text-right">
-                    <p className="font-medium text-sm">${pattern.amount.toLocaleString()}</p>
-                    <p className={`text-xs ${
-                      pattern.percentage > 0 ? 'text-red-600' : 
-                      pattern.percentage < 0 ? 'text-green-600' : 'text-gray-600'
-                    }`}>
-                      {pattern.percentage > 0 ? '+' : ''}{pattern.percentage}%
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="space-y-2">
-                  <Progress 
-                    value={Math.abs(pattern.percentage)} 
-                    className="h-2" 
+      {/* Smart Insights */}
+      <Box>
+        <Typography variant="h6" fontWeight={700} sx={{ mb: 3, color: '#425563', fontSize: { xs: '1.1rem', md: '1.25rem' } }}>
+          Your Power-Ups 🚀
+        </Typography>
+        <Grid2 container spacing={{ xs: 2, md: 3 }}>
+          {sparkInsights.map((insight) => (
+            <Grid2 size={{ xs: 12, md: 6, xl: 4 }} key={insight.id}>
+              <Card sx={{ 
+                p: { xs: 2, md: 3 },
+                borderRadius: 4,
+                background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(254,249,252,0.95) 100%)',
+                border: `1px solid ${insight.color}20`,
+                backdropFilter: 'blur(20px)',
+                transition: 'all 0.3s ease',
+                position: 'relative',
+                overflow: 'hidden',
+                '&:hover': {
+                  transform: 'translateY(-6px) scale(1.02)',
+                  boxShadow: `0 20px 60px ${insight.color}25`,
+                }
+              }}>
+                <Box sx={{ 
+                  position: 'absolute', 
+                  top: -15, 
+                  right: -15, 
+                  fontSize: { xs: '60px', md: '80px' }, 
+                  opacity: 0.1 
+                }}>
+                  {insight.emoji}
+                </Box>
+                <CardContent sx={{ position: 'relative', zIndex: 1, p: 0 }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                    <Box sx={{ 
+                      width: 40, 
+                      height: 40, 
+                      borderRadius: 2, 
+                      background: `${insight.color}15`,
+                      display: 'flex', 
+                      alignItems: 'center', 
+                      justifyContent: 'center',
+                      mr: 2,
+                      border: `1px solid ${insight.color}30`,
+                    }}>
+                      <Typography sx={{ fontSize: '20px' }}>{insight.emoji}</Typography>
+                    </Box>
+                    <Typography variant="h6" fontWeight={700} sx={{ 
+                      color: insight.color, 
+                      fontSize: { xs: '1rem', md: '1.1rem' },
+                      fontFamily: '"Inter", sans-serif'
+                    }}>
+                      {insight.title}
+                    </Typography>
+                  </Box>
+                  <Typography variant="body2" sx={{ 
+                    color: '#425563', 
+                    fontWeight: 500, 
+                    mb: 3,
+                    fontSize: { xs: '0.85rem', md: '0.9rem' }
+                  }}>
+                    {insight.description}
+                  </Typography>
+                  <Button
+                    variant="contained"
+                    fullWidth
+                    endIcon={<ArrowRight size={16} />}
+                    sx={{
+                      background: `linear-gradient(135deg, ${insight.color} 0%, ${insight.color}dd 100%)`,
+                      color: 'white',
+                      borderRadius: 3,
+                      fontWeight: 700,
+                      py: 1.2,
+                      boxShadow: `0 8px 24px ${insight.color}30`,
+                      '&:hover': {
+                        background: `linear-gradient(135deg, ${insight.color}dd 0%, ${insight.color}bb 100%)`,
+                        boxShadow: `0 12px 32px ${insight.color}40`,
+                        transform: 'translateY(-2px)',
+                      }
+                    }}
+                  >
+                    {insight.actionText}
+                  </Button>
+                </CardContent>
+              </Card>
+            </Grid2>
+          ))}
+        </Grid2>
+      </Box>
+
+      {/* Spending Breakdown */}
+      <Box>
+        <Typography variant="h6" fontWeight={700} sx={{ mb: 3, color: '#425563', fontSize: { xs: '1.1rem', md: '1.25rem' } }}>
+          Where Your Money Goes 💸
+        </Typography>
+        <Card sx={{ 
+          p: { xs: 2, md: 3 },
+          borderRadius: 4,
+          background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(254,249,252,0.95) 100%)',
+          border: '1px solid rgba(174, 50, 142, 0.1)',
+          backdropFilter: 'blur(20px)',
+          boxShadow: '0 8px 32px rgba(174, 50, 142, 0.1)',
+        }}>
+          <CardContent sx={{ p: 0 }}>
+            <Box sx={{ space: 3 }}>
+              {spendingCategories.map((category, index) => (
+                <Box key={index} sx={{ mb: 3 }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1 }}>
+                    <Typography variant="subtitle1" fontWeight={600} sx={{ 
+                      color: category.color,
+                      fontSize: { xs: '0.9rem', md: '1rem' }
+                    }}>
+                      {category.name}
+                    </Typography>
+                    <Typography variant="h6" fontWeight={700} sx={{ 
+                      color: category.color,
+                      fontSize: { xs: '1rem', md: '1.1rem' }
+                    }}>
+                      {category.amount}
+                    </Typography>
+                  </Box>
+                  <LinearProgress 
+                    variant="determinate" 
+                    value={category.percentage} 
+                    sx={{ 
+                      height: { xs: 8, md: 10 }, 
+                      borderRadius: 5,
+                      backgroundColor: `${category.color}15`,
+                      '& .MuiLinearProgress-bar': {
+                        background: `linear-gradient(90deg, ${category.color} 0%, ${category.color}dd 100%)`,
+                        borderRadius: 5,
+                      }
+                    }} 
                   />
-                  <div className="flex items-center justify-between text-xs text-muted-foreground">
-                    <span>Current: ${pattern.amount}</span>
-                    <span>Predicted: ${pattern.prediction}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+                  <Typography variant="caption" sx={{ 
+                    color: category.color, 
+                    fontWeight: 600, 
+                    mt: 0.5, 
+                    display: 'block',
+                    fontSize: { xs: '0.7rem', md: '0.75rem' }
+                  }}>
+                    {category.percentage}% of total spending
+                  </Typography>
+                </Box>
+              ))}
+            </Box>
+          </CardContent>
+        </Card>
+      </Box>
 
-      {/* Quick Actions */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Lightbulb className="h-5 w-5" />
-            Smart Recommendations
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-3">
-            <div className="flex items-center justify-between p-3 rounded-lg border bg-green-50 border-green-200">
-              <div className="flex items-center gap-3">
-                <CheckCircle className="h-5 w-5 text-green-600" />
-                <div>
-                  <p className="font-medium text-sm">Set up automatic savings</p>
-                  <p className="text-xs text-muted-foreground">Save $500/month based on surplus prediction</p>
-                </div>
-              </div>
-              <Button variant="outline" size="sm">
-                Enable
-              </Button>
-            </div>
-            
-            <div className="flex items-center justify-between p-3 rounded-lg border bg-blue-50 border-blue-200">
-              <div className="flex items-center gap-3">
-                <Target className="h-5 w-5 text-blue-600" />
-                <div>
-                  <p className="font-medium text-sm">Optimize payment timing</p>
-                  <p className="text-xs text-muted-foreground">Schedule payments to improve cash flow</p>
-                </div>
-              </div>
-              <Button variant="outline" size="sm">
-                Setup
-              </Button>
-            </div>
-            
-            <div className="flex items-center justify-between p-3 rounded-lg border bg-orange-50 border-orange-200">
-              <div className="flex items-center gap-3">
-                <XCircle className="h-5 w-5 text-orange-600" />
-                <div>
-                  <p className="font-medium text-sm">Review duplicate subscriptions</p>
-                  <p className="text-xs text-muted-foreground">3 potential duplicates found</p>
-                </div>
-              </div>
-              <Button variant="outline" size="sm">
-                Review
-              </Button>
-            </div>
-          </div>
+      {/* Achievement Section */}
+      <Card sx={{ 
+        p: { xs: 2, md: 3 },
+        borderRadius: 4,
+        background: 'linear-gradient(135deg, #f59e0b15 0%, #f59e0b25 100%)',
+        border: '1px solid #f59e0b30',
+        position: 'relative',
+        overflow: 'hidden',
+      }}>
+        <Box sx={{ 
+          position: 'absolute', 
+          top: -20, 
+          right: -20, 
+          fontSize: '100px', 
+          opacity: 0.1,
+          color: '#f59e0b'
+        }}>
+          🏆
+        </Box>
+        <CardContent sx={{ position: 'relative', zIndex: 1 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
+            <Trophy size={24} color="#f59e0b" />
+            <Typography variant="h6" fontWeight={700} sx={{ 
+              color: '#f59e0b',
+              fontSize: { xs: '1.1rem', md: '1.25rem' }
+            }}>
+              This Week's Achievement 🎉
+            </Typography>
+          </Box>
+          <Typography variant="body1" sx={{ 
+            color: '#425563', 
+            fontWeight: 500, 
+            mb: 2,
+            fontSize: { xs: '0.9rem', md: '1rem' }
+          }}>
+            You saved ₦3,200 more than last week! Keep it up! 💪
+          </Typography>
+          <LinearProgress 
+            variant="determinate" 
+            value={85} 
+            sx={{ 
+              height: 12, 
+              borderRadius: 6,
+              backgroundColor: '#f59e0b15',
+              '& .MuiLinearProgress-bar': {
+                background: 'linear-gradient(90deg, #f59e0b 0%, #fbbf24 100%)',
+                borderRadius: 6,
+              }
+            }} 
+          />
+          <Typography variant="caption" sx={{ 
+            color: '#f59e0b', 
+            fontWeight: 600, 
+            mt: 1, 
+            display: 'block' 
+          }}>
+            85% to next level! 🚀
+          </Typography>
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

@@ -1,4 +1,4 @@
-import { Home, Receipt, Brain, Target } from "lucide-react";
+import { Wallet, Zap, Users } from "lucide-react";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import Paper from "@mui/material/Paper";
@@ -10,10 +10,9 @@ interface MobileBottomBarProps {
 }
 
 const bottomNavItems = [
-  { name: 'Home', icon: Home, id: 'dashboard' },
-  { name: 'Transactions', icon: Receipt, id: 'transactions' },
-  { name: 'Intelligence', icon: Brain, id: 'intelligence' },
-  { name: 'Actions', icon: Target, id: 'micro-actions' },
+  { name: 'Stash', icon: Wallet, id: 'dashboard' },
+  { name: 'Sparks', icon: Zap, id: 'intelligence' },
+  { name: 'Connect', icon: Users, id: 'social' },
 ];
 
 export function MobileBottomBar({ activeView = 'dashboard', onNavigate }: MobileBottomBarProps) {
@@ -33,9 +32,13 @@ export function MobileBottomBar({ activeView = 'dashboard', onNavigate }: Mobile
         right: 0, 
         zIndex: 40, 
         display: { xs: 'block', md: 'none' },
-        background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(254,249,252,0.95) 100%)',
+        background: 'linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(254,249,252,0.98) 100%)',
         backdropFilter: 'blur(20px)',
         borderTop: '1px solid rgba(174, 50, 142, 0.1)',
+        borderRadius: '24px 24px 0 0',
+        boxShadow: '0 -8px 32px rgba(174, 50, 142, 0.15)',
+        mx: 0,
+        pb: 'env(safe-area-inset-bottom)',
       }}
       elevation={0}
     >
@@ -45,14 +48,23 @@ export function MobileBottomBar({ activeView = 'dashboard', onNavigate }: Mobile
         showLabels
         sx={{
           background: 'transparent',
+          height: 72,
+          px: 2,
+          py: 1,
           '& .MuiBottomNavigationAction-root': {
             color: '#425563',
+            borderRadius: 3,
+            transition: 'all 0.2s ease-in-out',
             '&.Mui-selected': {
               color: '#AE328E',
+              background: 'linear-gradient(135deg, rgba(174, 50, 142, 0.1) 0%, rgba(193, 58, 158, 0.1) 100%)',
+              transform: 'scale(1.05)',
+              boxShadow: '0 4px 16px rgba(174, 50, 142, 0.2)',
             },
             '& .MuiBottomNavigationAction-label': {
-              fontSize: '0.75rem',
-              fontWeight: 500
+              fontSize: '0.8rem',
+              fontWeight: 600,
+              fontFamily: '"Inter", sans-serif',
             }
           }
         }}
@@ -62,7 +74,7 @@ export function MobileBottomBar({ activeView = 'dashboard', onNavigate }: Mobile
             key={item.id}
             label={item.name}
             value={item.id}
-            icon={<item.icon size={22} color={value === item.id ? '#AE328E' : '#425563'} />}
+            icon={<item.icon size={24} color={value === item.id ? '#AE328E' : '#425563'} strokeWidth={2.5} />}
           />
         ))}
       </BottomNavigation>
