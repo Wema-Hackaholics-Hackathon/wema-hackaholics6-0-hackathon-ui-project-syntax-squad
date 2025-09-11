@@ -1,108 +1,146 @@
 'use client'
-import { Bell, Search, Settings, Menu } from "lucide-react"
-import { useState } from "react"
-import { Button } from "./ui/button"
-import { Input } from "./ui/input"
-import { NotificationsPanel } from "./NotificationsPanel"
-import { ProfileDropdown } from "./ProfileDropdown"
-import { Badge } from "./ui/badge"
+import { useState } from "react";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Badge from "@mui/material/Badge";
+import InputBase from "@mui/material/InputBase";
+import Box from "@mui/material/Box";
+import MenuIcon from "@mui/icons-material/Menu";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import SearchIcon from "@mui/icons-material/Search";
+import SettingsIcon from "@mui/icons-material/Settings";
+import { alpha, styled } from "@mui/material/styles";
+import { NotificationsPanel } from "./NotificationsPanel";
+import { ProfileDropdown } from "./ProfileDropdown";
 
 interface HeaderProps {
-  onMenuClick?: () => void
-  onNavigate?: (view: string) => void
+  onMenuClick?: () => void;
+  onNavigate?: (view: string) => void;
 }
 
+const Search = styled('form')(({ theme }) => ({
+  position: 'relative',
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginLeft: 0,
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
+    marginLeft: theme.spacing(1),
+    width: 'auto',
+  },
+}));
+
+const SearchIconWrapper = styled('div')(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: 'inherit',
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: '20ch',
+    },
+  },
+}));
+
 export function Header({ onMenuClick, onNavigate }: HeaderProps) {
-  const [notificationsOpen, setNotificationsOpen] = useState(false)
-  const [searchQuery, setSearchQuery] = useState("")
-  
-  // Mock notification count
-  const unreadNotifications = 3
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const unreadNotifications = 3;
 
   const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     if (searchQuery.trim()) {
       // Handle search logic here
-      console.log("Searching for:", searchQuery)
+      console.log("Searching for:", searchQuery);
     }
-  }
+  };
 
   return (
     <>
-      <header className="border-b border-pink-200/50 bg-gradient-to-r from-white via-pink-50/30 to-white backdrop-blur-xl px-3 md:px-6 py-3 sticky top-0 z-50 shadow-alat-sm">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2 md:gap-6">
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              className="md:hidden h-8 w-8 hover:bg-pink-100 text-[#425563]"
-              onClick={onMenuClick}
-            >
-              <Menu className="h-5 w-5" />
-            </Button>
-            <div className="flex items-center gap-2">
-              <div className="h-6 w-6 md:h-8 md:w-8 bg-gradient-alat rounded-xl flex items-center justify-center shadow-alat-sm">
-                <span className="text-white font-bold text-xs md:text-sm">AL</span>
-              </div>
-              <h1 className="text-base md:text-xl font-bold text-gradient-alat">
-                ALAT Lens
-              </h1>
-            </div>
-            <form onSubmit={handleSearch} className="relative w-32 md:w-80 hidden sm:block">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#AE328E]" />
-              <Input
+      <AppBar position="sticky" color="default" elevation={1} sx={{ zIndex: 1201 }}>
+        <Toolbar>
+          {/* Menu Button (Mobile) */}
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            onClick={onMenuClick}
+            sx={{ mr: 2, display: { md: 'none' } }}
+          >
+            <MenuIcon />
+          </IconButton>
+
+          {/* Logo and Title */}
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mr: 2 }}>
+            <Box sx={{ width: 32, height: 32, bgcolor: 'primary.main', borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: 1 }}>
+              <Typography variant="subtitle2" color="white" fontWeight="bold">AL</Typography>
+            </Box>
+            <Typography variant="h6" noWrap component="div" sx={{ fontWeight: 'bold', color: 'primary.main' }}>
+              ALAT Spark
+            </Typography>
+          </Box>
+
+          {/* Search (hidden on xs) */}
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
+            <Search onSubmit={handleSearch}>
+              <SearchIconWrapper>
+                <SearchIcon color="primary" />
+              </SearchIconWrapper>
+              <StyledInputBase
                 placeholder="Search transactions, insights..."
+                inputProps={{ 'aria-label': 'search' }}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 h-8 md:h-10 text-sm border-pink-200 bg-white/50 backdrop-blur-sm focus:border-[#AE328E] focus:ring-[#AE328E]/30"
               />
-            </form>
-          </div>
-          
-          <div className="flex items-center gap-1 md:gap-3">
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              className="sm:hidden h-8 w-8 hover:bg-pink-100 text-[#425563]"
-            >
-              <Search className="h-4 w-4" />
-            </Button>
-            
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              className="h-8 w-8 md:h-10 md:w-10 relative hover:bg-pink-100 text-[#425563]"
-              onClick={() => setNotificationsOpen(true)}
-            >
-              <Bell className="h-4 w-4 md:h-5 md:w-5" />
-              {unreadNotifications > 0 && (
-                <Badge 
-                  variant="destructive" 
-                  className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs bg-gradient-to-r from-rose-400 to-rose-500 border-0"
-                >
-                  {unreadNotifications}
-                </Badge>
-              )}
-            </Button>
-            
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              className="h-8 w-8 md:h-10 md:w-10 hidden md:flex hover:bg-pink-100 text-[#425563]"
-              onClick={() => onNavigate?.('settings')}
-            >
-              <Settings className="h-5 w-5" />
-            </Button>
-            
+            </Search>
+          </Box>
+
+          {/* Actions */}
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            {/* Search Icon (Mobile) */}
+            <IconButton color="inherit" sx={{ display: { sm: 'none' } }}>
+              <SearchIcon />
+            </IconButton>
+
+            {/* Notifications */}
+            <IconButton color="inherit" onClick={() => setNotificationsOpen(true)}>
+              <Badge badgeContent={unreadNotifications} color="error">
+                <NotificationsIcon />
+              </Badge>
+            </IconButton>
+
+            {/* Settings (Desktop) */}
+            <IconButton color="inherit" sx={{ display: { xs: 'none', md: 'flex' } }} onClick={() => onNavigate?.('settings')}>
+              <SettingsIcon />
+            </IconButton>
+
+            {/* Profile Dropdown */}
             <ProfileDropdown onNavigate={onNavigate} />
-          </div>
-        </div>
-      </header>
-      
-      <NotificationsPanel 
+          </Box>
+        </Toolbar>
+      </AppBar>
+
+      <NotificationsPanel
         isOpen={notificationsOpen}
         onClose={() => setNotificationsOpen(false)}
       />
     </>
-  )
+  );
 }

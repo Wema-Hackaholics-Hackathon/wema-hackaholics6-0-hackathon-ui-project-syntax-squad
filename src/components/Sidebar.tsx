@@ -64,7 +64,7 @@ export function Sidebar({ activeView = 'dashboard', onViewChange, isOpen = false
                 <span className="text-white font-bold text-sm">AL</span>
               </div>
               <div>
-                <h2 className="text-base md:text-lg font-bold text-gradient-alat">ALAT Lens</h2>
+                <h2 className="text-base md:text-lg font-bold text-gradient-alat">ALAT Spark</h2>
                 <p className="text-xs md:text-sm text-[#AE328E]">Financial Intelligence</p>
               </div>
             </div>
