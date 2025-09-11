@@ -53,9 +53,7 @@ export function ALATLensApp() {
   }
 
   return (
-    <div className="min-h-screen" style={{ 
-      background: 'linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(254,249,252,1) 50%, rgba(245,230,241,0.3) 100%)'
-    }}>
+    <div className="min-h-screen bg-gradient-to-br from-white via-[#fef9fc] to-[#f5e6f1]/30">
       <div className="flex h-screen overflow-hidden">
         <Sidebar 
           activeView={activeView} 
@@ -64,16 +62,16 @@ export function ALATLensApp() {
           onClose={() => setSidebarOpen(false)}
         />
         
-        <div className="flex-1 flex flex-col overflow-hidden">
+        <div className="flex-1 flex flex-col overflow-hidden md:ml-[280px]">
           <Header 
             onMenuClick={() => setSidebarOpen(true)}
             onNavigate={handleNavigation}
           />
           
-          <main className="flex-1 overflow-y-auto" style={{
+          <main className="flex-1 overflow-y-auto p-4 md:p-6" style={{
             background: 'transparent'
           }}>
-            <div className="h-full">
+            <div className="h-full max-w-7xl mx-auto">
               {renderActiveView()}
             </div>
           </main>

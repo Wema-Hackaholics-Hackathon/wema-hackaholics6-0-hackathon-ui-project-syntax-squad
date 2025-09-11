@@ -6,7 +6,6 @@ import CardHeader from "@mui/material/CardHeader";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import { useEffect, useMemo, useState } from "react";
 
 interface DashboardOverviewProps {
   onNavigate: (view: string) => void;
@@ -22,7 +21,7 @@ interface QuickStatItem {
   icon: typeof Target;
 }
 
-const defaultQuickStats: QuickStatItem[] = [
+const quickStats: QuickStatItem[] = [
   {
     title: "Smart Savings",
     value: "₦127,340",
@@ -156,7 +155,7 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
     fetchAndStore();
   }, [isBrowser, isReloadNavigation]);
   return (
-    <Box sx={{ p: { xs: 2, md: 4 } }}>
+    <>
       {/* Welcome Section */}
       <Card sx={{ 
         mb: 3, 
@@ -395,6 +394,6 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
           </Card>
         </Grid2>
       </Grid2>
-    </Box>
+    </>
   );
 }

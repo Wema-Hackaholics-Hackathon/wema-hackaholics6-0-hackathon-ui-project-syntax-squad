@@ -1,4 +1,4 @@
-import { Home, Receipt, Brain, Target, Users } from "lucide-react";
+import { Home, Receipt, Brain, Target } from "lucide-react";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import Paper from "@mui/material/Paper";
@@ -14,7 +14,6 @@ const bottomNavItems = [
   { name: 'Transactions', icon: Receipt, id: 'transactions' },
   { name: 'Intelligence', icon: Brain, id: 'intelligence' },
   { name: 'Actions', icon: Target, id: 'micro-actions' },
-  { name: 'Social', icon: Users, id: 'social' },
 ];
 
 export function MobileBottomBar({ activeView = 'dashboard', onNavigate }: MobileBottomBarProps) {

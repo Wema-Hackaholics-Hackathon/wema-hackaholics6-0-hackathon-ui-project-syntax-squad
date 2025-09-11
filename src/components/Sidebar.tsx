@@ -1,4 +1,4 @@
-import { Brain, CreditCard, Home, Users, Target, Building2, Receipt, TrendingUp, X } from "lucide-react";
+import { Brain, CreditCard, Home, Users, Target, Receipt, X } from "lucide-react";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -9,7 +9,6 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Image from "next/image";
 
 interface SidebarProps {
@@ -19,18 +18,13 @@ interface SidebarProps {
   onClose?: () => void;
 }
 
-const coreNavigation = [
+const navigation = [
   { name: 'Dashboard', icon: Home, id: 'dashboard' },
   { name: 'Transactions', icon: Receipt, id: 'transactions' },
   { name: 'Payment Intelligence', icon: Brain, id: 'intelligence' },
   { name: 'Micro-Actions', icon: Target, id: 'micro-actions' },
   { name: 'Social Payments', icon: Users, id: 'social' },
-];
-
-const advancedNavigation = [
-  { name: 'Business Hub', icon: Building2, id: 'business' },
   { name: 'Bank Connections', icon: CreditCard, id: 'banking' },
-  { name: 'Transaction Analytics', icon: TrendingUp, id: 'transaction-analytics' },
 ];
 
 export function Sidebar({ activeView = 'dashboard', onViewChange, isOpen = false, onClose }: SidebarProps) {
@@ -107,22 +101,9 @@ export function Sidebar({ activeView = 'dashboard', onViewChange, isOpen = false
         </Box>
       </Box>
       <Divider sx={{ mb: 2 }} />
-      {/* Core Features */}
-      <Typography 
-        variant="overline" 
-        sx={{ 
-          pl: 1, 
-          mb: 1, 
-          color: '#425563',
-          fontWeight: 600,
-          fontSize: '0.7rem',
-          letterSpacing: '0.05em'
-        }}
-      >
-        Core Features
-      </Typography>
+      {/* Main Navigation */}
       <List sx={{ '& .MuiListItemButton-root': { borderRadius: 2, mb: 0.5 } }}>
-        {coreNavigation.map((item) => (
+        {navigation.map((item) => (
           <ListItem key={item.id} disablePadding>
             <ListItemButton 
               selected={activeView === item.id} 
@@ -163,132 +144,6 @@ export function Sidebar({ activeView = 'dashboard', onViewChange, isOpen = false
           </ListItem>
         ))}
       </List>
-      <Divider sx={{ my: 2 }} />
-      {/* Advanced Features */}
-      <Typography 
-        variant="overline" 
-        sx={{ 
-          pl: 1, 
-          mb: 1, 
-          color: '#425563',
-          fontWeight: 600,
-          fontSize: '0.7rem',
-          letterSpacing: '0.05em'
-        }}
-      >
-        Advanced
-      </Typography>
-      <List sx={{ '& .MuiListItemButton-root': { borderRadius: 2, mb: 0.5 } }}>
-        {advancedNavigation.map((item) => (
-          <ListItem key={item.id} disablePadding>
-            <ListItemButton 
-              selected={activeView === item.id} 
-              onClick={() => handleItemClick(item.id)}
-              sx={{
-                '&.Mui-selected': {
-                  background: 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)',
-                  color: 'white',
-                  boxShadow: '0 4px 12px rgba(174, 50, 142, 0.25)',
-                  '&:hover': {
-                    background: 'linear-gradient(135deg, #c13a9e 0%, #d44fb0 100%)',
-                  },
-                  '& .MuiListItemIcon-root': {
-                    color: 'white'
-                  }
-                },
-                '&:hover': {
-                  background: 'linear-gradient(135deg, rgba(174, 50, 142, 0.05) 0%, rgba(193, 58, 158, 0.05) 100%)',
-                }
-              }}
-            >
-              <ListItemIcon sx={{ minWidth: 40 }}>
-                <item.icon size={20} color={activeView === item.id ? 'white' : '#425563'} />
-              </ListItemIcon>
-              <ListItemText>
-                <Typography
-                  variant="body2"
-                  sx={{
-                    fontWeight: activeView === item.id ? 600 : 500,
-                    fontSize: '0.875rem',
-                    color: activeView === item.id ? 'white' : '#425563'
-                  }}
-                >
-                  {item.name}
-                </Typography>
-              </ListItemText>
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider sx={{ my: 2 }} />
-      {/* Quick Actions */}
-      <Typography 
-        variant="overline" 
-        sx={{ 
-          pl: 1, 
-          mb: 1, 
-          color: '#425563',
-          fontWeight: 600,
-          fontSize: '0.7rem',
-          letterSpacing: '0.05em'
-        }}
-      >
-        Quick Actions
-      </Typography>
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-        <Button 
-          variant="outlined" 
-          size="small" 
-          onClick={() => handleItemClick('banking')} 
-          sx={{ 
-            justifyContent: 'flex-start',
-            borderColor: 'rgba(174, 50, 142, 0.3)',
-            color: '#425563',
-            borderRadius: 2,
-            '&:hover': {
-              borderColor: '#AE328E',
-              background: 'linear-gradient(135deg, rgba(174, 50, 142, 0.05) 0%, rgba(193, 58, 158, 0.05) 100%)',
-            }
-          }}
-        >
-          Link ALAT Account
-        </Button>
-        <Button 
-          variant="outlined" 
-          size="small" 
-          onClick={() => handleItemClick('micro-actions')} 
-          sx={{ 
-            justifyContent: 'flex-start',
-            borderColor: 'rgba(174, 50, 142, 0.3)',
-            color: '#425563',
-            borderRadius: 2,
-            '&:hover': {
-              borderColor: '#AE328E',
-              background: 'linear-gradient(135deg, rgba(174, 50, 142, 0.05) 0%, rgba(193, 58, 158, 0.05) 100%)',
-            }
-          }}
-        >
-          Create Savings Goal
-        </Button>
-        <Button 
-          variant="contained" 
-          size="small" 
-          onClick={() => handleItemClick('social')} 
-          sx={{ 
-            justifyContent: 'flex-start',
-            background: 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)',
-            color: 'white',
-            borderRadius: 2,
-            boxShadow: '0 4px 12px rgba(174, 50, 142, 0.25)',
-            '&:hover': {
-              background: 'linear-gradient(135deg, #c13a9e 0%, #d44fb0 100%)',
-              boxShadow: '0 6px 16px rgba(174, 50, 142, 0.3)',
-            }
-          }}
-        >
-          Split Bill
-        </Button>
-      </Box>
       <Box sx={{ flexGrow: 1 }} />
       {/* Mobile bottom spacing */}
       <Box sx={{ height: 60, display: { xs: 'block', md: 'none' } }} />
@@ -328,7 +183,9 @@ export function Sidebar({ activeView = 'dashboard', onViewChange, isOpen = false
             boxSizing: 'border-box',
             background: 'linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(254,249,252,0.98) 100%)',
             backdropFilter: 'blur(20px)',
-            borderRight: '1px solid rgba(174, 50, 142, 0.1)'
+            borderRight: '1px solid rgba(174, 50, 142, 0.1)',
+            top: 64, // Account for header height
+            height: 'calc(100vh - 64px)' // Adjust height to not overlap header
           } 
         }}
       >
