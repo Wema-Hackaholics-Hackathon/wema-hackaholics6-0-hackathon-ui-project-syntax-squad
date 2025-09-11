@@ -6,6 +6,7 @@ import CardHeader from "@mui/material/CardHeader";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import { useTheme } from "@mui/material/styles";
 
 interface DashboardOverviewProps {
   onNavigate: (view: string) => void;
@@ -50,15 +51,16 @@ const recentInsights = [
 ];
 
 export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
+  const theme = useTheme();
   return (
     <Box sx={{ p: { xs: 2, md: 4 } }}>
       {/* Welcome Section */}
-      <Card sx={{ mb: 3, p: 3, borderRadius: 3, background: (theme) => theme.custom?.gradients.primary }}>
+      <Card sx={{ mb: 3, p: 3, borderRadius: 3, background: theme.custom?.gradients.primary }}>
         <CardContent>
-          <Typography variant="h5" color="white" fontWeight="bold" gutterBottom>
+          <Typography variant="h5" color={theme.palette.common.white} fontWeight="bold" gutterBottom>
             Welcome back!
           </Typography>
-          <Typography color="white" sx={{ opacity: 0.9 }}>
+          <Typography color={theme.palette.common.white} sx={{ opacity: 0.9 }}>
             Here's your financial overview and latest insights
           </Typography>
         </CardContent>
@@ -67,10 +69,10 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
       {/* Quick Stats */}
       <Grid container spacing={2} sx={{ mb: 3 }}>
         {quickStats.map((stat, index) => (
-          <Grid item xs={6} md={4} key={index}>
+          <Grid item size={{ xs: 6, md: 4 }} key={index}>
             <Card sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <Box sx={{ mb: 1 }}>
-                <stat.icon size={28} color="#AE328E" />
+                <stat.icon size={28} color={theme.palette.primary.main} />
               </Box>
               <Typography variant="subtitle2" color="text.secondary">
                 {stat.title}
@@ -78,21 +80,21 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
               <Typography variant="h6" fontWeight="bold">
                 {stat.value}
               </Typography>
-              <Typography variant="caption" color={stat.changeType === 'positive' ? 'success.main' : 'error.main'}>
+              <Typography variant="caption" color={stat.changeType === 'positive' ? theme.palette.success.main : theme.palette.error.main}>
                 {stat.change}
               </Typography>
             </Card>
           </Grid>
         ))}
         {/* Quick Action Card */}
-        <Grid item xs={12} md={4}>
+        <Grid item size={{ xs: 12, md: 4 }}>
           <Card
-            sx={{ p: 2, cursor: 'pointer', background: (theme) => theme.custom?.gradients.secondary }}
+            sx={{ p: 2, cursor: 'pointer', background: theme.custom?.gradients.secondary }}
             onClick={() => onNavigate('banking')}
           >
             <CardContent sx={{ textAlign: 'center' }}>
-              <Box sx={{ p: 1, borderRadius: '50%', bgcolor: 'primary.light', width: 40, height: 40, mx: 'auto', mb: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <CreditCard size={24} color="#AE328E" />
+              <Box sx={{ p: 1, borderRadius: '50%', bgcolor: theme.palette.primary.light, width: 40, height: 40, mx: 'auto', mb: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <CreditCard size={24} color={theme.palette.primary.main} />
               </Box>
               <Typography variant="body2" color="text.primary" fontWeight={500}>
                 Connect Bank
