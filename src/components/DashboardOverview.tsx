@@ -7,24 +7,35 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
+import { useEffect, useMemo, useState } from "react";
 
 interface DashboardOverviewProps {
   onNavigate: (view: string) => void;
 }
 
-const quickStats = [
+type ChangeType = "positive" | "negative";
+
+interface QuickStatItem {
+  title: string;
+  value: string;
+  change: string;
+  changeType: ChangeType;
+  icon: typeof Target;
+}
+
+const defaultQuickStats: QuickStatItem[] = [
   {
     title: "Smart Savings",
     value: "₦127,340",
     change: "+28.5%",
-    changeType: "positive" as const,
+    changeType: "positive",
     icon: Target,
   },
   {
     title: "This Month",
     value: "₦45,230",
     change: "-12.3%",
-    changeType: "negative" as const,
+    changeType: "negative",
     icon: TrendingUp,
   },
 ];
@@ -52,6 +63,100 @@ const recentInsights = [
 
 export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
   const theme = useTheme();
+  const [quickStats, setQuickStats] = useState<QuickStatItem[]>(defaultQuickStats);
+
+  const isBrowser = typeof window !== "undefined";
+
+  const isReloadNavigation = useMemo(() => {
+    if (!isBrowser || typeof performance === "undefined") return false;
+    const entries = (performance.getEntriesByType("navigation") as PerformanceNavigationTiming[]) || [];
+    return entries[0]?.type === "reload";
+  }, [isBrowser]);
+
+  useEffect(() => {
+    if (!isBrowser) return;
+
+    // Helper formatters
+    const formatCurrency = (amount: number) => {
+      if (Number.isNaN(amount)) return "₦0";
+      return `₦${amount.toLocaleString("en-NG")}`;
+    };
+
+    const deriveChangeType = (change: string): ChangeType => {
+      return change.trim().startsWith("-") ? "negative" : "positive";
+    };
+
+    // Load from localStorage first to populate UI immediately
+    try {
+      const cached = window.localStorage.getItem("dashboardBalance");
+      if (cached) {
+        const data = JSON.parse(cached) as {
+          totalBalance: number;
+          thisMonthSpending: number;
+          savingDifference: string;
+          spendingDifference: string;
+        };
+        setQuickStats([
+          {
+            title: "Smart Savings",
+            value: formatCurrency(data.totalBalance),
+            change: data.savingDifference,
+            changeType: deriveChangeType(data.savingDifference),
+            icon: Target,
+          },
+          {
+            title: "This Month",
+            value: formatCurrency(data.thisMonthSpending),
+            change: data.spendingDifference,
+            changeType: deriveChangeType(data.spendingDifference),
+            icon: TrendingUp,
+          },
+        ]);
+      }
+    } catch {}
+
+    // Only fetch after a full browser refresh
+    if (!isReloadNavigation) return;
+
+    const fetchAndStore = async () => {
+      try {
+        const res = await fetch("http://localhost:3000/api/balance", { cache: "no-store" });
+        if (!res.ok) return;
+        const json = (await res.json()) as {
+          totalBalance: number;
+          lastMonthSpending: number;
+          thisMonthSpending: number;
+          savingDifference: string;
+          spendingDifference: string;
+        };
+
+        // Persist in localStorage
+        window.localStorage.setItem("dashboardBalance", JSON.stringify(json));
+
+        // Update UI
+        setQuickStats([
+          {
+            title: "Smart Savings",
+            value: formatCurrency(json.totalBalance),
+            change: json.savingDifference,
+            changeType: deriveChangeType(json.savingDifference),
+            icon: Target,
+          },
+          {
+            title: "This Month",
+            value: formatCurrency(json.thisMonthSpending),
+            change: json.spendingDifference,
+            changeType: deriveChangeType(json.spendingDifference),
+            icon: TrendingUp,
+          },
+        ]);
+      } catch {
+        // Fail silently for now
+      }
+    };
+
+    fetchAndStore();
+  }, [isBrowser, isReloadNavigation]);
   return (
     <Box sx={{ p: { xs: 2, md: 4 } }}>
       {/* Welcome Section */}
