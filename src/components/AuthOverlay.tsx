@@ -123,14 +123,20 @@ export function AuthOverlay({ onAuthSuccess }: AuthOverlayProps) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-background/80 dark:bg-slate-900/90 backdrop-blur-xl"
-      style={{ minHeight: '100vh' }}
+      className="fixed inset-0 z-[9999] bg-background/80 dark:bg-slate-900/90 backdrop-blur-xl"
+      style={{ 
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '100vh',
+        padding: '1rem'
+      }}
     >
       <motion.div
         initial={{ scale: 0.9, y: 20 }}
         animate={{ scale: 1, y: 0 }}
         transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-        className="w-full max-w-md mx-auto flex items-center justify-center"
+        className="w-full max-w-md mx-auto"
       >
         <Card 
           sx={{
