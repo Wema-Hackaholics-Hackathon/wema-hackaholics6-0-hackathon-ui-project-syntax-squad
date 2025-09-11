@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
   Box, 
@@ -15,7 +15,7 @@ import {
   Step,
   StepLabel
 } from '@mui/material'
-import { Shield, CheckCircle, ArrowLeft } from 'lucide-react'
+import { CheckCircle, ArrowLeft } from 'lucide-react'
 import { authService } from '../services/authService'
 import { User } from '../types'
 
@@ -123,14 +123,20 @@ export function AuthOverlay({ onAuthSuccess }: AuthOverlayProps) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-background/80 dark:bg-slate-900/90 backdrop-blur-xl"
-      style={{ minHeight: '100vh' }}
+      className="fixed inset-0 z-[9999] bg-background/80 dark:bg-slate-900/90 backdrop-blur-xl"
+      style={{ 
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '100vh',
+        padding: '1rem'
+      }}
     >
       <motion.div
         initial={{ scale: 0.9, y: 20 }}
         animate={{ scale: 1, y: 0 }}
         transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-        className="w-full max-w-md mx-auto flex items-center justify-center"
+        className="w-full max-w-md mx-auto"
       >
         <Card 
           sx={{
@@ -320,7 +326,7 @@ export function AuthOverlay({ onAuthSuccess }: AuthOverlayProps) {
                       Account Verified!
                     </Typography>
                     <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-                      We'll send an OTP to your registered email:
+                      We&apos;ll send an OTP to your registered email:
                     </Typography>
                     <Typography 
                       variant="body1" 
@@ -379,7 +385,7 @@ export function AuthOverlay({ onAuthSuccess }: AuthOverlayProps) {
                     Enter the 6-digit OTP
                   </Typography>
                   <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
-                    We've sent a verification code to {maskedEmail}
+                    We&apos;ve sent a verification code to {maskedEmail}
                   </Typography>
                   
                   <TextField
