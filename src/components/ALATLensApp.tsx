@@ -202,7 +202,7 @@ export function ALATLensApp() {
               />
             </Box>
             <Box sx={{ color: '#AE328E', fontWeight: 600, fontSize: '1.1rem' }}>
-              Loading ALAT Lens...
+              Loading ALAT Spark...
             </Box>
           </Box>
         </Box>

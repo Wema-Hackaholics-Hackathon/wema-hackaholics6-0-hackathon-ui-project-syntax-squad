@@ -187,7 +187,7 @@ export function AuthOverlay({ onAuthSuccess }: AuthOverlayProps) {
                   textShadow: '0 2px 4px rgba(174, 50, 142, 0.1)'
                 }}
               >
-                ALAT Lens
+                ALAT Spark
               </Typography>
               <Typography variant="body1" color="text.secondary" sx={{ mt: 1 }}>
                 Secure banking made simple

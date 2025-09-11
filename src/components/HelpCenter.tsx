@@ -26,7 +26,7 @@ const helpCategories = [
     title: "Getting Started",
     icon: BookOpen,
     articles: [
-      "Setting up your SpendLens account",
+      "Setting up your Alat spark account",
       "Connecting your ALAT bank account",
       "Understanding your dashboard",
       "First transaction insights"
@@ -78,7 +78,7 @@ const faqItems = [
     answer: "Our AI achieves 95%+ accuracy in categorization and continuously learns from your spending patterns."
   },
   {
-    question: "Is there a fee for using SpendLens?",
+    question: "Is there a fee for using Alat spark?",
     answer: "Basic features are free. Premium features require a subscription starting at ₦2,500/month."
   }
 ]
