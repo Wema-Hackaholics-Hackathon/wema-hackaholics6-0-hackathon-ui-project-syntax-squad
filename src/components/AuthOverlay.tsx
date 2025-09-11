@@ -145,8 +145,8 @@ export function AuthOverlay({ onAuthSuccess }: AuthOverlayProps) {
       >
         <Card 
           sx={{
-            maxWidth: 500,
-            width: '100%',
+            maxWidth: { xs: 340, sm: 500 },
+            width: { xs: '90%', sm: '100%' },
             background: 'rgba(255, 255, 255, 0.95)',
             backdropFilter: 'blur(20px)',
             boxShadow: `
@@ -159,7 +159,7 @@ export function AuthOverlay({ onAuthSuccess }: AuthOverlayProps) {
             border: '1px solid rgba(174, 50, 142, 0.1)'
           }}
         >
-          <CardContent sx={{ p: 4 }}>
+          <CardContent sx={{ p: { xs: 3, sm: 4 } }}>
             {/* Header */}
             <Box sx={{ textAlign: 'center', mb: 4 }}>
               <motion.div
