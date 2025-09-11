@@ -33,7 +33,7 @@ const quickActions: QuickAction[] = [
     title: "Split a Bill 🧾",
     description: "Share expenses with friends instantly",
     emoji: "💸",
-    color: "#10b981",
+    color: "#AE328E",
     actionText: "Split Now"
   },
   {
@@ -41,7 +41,7 @@ const quickActions: QuickAction[] = [
     title: "Group Challenge 🎯",
     description: "Save together, achieve together!",
     emoji: "🏆",
-    color: "#8b5cf6",
+    color: "#425563",
     actionText: "Join Challenge"
   },
   {
@@ -49,7 +49,7 @@ const quickActions: QuickAction[] = [
     title: "Send Money 💫",
     description: "Quick payments to friends",
     emoji: "💳",
-    color: "#06b6d4",
+    color: "#AE328E",
     actionText: "Send Payment"
   }
 ]
@@ -61,7 +61,7 @@ const friendActivities: FriendActivity[] = [
     action: "paid you for dinner",
     amount: "₦2,500",
     emoji: "🍕",
-    color: "#10b981"
+    color: "#AE328E"
   },
   {
     id: "2", 
@@ -69,7 +69,7 @@ const friendActivities: FriendActivity[] = [
     action: "requested split for uber",
     amount: "₦1,200",
     emoji: "🚗",
-    color: "#f59e0b"
+    color: "#425563"
   },
   {
     id: "3",
@@ -77,7 +77,7 @@ const friendActivities: FriendActivity[] = [
     action: "group expense added",
     amount: "₦8,500",
     emoji: "🍽️",
-    color: "#8b5cf6"
+    color: "#AE328E"
   }
 ]
 
@@ -110,8 +110,8 @@ export function SocialPayments() {
       <Card sx={{ 
         p: { xs: 2, md: 3 }, 
         borderRadius: 4, 
-        background: 'linear-gradient(135deg, #06b6d4 0%, #38bdf8 100%)',
-        boxShadow: '0 12px 40px rgba(6, 182, 212, 0.3)',
+        background: 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)',
+        boxShadow: '0 12px 40px rgba(174, 50, 142, 0.3)',
         border: 'none',
         position: 'relative',
         overflow: 'hidden',
@@ -234,7 +234,7 @@ export function SocialPayments() {
                     endIcon={<Plus size={16} />}
                     sx={{
                       background: activeActions.includes(action.id)
-                        ? 'linear-gradient(135deg, #10b981 0%, #059669 100%)'
+                        ? 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)'
                         : `linear-gradient(135deg, ${action.color} 0%, ${action.color}dd 100%)`,
                       color: 'white',
                       borderRadius: 3,
@@ -243,7 +243,7 @@ export function SocialPayments() {
                       boxShadow: `0 8px 24px ${action.color}30`,
                       '&:hover': {
                         background: activeActions.includes(action.id)
-                          ? 'linear-gradient(135deg, #059669 0%, #047857 100%)'
+                          ? 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)'
                           : `linear-gradient(135deg, ${action.color}dd 0%, ${action.color}bb 100%)`,
                         boxShadow: `0 12px 32px ${action.color}40`,
                         transform: 'translateY(-2px)',
@@ -416,8 +416,8 @@ export function SocialPayments() {
       <Card sx={{ 
         p: { xs: 2, md: 3 },
         borderRadius: 4,
-        background: 'linear-gradient(135deg, #f59e0b15 0%, #f59e0b25 100%)',
-        border: '1px solid #f59e0b30',
+        background: 'linear-gradient(135deg, #AE328E15 0%, #AE328E25 100%)',
+        border: '1px solid #AE328E30',
         position: 'relative',
         overflow: 'hidden',
       }}>
@@ -427,15 +427,15 @@ export function SocialPayments() {
           right: -20, 
           fontSize: '100px', 
           opacity: 0.1,
-          color: '#f59e0b'
+          color: '#AE328E'
         }}>
           🏆
         </Box>
         <CardContent sx={{ position: 'relative', zIndex: 1 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
-            <Heart size={24} color="#f59e0b" fill="#f59e0b" />
+            <Heart size={24} color="#AE328E" fill="#AE328E" />
             <Typography variant="h6" fontWeight={700} sx={{ 
-              color: '#f59e0b',
+              color: '#AE328E',
               fontSize: { xs: '1.1rem', md: '1.25rem' }
             }}>
               Social Superstar! 🌟
@@ -454,19 +454,19 @@ export function SocialPayments() {
             startIcon={<Share size={18} />}
             sx={{
               background: sharedAchievement 
-                ? 'linear-gradient(135deg, #10b981 0%, #059669 100%)'
-                : 'linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%)',
+                ? 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)'
+                : 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)',
               color: 'white',
               borderRadius: 3,
               fontWeight: 700,
               px: 3,
               py: 1,
-              boxShadow: '0 6px 20px #f59e0b30',
+              boxShadow: '0 6px 20px #AE328E30',
               '&:hover': {
                 background: sharedAchievement 
-                  ? 'linear-gradient(135deg, #059669 0%, #047857 100%)'
-                  : 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)',
-                boxShadow: '0 8px 24px #f59e0b40',
+                  ? 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)'
+                  : 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)',
+                boxShadow: '0 8px 24px #AE328E40',
                 transform: 'translateY(-1px)',
               }
             }}

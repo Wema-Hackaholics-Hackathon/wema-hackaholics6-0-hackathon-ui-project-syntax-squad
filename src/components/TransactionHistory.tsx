@@ -301,14 +301,14 @@ export function TransactionHistory() {
                       <Typography variant="subtitle1" fontWeight={600} sx={{ color: '#425563' }}>
                         {transaction.description}
                       </Typography>
-                      <Typography variant="caption" sx={{ color: '#6b7280' }}>
+                    <Typography variant="caption" sx={{ color: '#425563' }}>
                         {transaction.merchant} • {new Date(transaction.date).toLocaleDateString()}
                       </Typography>
                     </Box>
                   </Box>
                   <Box sx={{ textAlign: 'right' }}>
                     <Typography variant="h6" fontWeight={700} sx={{ 
-                      color: transaction.type === 'credit' ? '#10b981' : '#ef4444'
+                      color: transaction.type === 'credit' ? '#AE328E' : '#425563'
                     }}>
                       {transaction.type === 'credit' ? '+' : '-'}₦{Math.abs(transaction.amount).toLocaleString()}
                     </Typography>

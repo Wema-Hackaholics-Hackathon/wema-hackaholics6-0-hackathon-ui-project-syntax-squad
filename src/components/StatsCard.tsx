@@ -70,7 +70,7 @@ export function StatsCard({ title, value, change, changeType, icon: Icon }: Stat
           variant="body2"
           fontWeight={500}
           sx={{
-            color: changeType === 'positive' ? '#10b981' : '#ef4444',
+            color: changeType === 'positive' ? '#AE328E' : '#425563',
             fontSize: '0.8rem'
           }}
         >

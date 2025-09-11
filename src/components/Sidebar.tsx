@@ -181,7 +181,7 @@ export function Sidebar({ activeView = 'dashboard', onViewChange, isOpen = false
                 <ListItemIcon sx={{ minWidth: 40 }}>
                   <item.icon 
                     size={20} 
-                    color={item.id === 'logout' ? '#ef4444' : '#425563'} 
+                    color={item.id === 'logout' ? '#425563' : '#425563'} 
                     strokeWidth={2}
                   />
                 </ListItemIcon>
@@ -191,7 +191,7 @@ export function Sidebar({ activeView = 'dashboard', onViewChange, isOpen = false
                     sx={{
                       fontWeight: 600,
                       fontSize: '0.875rem',
-                      color: item.id === 'logout' ? '#ef4444' : '#425563',
+                      color: item.id === 'logout' ? '#425563' : '#425563',
                       fontFamily: '"Inter", sans-serif',
                     }}
                   >

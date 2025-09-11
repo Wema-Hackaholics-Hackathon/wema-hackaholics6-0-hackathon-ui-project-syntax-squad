@@ -106,7 +106,7 @@ const categoryData: CategoryData[] = [
     transactionCount: 8,
     trend: "stable",
     trendPercentage: 1.2,
-    color: "#96CEB4",
+    color: "#425563",
     icon: Home,
     subcategories: [
       { name: "Electricity", amount: 18500, percentage: 48.1, transactionCount: 2 },
@@ -123,7 +123,7 @@ const categoryData: CategoryData[] = [
     transactionCount: 9,
     trend: "up",
     trendPercentage: 12.8,
-    color: "#FFEAA7",
+    color: "#AE328E",
     icon: ShoppingCart,
     subcategories: [
       { name: "Clothing", amount: 18000, percentage: 56.3, transactionCount: 4 },
@@ -140,7 +140,7 @@ const categoryData: CategoryData[] = [
     transactionCount: 6,
     trend: "stable",
     trendPercentage: 0.5,
-    color: "#DDA0DD",
+    color: "#425563",
     icon: CreditCard,
     subcategories: [
       { name: "Phone Bill", amount: 12000, percentage: 46.5, transactionCount: 2 },
@@ -476,10 +476,10 @@ export function CategoryView() {
                   <XAxis dataKey="month" />
                   <YAxis tickFormatter={(value) => `₦${(value / 1000).toFixed(0)}k`} />
                   <Tooltip formatter={(value) => formatCurrency(Number(value))} />
-                  <Bar dataKey="food" fill="#FF6B6B" name="Food & Groceries" />
-                  <Bar dataKey="transport" fill="#4ECDC4" name="Transportation" />
-                  <Bar dataKey="entertainment" fill="#45B7D1" name="Entertainment" />
-                  <Bar dataKey="utilities" fill="#96CEB4" name="Utilities" />
+                  <Bar dataKey="food" fill="#AE328E" name="Food & Groceries" />
+                  <Bar dataKey="transport" fill="#425563" name="Transportation" />
+                  <Bar dataKey="entertainment" fill="#AE328E" name="Entertainment" />
+                  <Bar dataKey="utilities" fill="#425563" name="Utilities" />
                 </BarChart>
               </ResponsiveContainer>
             </CardContent>

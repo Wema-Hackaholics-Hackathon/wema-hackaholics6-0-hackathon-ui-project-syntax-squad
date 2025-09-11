@@ -1,6 +1,5 @@
 import { 
   Target, 
-  Zap,
   CheckCircle,
   Plus
 } from "lucide-react"
@@ -31,7 +30,7 @@ const microActions: MicroAction[] = [
     isActive: true,
     totalSaved: 2340,
     emoji: "🔄",
-    color: "#10b981"
+    color: "#AE328E"
   },
   {
     id: "2", 
@@ -40,7 +39,7 @@ const microActions: MicroAction[] = [
     isActive: false,
     totalSaved: 0,
     emoji: "☕",
-    color: "#f59e0b"
+    color: "#425563"
   },
   {
     id: "3",
@@ -49,7 +48,7 @@ const microActions: MicroAction[] = [
     isActive: true,
     totalSaved: 4200,
     emoji: "🎯",
-    color: "#8b5cf6"
+    color: "#AE328E"
   }
 ]
 
@@ -108,21 +107,21 @@ export function MicroActions() {
       <Card sx={{ 
         p: { xs: 2, md: 3 },
         borderRadius: 4,
-        background: 'linear-gradient(135deg, #10b98115 0%, #10b98125 100%)',
-        border: '1px solid #10b98130',
+        background: 'linear-gradient(135deg, #AE328E15 0%, #AE328E25 100%)',
+        border: '1px solid #AE328E30',
         backdropFilter: 'blur(20px)',
       }}>
         <CardContent sx={{ p: 0, textAlign: 'center' }}>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 2, mb: 2 }}>
-            <CheckCircle size={24} color="#10b981" />
-            <Typography variant="h6" fontWeight={700} sx={{ color: '#10b981' }}>
+            <CheckCircle size={24} color="#AE328E" />
+            <Typography variant="h6" fontWeight={700} sx={{ color: '#AE328E' }}>
               Total Saved This Month
             </Typography>
           </Box>
-          <Typography variant="h3" fontWeight={800} sx={{ color: '#10b981', mb: 1 }}>
+          <Typography variant="h3" fontWeight={800} sx={{ color: '#AE328E', mb: 1 }}>
             ₦{totalSavings.toLocaleString()}
           </Typography>
-          <Typography variant="body2" sx={{ color: '#6b7280' }}>
+          <Typography variant="body2" sx={{ color: '#425563' }}>
             From {actions.filter(a => a.isActive).length} active micro actions
           </Typography>
         </CardContent>

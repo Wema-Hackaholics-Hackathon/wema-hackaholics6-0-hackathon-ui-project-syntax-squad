@@ -27,7 +27,7 @@ const sparkInsights: SimpleInsight[] = [
     title: "Save on Food Delivery 🍕",
     description: "Cook 2 more meals at home this week to save ₦3,500",
     emoji: "🍳",
-    color: "#10b981",
+    color: "#AE328E",
     actionText: "Start Cooking Challenge"
   },
   {
@@ -35,7 +35,7 @@ const sparkInsights: SimpleInsight[] = [
     title: "Subscription Detective 🔍",
     description: "Found 2 unused subscriptions worth ₦4,200/month",
     emoji: "💰",
-    color: "#f59e0b",
+    color: "#425563",
     actionText: "Cancel Subscriptions"
   },
   {
@@ -43,17 +43,17 @@ const sparkInsights: SimpleInsight[] = [
     title: "Weekend Warrior 🎉",
     description: "You spend 40% more on weekends. Set a limit?",
     emoji: "🎯",
-    color: "#8b5cf6",
+    color: "#AE328E",
     actionText: "Set Weekend Budget"
   }
 ]
 
 const spendingCategories = [
-  { name: "Food & Drinks 🍔", amount: "₦25,400", percentage: 35, color: "#ef4444" },
-  { name: "Transport 🚗", amount: "₦18,200", percentage: 25, color: "#3b82f6" },
-  { name: "Entertainment 🎬", amount: "₦14,600", percentage: 20, color: "#8b5cf6" },
-  { name: "Shopping 🛍️", amount: "₦10,950", percentage: 15, color: "#10b981" },
-  { name: "Other 📦", amount: "₦3,650", percentage: 5, color: "#6b7280" }
+  { name: "Food & Drinks 🍔", amount: "₦25,400", percentage: 35, color: "#AE328E" },
+  { name: "Transport 🚗", amount: "₦18,200", percentage: 25, color: "#425563" },
+  { name: "Entertainment 🎬", amount: "₦14,600", percentage: 20, color: "#AE328E" },
+  { name: "Shopping 🛍️", amount: "₦10,950", percentage: 15, color: "#425563" },
+  { name: "Other 📦", amount: "₦3,650", percentage: 5, color: "#425563" }
 ]
 
 export function PaymentIntelligence() {
@@ -74,8 +74,8 @@ export function PaymentIntelligence() {
       <Card sx={{ 
         p: { xs: 2, md: 3 }, 
         borderRadius: 4, 
-        background: 'linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%)',
-        boxShadow: '0 12px 40px rgba(139, 92, 246, 0.3)',
+        background: 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)',
+        boxShadow: '0 12px 40px rgba(174, 50, 142, 0.3)',
         border: 'none',
         position: 'relative',
         overflow: 'hidden',
@@ -197,7 +197,7 @@ export function PaymentIntelligence() {
                     endIcon={<ArrowRight size={16} />}
                     sx={{
                       background: completedActions.includes(insight.id) 
-                        ? 'linear-gradient(135deg, #10b981 0%, #059669 100%)'
+                        ? 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)'
                         : `linear-gradient(135deg, ${insight.color} 0%, ${insight.color}dd 100%)`,
                       color: 'white',
                       borderRadius: 3,
@@ -206,7 +206,7 @@ export function PaymentIntelligence() {
                       boxShadow: `0 8px 24px ${insight.color}30`,
                       '&:hover': {
                         background: completedActions.includes(insight.id) 
-                          ? 'linear-gradient(135deg, #059669 0%, #047857 100%)'
+                          ? 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)'
                           : `linear-gradient(135deg, ${insight.color}dd 0%, ${insight.color}bb 100%)`,
                         boxShadow: `0 12px 32px ${insight.color}40`,
                         transform: 'translateY(-2px)',
@@ -286,8 +286,8 @@ export function PaymentIntelligence() {
       <Card sx={{ 
         p: { xs: 2, md: 3 },
         borderRadius: 4,
-        background: 'linear-gradient(135deg, #f59e0b15 0%, #f59e0b25 100%)',
-        border: '1px solid #f59e0b30',
+        background: 'linear-gradient(135deg, #AE328E15 0%, #AE328E25 100%)',
+        border: '1px solid #AE328E30',
         position: 'relative',
         overflow: 'hidden',
       }}>
@@ -297,15 +297,15 @@ export function PaymentIntelligence() {
           right: -20, 
           fontSize: '100px', 
           opacity: 0.1,
-          color: '#f59e0b'
+          color: '#AE328E'
         }}>
           🏆
         </Box>
         <CardContent sx={{ position: 'relative', zIndex: 1 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
-            <Trophy size={24} color="#f59e0b" />
+            <Trophy size={24} color="#AE328E" />
             <Typography variant="h6" fontWeight={700} sx={{ 
-              color: '#f59e0b',
+              color: '#AE328E',
               fontSize: { xs: '1.1rem', md: '1.25rem' }
             }}>
               This Week&apos;s Achievement 🎉
@@ -325,15 +325,15 @@ export function PaymentIntelligence() {
             sx={{ 
               height: 12, 
               borderRadius: 6,
-              backgroundColor: '#f59e0b15',
+              backgroundColor: '#AE328E15',
               '& .MuiLinearProgress-bar': {
-                background: 'linear-gradient(90deg, #f59e0b 0%, #fbbf24 100%)',
+                background: 'linear-gradient(90deg, #AE328E 0%, #c13a9e 100%)',
                 borderRadius: 6,
               }
             }} 
           />
           <Typography variant="caption" sx={{ 
-            color: '#f59e0b', 
+            color: '#AE328E', 
             fontWeight: 600, 
             mt: 1, 
             display: 'block' 
