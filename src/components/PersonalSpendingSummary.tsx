@@ -355,8 +355,8 @@ export function PersonalSpendingSummary() {
               <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                 <div className="text-center">
                   <div className="relative w-24 h-24 mx-auto mb-3">
-                    <div className="w-full h-full rounded-full bg-green-100 flex items-center justify-center">
-                      <span className="text-2xl font-bold text-green-600">85</span>
+                    <div className="w-full h-full rounded-full flex items-center justify-center" style={{ background: theme.palette.success.light }}>
+                      <span className="text-2xl font-bold" style={{ color: theme.palette.success.main }}>85</span>
                     </div>
                   </div>
                   <h3 className="font-medium mb-1">Overall Score</h3>
@@ -370,7 +370,7 @@ export function PersonalSpendingSummary() {
                       <span>33.8%</span>
                     </div>
                     <Progress value={67.6} className="h-2" />
-                    <p className="text-xs text-green-600 mt-1">Above recommended 20%</p>
+                    <p className="text-xs mt-1" style={{ color: theme.palette.success.main }}>Above recommended 20%</p>
                   </div>
                   
                   <div>
@@ -379,7 +379,7 @@ export function PersonalSpendingSummary() {
                       <span>93.1%</span>
                     </div>
                     <Progress value={93.1} className="h-2" />
-                    <p className="text-xs text-green-600 mt-1">Excellent control</p>
+                    <p className="text-xs mt-1" style={{ color: theme.palette.success.main }}>Excellent control</p>
                   </div>
                 </div>
                 
@@ -390,7 +390,7 @@ export function PersonalSpendingSummary() {
                       <span>4.2 months</span>
                     </div>
                     <Progress value={70} className="h-2" />
-                    <p className="text-xs text-orange-600 mt-1">Target: 6 months</p>
+                    <p className="text-xs mt-1" style={{ color: theme.palette.warning.main }}>Target: 6 months</p>
                   </div>
                   
                   <div>
@@ -399,25 +399,25 @@ export function PersonalSpendingSummary() {
                       <span>76%</span>
                     </div>
                     <Progress value={76} className="h-2" />
-                    <p className="text-xs text-green-600 mt-1">On track with goals</p>
+                    <p className="text-xs mt-1" style={{ color: theme.palette.success.main }}>On track with goals</p>
                   </div>
                 </div>
                 
                 <div className="space-y-3">
                   <div className="flex items-center gap-2 text-sm">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
+                    <CheckCircle className="h-4 w-4" style={{ color: theme.palette.success.main }} />
                     <span>Emergency fund building</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
+                    <CheckCircle className="h-4 w-4" style={{ color: theme.palette.success.main }} />
                     <span>Consistent savings</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm">
-                    <AlertTriangle className="h-4 w-4 text-orange-500" />
+                    <AlertTriangle className="h-4 w-4" style={{ color: theme.palette.warning.main }} />
                     <span>High grocery spending</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
+                    <CheckCircle className="h-4 w-4" style={{ color: theme.palette.success.main }} />
                     <span>Auto-save active</span>
                   </div>
                 </div>
@@ -442,14 +442,14 @@ export function PersonalSpendingSummary() {
                     <Line
                       type="monotone"
                       dataKey="netWorth"
-                      stroke="#8B5CF6"
+                      stroke={theme.palette.primary.main}
                       strokeWidth={3}
                       name="Net Worth"
                     />
                   </LineChart>
                 </ResponsiveContainer>
                 <div className="mt-4 text-center">
-                  <p className="text-2xl font-bold text-purple-600">{formatCurrency(currentMonth.netWorth)}</p>
+                  <p className="text-2xl font-bold" style={{ color: theme.palette.primary.main }}>{formatCurrency(currentMonth.netWorth)}</p>
                   <p className="text-sm text-muted-foreground">Current Net Worth</p>
                   <p className="text-sm text-green-600">+₦767,000 (35.6%) this year</p>
                 </div>
@@ -478,18 +478,18 @@ export function PersonalSpendingSummary() {
                   </div>
                   
                   <div className="space-y-3 mt-6">
-                    <div className="flex justify-between items-center p-3 rounded-lg bg-green-50">
-                      <span className="font-medium">Lowest Day</span>
-                      <span className="text-green-600">₦2,800 (Sunday)</span>
-                    </div>
-                    <div className="flex justify-between items-center p-3 rounded-lg bg-red-50">
-                      <span className="font-medium">Highest Day</span>
-                      <span className="text-red-600">₦35,400 (Saturday)</span>
-                    </div>
-                    <div className="flex justify-between items-center p-3 rounded-lg bg-blue-50">
-                      <span className="font-medium">Most Active</span>
-                      <span className="text-blue-600">Weekends</span>
-                    </div>
+<div className="flex justify-between items-center p-3 rounded-lg" style={{ background: theme.palette.success.light }}>
+                       <span className="font-medium">Lowest Day</span>
+                       <span style={{ color: theme.palette.success.main }}>₦2,800 (Sunday)</span>
+                     </div>
+                     <div className="flex justify-between items-center p-3 rounded-lg" style={{ background: theme.palette.error.light }}>
+                       <span className="font-medium">Highest Day</span>
+                       <span style={{ color: theme.palette.error.main }}>₦35,400 (Saturday)</span>
+                     </div>
+                     <div className="flex justify-between items-center p-3 rounded-lg" style={{ background: theme.palette.info.light }}>
+                       <span className="font-medium">Most Active</span>
+                       <span style={{ color: theme.palette.info.main }}>Weekends</span>
+                     </div>
                   </div>
                 </div>
               </CardContent>
@@ -533,13 +533,12 @@ export function PersonalSpendingSummary() {
                     </div>
                   </div>
                   
-                  <div className={`flex items-center gap-2 p-2 rounded text-sm ${
-                    goal.onTrack ? 'bg-green-50 text-green-700' : 'bg-orange-50 text-orange-700'
-                  }`}>
+                  <div className="flex items-center gap-2 p-2 rounded text-sm"
+                      style={{ background: goal.onTrack ? theme.palette.success.light : theme.palette.warning.light, color: goal.onTrack ? theme.palette.success.main : theme.palette.warning.main }}>
                     {goal.onTrack ? (
-                      <CheckCircle className="h-4 w-4" />
+                      <CheckCircle className="h-4 w-4" style={{ color: theme.palette.success.main }} />
                     ) : (
-                      <Clock className="h-4 w-4" />
+                      <Clock className="h-4 w-4" style={{ color: theme.palette.warning.main }} />
                     )}
                     <span>{goal.onTrack ? 'On track' : 'Behind schedule'}</span>
                   </div>
@@ -567,18 +566,18 @@ export function PersonalSpendingSummary() {
                 }`}>
                   <CardHeader>
                     <div className="flex items-start gap-3">
-                      <div className={`p-2 rounded-lg ${
-                        insight.type === 'warning' ? 'bg-red-100' :
-                        insight.type === 'success' ? 'bg-green-100' :
-                        insight.type === 'info' ? 'bg-blue-100' :
-                        'bg-gray-100'
-                      }`}>
-                        <IconComponent className={`h-4 w-4 ${
-                          insight.type === 'warning' ? 'text-red-600' :
-                          insight.type === 'success' ? 'text-green-600' :
-                          insight.type === 'info' ? 'text-blue-600' :
-                          'text-gray-600'
-                        }`} />
+<div className="p-2 rounded-lg" style={{
+                         background: insight.type === 'warning' ? theme.palette.error.light :
+                                    insight.type === 'success' ? theme.palette.success.light :
+                                    insight.type === 'info' ? theme.palette.info.light :
+                                    theme.palette.grey[100]
+                       }}>
+                         <IconComponent className="h-4 w-4" style={{
+                           color: insight.type === 'warning' ? theme.palette.error.main :
+                                  insight.type === 'success' ? theme.palette.success.main :
+                                  insight.type === 'info' ? theme.palette.info.main :
+                                  theme.palette.grey[600]
+                         }} />
                       </div>
                       <div className="flex-1">
                         <CardTitle className="text-base">{insight.title}</CardTitle>
@@ -592,13 +591,13 @@ export function PersonalSpendingSummary() {
                     <p className="text-sm text-muted-foreground mb-3">{insight.description}</p>
                     <div className="flex items-center justify-between mb-3">
                       <span className="text-sm font-medium">Impact:</span>
-                      <span className={`text-sm font-medium ${
-                        insight.type === 'warning' ? 'text-red-600' :
-                        insight.type === 'success' ? 'text-green-600' :
-                        'text-blue-600'
-                      }`}>
-                        {insight.impact}
-                      </span>
+<span className="text-sm font-medium" style={{
+                         color: insight.type === 'warning' ? theme.palette.error.main :
+                                insight.type === 'success' ? theme.palette.success.main :
+                                theme.palette.info.main
+                       }}>
+                         {insight.impact}
+                       </span>
                     </div>
                     <Button variant="outline" size="sm" className="w-full">
                       {insight.action}

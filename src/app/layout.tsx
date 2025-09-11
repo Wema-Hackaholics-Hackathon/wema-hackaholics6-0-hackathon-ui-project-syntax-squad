@@ -8,8 +8,8 @@ import "@fontsource/roboto/700.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Spendlens",
-  description: "A simple Spendlens banking mock",
+  title: "Alat Spark",
+  description: "Alat with a Gen Z spark",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
