@@ -1,9 +1,10 @@
 # ✨ Alat Spark
+Alat, with a Gen Z spark ✨
 
 <div align="center">
   <img src="public/logo.webp" alt="Alat Spark Logo" width="120" height="120"/>
   
-  **Intelligent financial insights powered by modern technology**
+  **Intelligent, AI powered financial insights powered by modern technology**
   
   [![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)](https://alat-spark.vercel.app/)
   [![Built with Next.js](https://img.shields.io/badge/Built%20with-Next.js-black)](https://nextjs.org/)
