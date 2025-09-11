@@ -98,14 +98,14 @@ export function NotificationsPanel({ isOpen, onClose }: NotificationsPanelProps)
     <>
       {/* Overlay */}
       <div 
-        className="fixed inset-0 bg-black/20 z-[1300] md:hidden"
+        className="fixed inset-0 bg-black/20 z-[1300]"
         onClick={onClose}
       />
       
       {/* Panel */}
-      <div className="fixed top-0 right-0 h-full w-full md:w-96 bg-white border-l border-pink-200 shadow-[0_10px_25px_rgba(174,50,142,0.15)] z-[1400] flex flex-col backdrop-blur-sm">
+      <div className="fixed top-16 right-4 w-96 max-w-[calc(100vw-2rem)] max-h-[calc(100vh-5rem)] bg-white border border-pink-200 rounded-lg shadow-[0_10px_25px_rgba(174,50,142,0.15)] z-[1400] flex flex-col backdrop-blur-sm">
         {/* Header */}
-        <div className="p-4 border-b border-pink-200 bg-gradient-to-r from-[#AE328E] to-[#c13a9e]">
+        <div className="p-4 border-b border-pink-200 bg-gradient-to-r from-[#AE328E] to-[#c13a9e] rounded-t-lg">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <Bell className="h-5 w-5 text-white" />
@@ -142,7 +142,7 @@ export function NotificationsPanel({ isOpen, onClose }: NotificationsPanelProps)
         </div>
 
         {/* Notifications List */}
-        <ScrollArea className="flex-1">
+        <ScrollArea className="flex-1 rounded-b-lg">
           <div className="p-4 space-y-3">
             {notifications.length === 0 ? (
               <div className="text-center py-8">

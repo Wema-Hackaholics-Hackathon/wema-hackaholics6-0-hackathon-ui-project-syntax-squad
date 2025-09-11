@@ -120,7 +120,7 @@ export function ProfileDropdown({ onNavigate }: ProfileDropdownProps) {
         <MenuItem onClick={() => handleMenuAction('profile')}> 
           <ListItemIcon><User size={18} /></ListItemIcon>
           <ListItemText primary="My Profile" secondary="Manage your account information" />
-          <ChevronRight size={16} color="#FFA726" />
+          <ChevronRight size={16} color="#AE328E" />
         </MenuItem>
         <MenuItem onClick={() => handleMenuAction('banking')}>
           <ListItemIcon><CreditCard size={18} /></ListItemIcon>
@@ -130,7 +130,7 @@ export function ProfileDropdown({ onNavigate }: ProfileDropdownProps) {
         <MenuItem onClick={() => handleMenuAction('settings')}>
           <ListItemIcon><Settings size={18} /></ListItemIcon>
           <ListItemText primary="Settings" secondary="Preferences and privacy" />
-          <ChevronRight size={16} color="#FFA726" />
+          <ChevronRight size={16} color="#AE328E" />
         </MenuItem>
         <Divider />
         {/* Security & Support */}
@@ -142,7 +142,7 @@ export function ProfileDropdown({ onNavigate }: ProfileDropdownProps) {
         <MenuItem onClick={() => handleMenuAction('help')}>
           <ListItemIcon><HelpCircle size={18} /></ListItemIcon>
           <ListItemText primary="Help & Support" secondary="Get help and contact us" />
-          <ChevronRight size={16} color="#FFA726" />
+          <ChevronRight size={16} color="#AE328E" />
         </MenuItem>
         <Divider />
         {/* Quick Actions */}
@@ -162,7 +162,7 @@ export function ProfileDropdown({ onNavigate }: ProfileDropdownProps) {
         <Divider />
         {/* Logout */}
         <MenuItem onClick={() => handleMenuAction('logout')} sx={{ color: theme.palette.primary.main }}>
-          <ListItemIcon><LogOut size={18} color="#E53935" /></ListItemIcon>
+          <ListItemIcon><LogOut size={18} color="#425563" /></ListItemIcon>
           <ListItemText primary="Sign Out" secondary="Log out of your account" />
         </MenuItem>
       </Menu>
