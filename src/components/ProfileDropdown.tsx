@@ -10,7 +10,7 @@ import {
   Star,
   ChevronRight
 } from "lucide-react"
-import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar"
+import { Avatar } from "./ui/avatar"
 import { Button } from "./ui/button"
 import {
   DropdownMenu,
@@ -61,11 +61,12 @@ export function ProfileDropdown({ onNavigate }: ProfileDropdownProps) {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-8 w-8 md:h-9 md:w-9 rounded-full hover:bg-pink-100">
-          <Avatar className="h-8 w-8 md:h-9 md:w-9 ring-2 ring-pink-200 shadow-alat-sm">
-            <AvatarImage src={profileData.avatar} alt={profileData.name} />
-            <AvatarFallback className="bg-gradient-alat text-white">
-              <User className="h-3 w-3 md:h-4 md:w-4" />
-            </AvatarFallback>
+          <Avatar src={profileData.avatar} alt={profileData.name} className="h-8 w-8 md:h-9 md:w-9 ring-2 ring-pink-200 shadow-alat-sm">
+            {!profileData.avatar ? (
+              <span className="bg-gradient-alat text-white flex items-center justify-center w-full h-full">
+                <User className="h-3 w-3 md:h-4 md:w-4" />
+              </span>
+            ) : null}
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
