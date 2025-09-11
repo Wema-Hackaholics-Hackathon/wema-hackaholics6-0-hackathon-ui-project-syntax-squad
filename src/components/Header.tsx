@@ -121,7 +121,7 @@ export function Header({ onNavigate }: HeaderProps) {
               priority
             />
           </Box>
-          <Box>
+          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             <Typography 
               variant="h6" 
               noWrap 
@@ -153,7 +153,7 @@ export function Header({ onNavigate }: HeaderProps) {
         </Box>
 
         {/* Search (hidden on xs) */}
-        <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
+        <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
           <Search onSubmit={handleSearch}>
             <SearchIconWrapper>
               <SearchIcon color="primary" />
@@ -166,6 +166,9 @@ export function Header({ onNavigate }: HeaderProps) {
             />
           </Search>
         </Box>
+
+        {/* Spacer to push actions to the right */}
+        <Box sx={{ flexGrow: 1 }} />
 
         {/* Actions */}
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
