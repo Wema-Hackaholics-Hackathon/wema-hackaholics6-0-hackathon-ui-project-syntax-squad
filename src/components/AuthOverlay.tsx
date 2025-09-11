@@ -136,11 +136,11 @@ export function AuthOverlay({ onAuthSuccess }: AuthOverlayProps) {
         initial={{ scale: 0.9, y: 20 }}
         animate={{ scale: 1, y: 0 }}
         transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-        className="w-full max-w-md mx-auto"
       >
         <Card 
           sx={{
-            width: '100%',
+            maxWidth: { xs: 340, sm: 500 },
+            width: { xs: '90%', sm: '100%' },
             background: 'hsl(var(--card))',
             backdropFilter: 'blur(20px)',
             boxShadow: `
