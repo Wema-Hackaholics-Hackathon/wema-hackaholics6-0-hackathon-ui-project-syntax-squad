@@ -146,7 +146,7 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
           right: -20, 
           fontSize: '120px', 
           opacity: 0.1,
-          color: 'white',
+          color: 'var(--foreground)',
           pointerEvents: 'none'
         }}>
           🚀
@@ -154,7 +154,7 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
         <CardContent sx={{ position: 'relative', zIndex: 1 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
             <Box sx={{ 
-              background: 'rgba(255,255,255,0.2)', 
+              background: 'var(--muted)', 
               borderRadius: 2, 
               p: 1, 
               display: 'flex', 
@@ -167,7 +167,7 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
               </Typography>
             </Box>
             <Box sx={{ 
-              background: 'rgba(255,255,255,0.2)', 
+              background: 'var(--muted)', 
               borderRadius: 2, 
               px: 1.5, 
               py: 0.5 
@@ -199,7 +199,7 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
               sx={{ 
                 p: { xs: 2, md: 3 }, 
                 borderRadius: 4,
-                background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(254,249,252,0.95) 100%)',
+                background: 'var(--card)',
                 border: '1px solid rgba(174, 50, 142, 0.1)',
                 backdropFilter: 'blur(20px)',
                 transition: 'all 0.3s ease',
@@ -224,10 +224,10 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
                 }}>
                   <stat.icon size={24} color={stat.color} strokeWidth={2.5} />
                 </Box>
-                <Typography variant="subtitle2" color="#425563" fontWeight={600} sx={{ mb: 1, fontSize: { xs: '0.8rem', md: '0.9rem' } }}>
+                <Typography variant="subtitle2" color="var(--foreground)" fontWeight={600} sx={{ mb: 1, fontSize: { xs: '0.8rem', md: '0.9rem' } }}>
                   {stat.title}
                 </Typography>
-                <Typography variant="h5" fontWeight={800} sx={{ color: stat.color, mb: 1, fontSize: { xs: '1.3rem', md: '1.5rem' } }}>
+                <Typography variant="h5" fontWeight={800} sx={{ color: 'var(--primary)', mb: 1, fontSize: { xs: '1.3rem', md: '1.5rem' } }}>
                   {balanceVisible ? stat.value : '••••••'}
                 </Typography>
                 <Typography variant="caption" className="text-sm font-medium px-2 py-1 rounded-lg" sx={{ 
@@ -274,7 +274,7 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
                       width: 36, 
                       height: 36, 
                       borderRadius: 2, 
-                      background: `${action.color}15`,
+                      background: 'var(--muted)',
                       display: 'flex', 
                       alignItems: 'center', 
                       justifyContent: 'center',
@@ -284,14 +284,14 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
                       <Typography sx={{ fontSize: '18px' }}>{action.emoji}</Typography>
                     </Box>
                     <Typography variant="subtitle1" fontWeight={700} sx={{ 
-                      color: action.color, 
+                      color: 'var(--primary)', 
                       fontSize: { xs: '0.9rem', md: '1rem' } 
                     }}>
                       {action.title}
                     </Typography>
                   </Box>
                   <Typography variant="body2" sx={{ 
-                    color: '#425563', 
+                    color: 'var(--foreground)', 
                     fontWeight: 500, 
                     mb: 2,
                     fontSize: { xs: '0.8rem', md: '0.875rem' }
@@ -307,13 +307,13 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
                         borderRadius: 4,
                         backgroundColor: `${action.color}15`,
                         '& .MuiLinearProgress-bar': {
-                          background: `linear-gradient(90deg, ${action.color} 0%, ${action.color}dd 100%)`,
+                          background: 'var(--primary)',
                           borderRadius: 4,
                         }
                       }} 
                     />
                     <Typography variant="caption" sx={{ 
-                      color: action.color, 
+                      color: 'var(--primary)', 
                       fontWeight: 600, 
                       mt: 0.5, 
                       display: 'block' 
@@ -330,7 +330,7 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
                       background: showSuccess && action.actionType === 'savings' 
                         ? 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)'
                         : `linear-gradient(135deg, ${action.color} 0%, ${action.color}dd 100%)`,
-                      color: 'white',
+                      color: 'var(--foreground)',
                       borderRadius: 3,
                       fontWeight: 700,
                       py: 1.2,
@@ -353,7 +353,7 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
 
       {/* Quick Access */}
       <Box>
-        <Typography variant="h6" fontWeight={700} sx={{ mb: 3, color: '#425563', fontSize: { xs: '1.1rem', md: '1.25rem' } }}>
+        <Typography variant="h6" fontWeight={700} sx={{ mb: 3, color: 'var(--foreground)', fontSize: { xs: '1.1rem', md: '1.25rem' } }}>
           Quick Access 🚀
         </Typography>
         <Grid2 container spacing={{ xs: 2, md: 3 }}>
@@ -363,7 +363,7 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
                 p: { xs: 2, md: 3 }, 
                 cursor: 'pointer', 
                 borderRadius: 4,
-                background: 'linear-gradient(135deg, #AE328E15 0%, #AE328E25 100%)',
+                background: 'var(--muted)',
                 border: '1px solid #AE328E30',
                 transition: 'all 0.3s ease',
                 '&:hover': {
@@ -376,7 +376,7 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
               <Box sx={{ textAlign: 'center' }}>
                 <Box sx={{ fontSize: { xs: '32px', md: '40px' }, mb: 1 }}>💰</Box>
                 <Typography variant="subtitle2" fontWeight={700} sx={{ 
-                  color: '#AE328E', 
+                  color: 'var(--primary)', 
                   fontSize: { xs: '0.8rem', md: '0.9rem' } 
                 }}>
                   My Stash
@@ -390,7 +390,7 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
                 p: { xs: 2, md: 3 }, 
                 cursor: 'pointer', 
                 borderRadius: 4,
-                background: 'linear-gradient(135deg, #42556315 0%, #42556325 100%)',
+                background: 'var(--muted)',
                 border: '1px solid #42556330',
                 transition: 'all 0.3s ease',
                 '&:hover': {
@@ -403,7 +403,7 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
               <Box sx={{ textAlign: 'center' }}>
                 <Box sx={{ fontSize: { xs: '32px', md: '40px' }, mb: 1 }}>⚡</Box>
                 <Typography variant="subtitle2" fontWeight={700} sx={{ 
-                  color: '#425563', 
+                  color: 'var(--foreground)', 
                   fontSize: { xs: '0.8rem', md: '0.9rem' } 
                 }}>
                   Sparks
@@ -417,7 +417,7 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
                 p: { xs: 2, md: 3 }, 
                 cursor: 'pointer', 
                 borderRadius: 4,
-                background: 'linear-gradient(135deg, #AE328E15 0%, #AE328E25 100%)',
+                background: 'var(--muted)',
                 border: '1px solid #AE328E30',
                 transition: 'all 0.3s ease',
                 '&:hover': {
@@ -430,7 +430,7 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
               <Box sx={{ textAlign: 'center' }}>
                 <Box sx={{ fontSize: { xs: '32px', md: '40px' }, mb: 1 }}>🤝</Box>
                 <Typography variant="subtitle2" fontWeight={700} sx={{ 
-                  color: '#AE328E', 
+                  color: 'var(--primary)', 
                   fontSize: { xs: '0.8rem', md: '0.9rem' } 
                 }}>
                   Connect
