@@ -121,7 +121,7 @@ export function Header({ onNavigate }: HeaderProps) {
               priority
             />
           </Box>
-          <Box>
+          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             <Typography 
               variant="h6" 
               noWrap 
