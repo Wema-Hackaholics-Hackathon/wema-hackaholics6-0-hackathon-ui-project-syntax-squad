@@ -19,4 +19,18 @@ function Avatar({ src, alt, className, children, ...props }: AvatarProps) {
   );
 }
 
-export { Avatar };
+interface AvatarImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {}
+
+function AvatarImage(props: AvatarImageProps) {
+  return <img {...props} />;
+}
+
+interface AvatarFallbackProps extends React.HTMLAttributes<HTMLSpanElement> {
+  children?: React.ReactNode;
+}
+
+function AvatarFallback({ children, ...props }: AvatarFallbackProps) {
+  return <span {...props}>{children}</span>;
+}
+
+export { Avatar, AvatarImage, AvatarFallback };
