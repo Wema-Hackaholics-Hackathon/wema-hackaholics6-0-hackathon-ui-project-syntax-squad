@@ -36,7 +36,7 @@ interface CategoryData {
   trend: 'up' | 'down' | 'stable'
   trendPercentage: number
   color: string
-  icon: any
+  icon: React.ComponentType<{ className?: string; size?: number }>
   subcategories: SubcategoryData[]
 }
 

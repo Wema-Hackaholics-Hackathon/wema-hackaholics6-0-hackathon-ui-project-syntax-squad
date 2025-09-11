@@ -59,7 +59,7 @@ const spendingCategories = [
 export function PaymentIntelligence() {
   const [completedActions, setCompletedActions] = useState<string[]>([]);
   
-  const handleActionClick = (insightId: string, actionText: string) => {
+  const handleActionClick = (insightId: string) => {
     if (!completedActions.includes(insightId)) {
       setCompletedActions([...completedActions, insightId]);
       // Show a brief success state
@@ -193,7 +193,7 @@ export function PaymentIntelligence() {
                   </Typography>
                   <Button
                     fullWidth
-                    onClick={() => handleActionClick(insight.id, insight.actionText)}
+                    onClick={() => handleActionClick(insight.id)}
                     endIcon={<ArrowRight size={16} />}
                     sx={{
                       background: completedActions.includes(insight.id) 
@@ -308,7 +308,7 @@ export function PaymentIntelligence() {
               color: '#f59e0b',
               fontSize: { xs: '1.1rem', md: '1.25rem' }
             }}>
-              This Week's Achievement 🎉
+              This Week&apos;s Achievement 🎉
             </Typography>
           </Box>
           <Typography variant="body1" sx={{ 
