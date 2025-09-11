@@ -13,9 +13,6 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import SearchIcon from "@mui/icons-material/Search";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { styled } from "@mui/material/styles";
-import { NotificationsDropdown } from "./NotificationsDropdown";
-import { SettingsDropdown } from "./SettingsDropdown";
-import { ProfileDropdownMenu } from "./ProfileDropdownMenu";
 import Image from "next/image";
 
 interface HeaderProps {
@@ -69,9 +66,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export function Header({ onMenuClick, onNavigate }: HeaderProps) {
-  const [notificationsOpen, setNotificationsOpen] = useState(false);
-  const [settingsOpen, setSettingsOpen] = useState(false);
-  const [profileOpen, setProfileOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const unreadNotifications = 3;
 
@@ -193,57 +187,35 @@ export function Header({ onMenuClick, onNavigate }: HeaderProps) {
             <SearchIcon />
           </IconButton>
 
-          {/* Notifications Dropdown */}
-          <NotificationsDropdown
-            trigger={
-              <IconButton color="inherit">
-                <Badge badgeContent={unreadNotifications} color="error">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton>
-            }
-            isOpen={notificationsOpen}
-            onOpenChange={setNotificationsOpen}
-          />
+          {/* Notifications */}
+          <IconButton color="inherit" onClick={() => onNavigate?.('notifications')}>
+            <Badge badgeContent={unreadNotifications} color="error">
+              <NotificationsIcon />
+            </Badge>
+          </IconButton>
 
-          {/* Settings Dropdown (Desktop) */}
-          <Box sx={{ display: { xs: 'none', md: 'block' } }}>
-            <SettingsDropdown
-              trigger={
-                <IconButton color="inherit">
-                  <SettingsIcon />
-                </IconButton>
-              }
-              isOpen={settingsOpen}
-              onOpenChange={setSettingsOpen}
-              onNavigate={onNavigate}
-            />
-          </Box>
+          {/* Settings (Desktop) */}
+          <IconButton color="inherit" sx={{ display: { xs: 'none', md: 'flex' } }} onClick={() => onNavigate?.('settings')}>
+            <SettingsIcon />
+          </IconButton>
 
-          {/* Profile Dropdown */}
-          <ProfileDropdownMenu
-            trigger={
-              <IconButton sx={{ p: 0 }}>
-                <Avatar
-                  src={profileData.avatar}
-                  alt={profileData.name}
-                  sx={{ 
-                    width: 36, 
-                    height: 36, 
-                    bgcolor: '#AE328E', 
-                    color: 'white', 
-                    fontWeight: 'bold',
-                    fontSize: '0.875rem'
-                  }}
-                >
-                  {!profileData.avatar ? getInitials(profileData.name) : null}
-                </Avatar>
-              </IconButton>
-            }
-            isOpen={profileOpen}
-            onOpenChange={setProfileOpen}
-            onNavigate={onNavigate}
-          />
+          {/* Profile */}
+          <IconButton sx={{ p: 0 }} onClick={() => onNavigate?.('profile')}>
+            <Avatar
+              src={profileData.avatar}
+              alt={profileData.name}
+              sx={{ 
+                width: 36, 
+                height: 36, 
+                bgcolor: '#AE328E', 
+                color: 'white', 
+                fontWeight: 'bold',
+                fontSize: '0.875rem'
+              }}
+            >
+              {!profileData.avatar ? getInitials(profileData.name) : null}
+            </Avatar>
+          </IconButton>
         </Box>
       </Toolbar>
     </AppBar>
