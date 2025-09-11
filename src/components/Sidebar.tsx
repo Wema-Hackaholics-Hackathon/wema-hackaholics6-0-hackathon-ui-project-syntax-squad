@@ -32,7 +32,10 @@ const advancedNavigation = [
   { name: 'Transaction Analytics', icon: TrendingUp, id: 'transaction-analytics' },
 ];
 
+import { useTheme } from '@mui/material/styles';
+
 export function Sidebar({ activeView = 'dashboard', onViewChange, isOpen = false, onClose }: SidebarProps) {
+  const theme = useTheme();
   const handleItemClick = (id: string) => {
     onViewChange?.(id);
     if (window.innerWidth < 768) {
@@ -99,7 +102,7 @@ export function Sidebar({ activeView = 'dashboard', onViewChange, isOpen = false
         <Button variant="outlined" size="small" onClick={() => handleItemClick('micro-actions')} sx={{ justifyContent: 'flex-start' }}>
           Create Savings Goal
         </Button>
-        <Button variant="outlined" size="small" color="warning" onClick={() => handleItemClick('social')} sx={{ justifyContent: 'flex-start' }}>
+        <Button variant="outlined" size="small" color="primary" onClick={() => handleItemClick('social')} sx={{ justifyContent: 'flex-start' }}>
           Split Bill
         </Button>
       </Box>
