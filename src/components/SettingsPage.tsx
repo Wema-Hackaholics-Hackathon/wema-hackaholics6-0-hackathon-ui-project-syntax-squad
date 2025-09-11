@@ -344,10 +344,10 @@ export function SettingsPage({ onBack }: SettingsPageProps) {
                 <div>
                   <Label htmlFor="currency" className="text-orange-900 font-medium">Default Currency</Label>
                   <Select defaultValue="ngn">
-                    <SelectTrigger className="border-orange-200 focus:border-orange-400 mt-2">
+                    <SelectTrigger className="border-orange-200 focus:border-orange-400 hover:border-orange-300 transition-colors mt-2">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="z-[1600]">
                       <SelectItem value="ngn">Nigerian Naira (₦)</SelectItem>
                       <SelectItem value="usd">US Dollar ($)</SelectItem>
                       <SelectItem value="eur">Euro (€)</SelectItem>
@@ -357,10 +357,10 @@ export function SettingsPage({ onBack }: SettingsPageProps) {
                 <div>
                   <Label htmlFor="language" className="text-orange-900 font-medium">Language</Label>
                   <Select defaultValue="en">
-                    <SelectTrigger className="border-orange-200 focus:border-orange-400 mt-2">
+                    <SelectTrigger className="border-orange-200 focus:border-orange-400 hover:border-orange-300 transition-colors mt-2">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="z-[1600]">
                       <SelectItem value="en">English</SelectItem>
                       <SelectItem value="ha">Hausa</SelectItem>
                       <SelectItem value="yo">Yoruba</SelectItem>
