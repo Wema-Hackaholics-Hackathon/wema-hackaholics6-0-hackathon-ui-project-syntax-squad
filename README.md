@@ -13,7 +13,7 @@ Alat, with a Gen Z spark ✨
 ---
 
 ## 👥 Team Syntax Squad
-- **Ilori Oluwagbenga** - Full Stack Developer
+- **Ilori Oluwagbenga** - Project manager
 - **Nathaniel Anthony** - Frontend Developer  
 - **Bakrin Rufaydah** - UI/UX Designer
 - **Oyedeji Samuel** - Backend Developer
