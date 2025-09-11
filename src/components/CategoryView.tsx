@@ -1,6 +1,5 @@
 import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
-import { Badge } from "./ui/badge"
 import { Button } from "./ui/button"
 import { Progress } from "./ui/progress"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select"
@@ -16,8 +15,6 @@ import {
   Home,
   CreditCard,
   Smartphone,
-  Coffee,
-  Plus,
   Settings,
   Eye,
   Edit,
@@ -36,7 +33,8 @@ interface CategoryData {
   trend: 'up' | 'down' | 'stable'
   trendPercentage: number
   color: string
-  icon: React.ComponentType<{ className?: string; size?: number }>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  icon: any
   subcategories: SubcategoryData[]
 }
 
@@ -497,7 +495,7 @@ export function CategoryView() {
                   {categoryData
                     .filter(cat => cat.trend === 'up')
                     .sort((a, b) => b.trendPercentage - a.trendPercentage)
-                    .map((category, index) => {
+                    .map((category) => {
                       const IconComponent = category.icon
                       return (
                         <div key={category.id} className="flex items-center justify-between p-3 rounded-lg bg-red-50 border border-red-100">
@@ -525,7 +523,7 @@ export function CategoryView() {
                   {categoryData
                     .filter(cat => cat.trend === 'down')
                     .sort((a, b) => b.trendPercentage - a.trendPercentage)
-                    .map((category, index) => {
+                    .map((category) => {
                       const IconComponent = category.icon
                       return (
                         <div key={category.id} className="flex items-center justify-between p-3 rounded-lg bg-green-50 border border-green-100">
