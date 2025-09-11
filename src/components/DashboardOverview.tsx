@@ -136,10 +136,8 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
   return (
     <div>
       {/* Welcome Section with Level */}
-      <Card className="p-6 rounded-2xl bg-gradient-to-br from-primary to-purple-600 shadow-xl border-none relative overflow-hidden"
-        sx={{ 
-          boxShadow: '0 12px 40px rgba(174, 50, 142, 0.3)',
-        }}>
+<Card className="p-6 rounded-2xl shadow-xl border-none relative overflow-hidden"
+        sx={{ background: 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)', boxShadow: '0 12px 40px rgba(174, 50, 142, 0.3)' }}>
         <Box sx={{ 
           position: 'absolute', 
           top: -20, 
@@ -161,8 +159,8 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
               alignItems: 'center', 
               gap: 1 
             }}>
-              <Trophy size={20} color="white" />
-              <Typography color="white" sx={{ fontWeight: 700, fontSize: '0.9rem' }}>
+              <Trophy size={20} color="var(--primary)" />
+              <Typography color="var(--foreground)" sx={{ fontWeight: 700, fontSize: '0.9rem' }}>
                 Level 3 Saver
               </Typography>
             </Box>
@@ -172,18 +170,18 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
               px: 1.5, 
               py: 0.5 
             }}>
-              <Typography color="white" sx={{ fontWeight: 600, fontSize: '0.8rem' }}>
+              <Typography color="var(--foreground)" sx={{ fontWeight: 600, fontSize: '0.8rem' }}>
                 850 XP ⭐
               </Typography>
             </Box>
           </Box>
-          <Typography variant="h4" color="white" fontWeight={800} gutterBottom sx={{ 
+          <Typography variant="h4" color="var(--foreground)" fontWeight={800} gutterBottom sx={{ 
             fontSize: { xs: '1.5rem', md: '2rem' },
             fontFamily: '"Inter", sans-serif'
           }}>
             Hey there, Money Master! 👋
           </Typography>
-          <Typography color="white" sx={{ opacity: 0.9, fontWeight: 500, fontSize: { xs: '0.9rem', md: '1rem' } }}>
+          <Typography color="var(--foreground)" sx={{ opacity: 0.9, fontWeight: 500, fontSize: { xs: '0.9rem', md: '1rem' } }}>
             You&apos;re crushing your financial goals! Keep it up 💪
           </Typography>
         </CardContent>
