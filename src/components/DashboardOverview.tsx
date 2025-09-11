@@ -121,8 +121,8 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
 
     const fetchAndStore = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/balance", { cache: "no-store" });
-        // const res = await fetch("https://alat-spark.vercel.app/api/balance", { cache: "no-store" }); 
+        // const res = await fetch("http://localhost:3000/api/balance", { cache: "no-store" });
+        const res = await fetch("https://alat-spark.vercel.app/api/balance", { cache: "no-store" }); 
         if (!res.ok) return;
         const json = (await res.json()) as {
           totalBalance: number;
