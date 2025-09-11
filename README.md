@@ -20,7 +20,18 @@ Alat, with a spark for Gen Z ✨
 
 ---
 
-## 🎯 Overview
+## 🚀 Live Demo
+Live Application: [Alat spark](https://alat-spark.vercel.app/)
+
+Recorded Demo: 
+
+
+## 🎯 The Problem
+Which "How Might We..." question from the challenge brief are you tackling? Show the format by providing an example below.
+
+Example: How might we help busy people organize their daily tasks more effectively?
+
+## ✨ Our Solution
 
 Alat Spark reimagines financial management through intelligent insights and seamless user experiences. Our platform combines modern banking interfaces with smart analytics to help users better understand and control their financial journey.
 
@@ -43,7 +54,7 @@ Alat Spark reimagines financial management through intelligent insights and seam
 
 ---
 
-## 🚀 Quick Start
+## ⚙️ How to Set Up and Run Locally
 
 ```bash
 # Clone repository
