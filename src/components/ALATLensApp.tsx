@@ -82,8 +82,6 @@ export function ALATLensApp() {
             display: 'flex',
             flexDirection: 'column',
             overflow: 'hidden',
-            marginLeft: isMobile ? 0 : `${sidebarWidth}px`,
-            transition: 'margin-left 300ms cubic-bezier(0.4, 0, 0.2, 1)',
           }}
         >
           <Box 
