@@ -55,7 +55,7 @@ const categoryData: CategoryData[] = [
     transactionCount: 24,
     trend: "up",
     trendPercentage: 15.3,
-    color: "#FF6B6B",
+    color: "#AE328E",
     icon: ShoppingCart,
     subcategories: [
       { name: "Groceries", amount: 52000, percentage: 58.1, transactionCount: 12 },
@@ -72,7 +72,7 @@ const categoryData: CategoryData[] = [
     transactionCount: 18,
     trend: "down",
     trendPercentage: 8.7,
-    color: "#4ECDC4",
+    color: "#425563",
     icon: Car,
     subcategories: [
       { name: "Ride Sharing", amount: 32400, percentage: 48.2, transactionCount: 10 },
@@ -89,7 +89,7 @@ const categoryData: CategoryData[] = [
     transactionCount: 12,
     trend: "stable",
     trendPercentage: 2.1,
-    color: "#45B7D1",
+    color: "#AE328E",
     icon: Smartphone,
     subcategories: [
       { name: "Streaming Services", amount: 18000, percentage: 40, transactionCount: 4 },

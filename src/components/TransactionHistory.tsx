@@ -157,7 +157,7 @@ export function TransactionHistory() {
               <Typography variant="subtitle2" color="#425563" fontWeight={600} sx={{ mb: 1 }}>
                 Income
               </Typography>
-              <Typography variant="h5" fontWeight={800} sx={{ color: '#10b981' }}>
+              <Typography variant="h5" fontWeight={800} sx={{ color: '#AE328E' }}>
                 ₦{totalIncome.toLocaleString()}
               </Typography>
             </CardContent>
@@ -167,8 +167,8 @@ export function TransactionHistory() {
           <Card sx={{ 
             p: { xs: 2, md: 3 }, 
             borderRadius: 4,
-            background: 'linear-gradient(135deg, #ef444415 0%, #ef444425 100%)',
-            border: '1px solid #ef444430',
+            background: 'linear-gradient(135deg, #42556315 0%, #42556325 100%)',
+            border: '1px solid #42556330',
             backdropFilter: 'blur(20px)',
           }}>
             <CardContent sx={{ p: 0, textAlign: 'center' }}>
@@ -176,20 +176,20 @@ export function TransactionHistory() {
                 width: 48, 
                 height: 48, 
                 borderRadius: 3, 
-                background: '#ef444415',
+                background: '#42556315',
                 display: 'flex', 
                 alignItems: 'center', 
                 justifyContent: 'center',
                 mx: 'auto',
                 mb: 2,
-                border: '2px solid #ef444430',
+                border: '2px solid #42556330',
               }}>
-                <ArrowDownLeft size={24} color="#ef4444" strokeWidth={2.5} />
+                <ArrowDownLeft size={24} color="#425563" strokeWidth={2.5} />
               </Box>
               <Typography variant="subtitle2" color="#425563" fontWeight={600} sx={{ mb: 1 }}>
                 Expenses
               </Typography>
-              <Typography variant="h5" fontWeight={800} sx={{ color: '#ef4444' }}>
+              <Typography variant="h5" fontWeight={800} sx={{ color: '#425563' }}>
                 ₦{totalExpense.toLocaleString()}
               </Typography>
             </CardContent>
@@ -199,8 +199,8 @@ export function TransactionHistory() {
           <Card sx={{ 
             p: { xs: 2, md: 3 }, 
             borderRadius: 4,
-            background: 'linear-gradient(135deg, #8b5cf615 0%, #8b5cf625 100%)',
-            border: '1px solid #8b5cf630',
+            background: 'linear-gradient(135deg, #AE328E15 0%, #AE328E25 100%)',
+            border: '1px solid #AE328E30',
             backdropFilter: 'blur(20px)',
           }}>
             <CardContent sx={{ p: 0, textAlign: 'center' }}>
@@ -208,20 +208,20 @@ export function TransactionHistory() {
                 width: 48, 
                 height: 48, 
                 borderRadius: 3, 
-                background: '#8b5cf615',
+                background: '#AE328E15',
                 display: 'flex', 
                 alignItems: 'center', 
                 justifyContent: 'center',
                 mx: 'auto',
                 mb: 2,
-                border: '2px solid #8b5cf630',
+                border: '2px solid #AE328E30',
               }}>
                 <Typography sx={{ fontSize: '24px' }}>💰</Typography>
               </Box>
               <Typography variant="subtitle2" color="#425563" fontWeight={600} sx={{ mb: 1 }}>
                 Balance
               </Typography>
-              <Typography variant="h5" fontWeight={800} sx={{ color: '#8b5cf6' }}>
+              <Typography variant="h5" fontWeight={800} sx={{ color: '#AE328E' }}>
                 ₦{(totalIncome - totalExpense).toLocaleString()}
               </Typography>
             </CardContent>
@@ -239,7 +239,7 @@ export function TransactionHistory() {
       }}>
         <CardContent sx={{ p: 0 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-            <Search size={20} color="#6b7280" />
+            <Search size={20} color="#425563" />
             <input
               type="text"
               placeholder="Search transactions..."
@@ -289,11 +289,11 @@ export function TransactionHistory() {
                       width: 48, 
                       height: 48, 
                       borderRadius: 3, 
-                      background: transaction.type === 'credit' ? '#10b98115' : '#ef444415',
+                      background: transaction.type === 'credit' ? '#AE328E15' : '#42556315',
                       display: 'flex', 
                       alignItems: 'center', 
                       justifyContent: 'center',
-                      border: transaction.type === 'credit' ? '1px solid #10b98130' : '1px solid #ef444430',
+                      border: transaction.type === 'credit' ? '1px solid #AE328E30' : '1px solid #42556330',
                     }}>
                       <Typography sx={{ fontSize: '20px' }}>{getCategoryEmoji(transaction.category)}</Typography>
                     </Box>
