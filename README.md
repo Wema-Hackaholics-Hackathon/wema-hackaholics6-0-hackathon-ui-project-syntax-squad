@@ -1,5 +1,5 @@
 # ✨ Alat Spark
-Alat, with a Gen Z spark ✨
+Alat, with a spark for Gen Z ✨
 
 <div align="center">
   <img src="public/logo.webp" alt="Alat Spark Logo" width="120" height="120"/>

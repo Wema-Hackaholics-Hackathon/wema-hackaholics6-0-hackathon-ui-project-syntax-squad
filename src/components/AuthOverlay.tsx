@@ -180,7 +180,7 @@ export function AuthOverlay({ onAuthSuccess }: AuthOverlayProps) {
                 ALAT Spark
               </Typography>
               <Typography variant="body1" color="text.secondary" sx={{ mt: 1 }}>
-                Secure banking made simple
+                Alat, with a spark for Gen Z
               </Typography>
             </Box>
 

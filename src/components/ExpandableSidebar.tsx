@@ -59,9 +59,9 @@ export function ExpandableSidebar({
         '& .MuiDrawer-paper': {
           width: sidebarWidth,
           boxSizing: 'border-box',
-          background: 'linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(254,249,252,0.95) 50%, rgba(245,230,241,0.3) 100%)',
+          background: 'hsl(var(--background))',
           backdropFilter: 'blur(20px)',
-          borderRight: '1px solid rgba(174, 50, 142, 0.1)',
+          borderRight: '1px solid hsl(var(--border))',
           boxShadow: '4px 0 24px rgba(174, 50, 142, 0.08)',
           transition: 'width 300ms cubic-bezier(0.4, 0, 0.2, 1)',
           overflowX: 'hidden',
@@ -79,8 +79,8 @@ export function ExpandableSidebar({
           right: -12,
           width: 24,
           height: 24,
-          bgcolor: 'white',
-          border: '1px solid rgba(174, 50, 142, 0.2)',
+          bgcolor: 'hsl(var(--background))',
+          border: '1px solid hsl(var(--border))',
           zIndex: 1,
           '&:hover': {
             bgcolor: '#AE328E',
@@ -113,13 +113,13 @@ export function ExpandableSidebar({
                         background: isActive 
                           ? 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)'
                           : 'transparent',
-                        color: isActive ? 'white' : '#374151',
+                        color: isActive ? 'white' : 'hsl(var(--foreground))',
                         transform: isActive ? 'translateY(-1px)' : 'none',
                         boxShadow: isActive ? '0 4px 12px rgba(174, 50, 142, 0.3)' : 'none',
                         '&:hover': {
                           background: isActive 
                             ? 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)'
-                            : 'rgba(174, 50, 142, 0.05)',
+                             : 'hsl(var(--accent))',
                           color: isActive ? 'white' : '#AE328E',
                           transform: 'translateY(-1px)',
                         },
@@ -153,7 +153,7 @@ export function ExpandableSidebar({
 
         {/* Bottom Actions */}
         <Box>
-          <Divider sx={{ mb: 2, borderColor: 'rgba(107, 114, 128, 0.2)' }} />
+          <Divider sx={{ mb: 2, borderColor: 'hsl(var(--border))' }} />
           <List sx={{ p: 0 }}>
             {bottomActions.map((item) => {
               const IconComponent = item.icon
@@ -168,10 +168,10 @@ export function ExpandableSidebar({
                         minHeight: 40,
                         justifyContent: isExpanded ? 'initial' : 'center',
                         px: 2,
-                        color: '#6b7280',
+                        color: 'hsl(var(--muted-foreground))',
                         '&:hover': {
-                          backgroundColor: item.id === 'logout' ? 'rgba(239, 68, 68, 0.05)' : 'rgba(107, 114, 128, 0.05)',
-                          color: item.id === 'logout' ? '#ef4444' : '#374151',
+                          backgroundColor: item.id === 'logout' ? 'hsl(var(--destructive))' : 'hsl(var(--accent))',
+                          color: item.id === 'logout' ? 'hsl(var(--destructive-foreground))' : 'hsl(var(--accent-foreground))',
                         },
                         transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)',
                       }}

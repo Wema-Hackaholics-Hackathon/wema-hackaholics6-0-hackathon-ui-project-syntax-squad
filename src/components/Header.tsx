@@ -22,16 +22,16 @@ interface HeaderProps {
 const Search = styled('form')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius * 1.5,
-  background: 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(254,249,252,0.9) 100%)',
-  border: '1px solid rgba(174, 50, 142, 0.1)',
+  background: 'hsl(var(--input))',
+  border: '1px solid hsl(var(--border))',
   backdropFilter: 'blur(10px)',
   '&:hover': {
-    background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(254,249,252,0.95) 100%)',
-    border: '1px solid rgba(174, 50, 142, 0.2)',
+    background: 'hsl(var(--accent))',
+    border: '1px solid hsl(var(--border))',
   },
   '&:focus-within': {
-    border: '1px solid rgba(174, 50, 142, 0.4)',
-    boxShadow: '0 0 0 2px rgba(174, 50, 142, 0.1)',
+    border: '1px solid hsl(var(--ring))',
+    boxShadow: '0 0 0 2px hsl(var(--ring))',
   },
   marginLeft: 0,
   width: '100%',
@@ -92,9 +92,9 @@ export function Header({ onNavigate }: HeaderProps) {
       elevation={0}
       sx={{ 
         zIndex: 1201,
-        background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(254,249,252,0.95) 100%)',
+        background: 'hsl(var(--background))',
         backdropFilter: 'blur(20px)',
-        borderBottom: '1px solid rgba(174, 50, 142, 0.1)',
+        borderBottom: '1px solid hsl(var(--border))',
         boxShadow: '0 1px 3px rgba(174, 50, 142, 0.1)'
       }}
     >
@@ -142,13 +142,13 @@ export function Header({ onNavigate }: HeaderProps) {
             <Typography 
               variant="caption" 
               sx={{ 
-                color: '#425563',
+                color: 'hsl(var(--muted-foreground))',
                 fontWeight: 500,
                 fontSize: '0.75rem',
                 display: { xs: 'none', sm: 'block' }
               }}
             >
-              Alat, with a spark of Gen Z
+              Alat, with a spark for Gen Z
             </Typography>
           </Box>
         </Box>
