@@ -134,7 +134,7 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
     );
   }
   return (
-    <div className="space-y-4 md:space-y-6">
+    <div>
       {/* Welcome Section with Level */}
       <Card sx={{ 
         p: { xs: 2, md: 3 }, 
