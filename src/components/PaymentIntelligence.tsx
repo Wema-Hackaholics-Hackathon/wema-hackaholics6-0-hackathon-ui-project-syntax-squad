@@ -10,6 +10,7 @@ import { LinearProgress } from "@mui/material"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
 import Button from "@mui/material/Button"
+import { useState } from "react"
 
 interface SimpleInsight {
   id: string
@@ -56,6 +57,17 @@ const spendingCategories = [
 ]
 
 export function PaymentIntelligence() {
+  const [completedActions, setCompletedActions] = useState<string[]>([]);
+  
+  const handleActionClick = (insightId: string, actionText: string) => {
+    if (!completedActions.includes(insightId)) {
+      setCompletedActions([...completedActions, insightId]);
+      // Show a brief success state
+      setTimeout(() => {
+        // Could add more complex state management here
+      }, 1000);
+    }
+  };
   return (
     <div className="space-y-4 md:space-y-6">
       {/* Sparks Header */}
@@ -181,22 +193,27 @@ export function PaymentIntelligence() {
                   </Typography>
                   <Button
                     fullWidth
+                    onClick={() => handleActionClick(insight.id, insight.actionText)}
                     endIcon={<ArrowRight size={16} />}
                     sx={{
-                      background: `linear-gradient(135deg, ${insight.color} 0%, ${insight.color}dd 100%)`,
+                      background: completedActions.includes(insight.id) 
+                        ? 'linear-gradient(135deg, #10b981 0%, #059669 100%)'
+                        : `linear-gradient(135deg, ${insight.color} 0%, ${insight.color}dd 100%)`,
                       color: 'white',
                       borderRadius: 3,
                       fontWeight: 700,
                       py: 1.2,
                       boxShadow: `0 8px 24px ${insight.color}30`,
                       '&:hover': {
-                        background: `linear-gradient(135deg, ${insight.color}dd 0%, ${insight.color}bb 100%)`,
+                        background: completedActions.includes(insight.id) 
+                          ? 'linear-gradient(135deg, #059669 0%, #047857 100%)'
+                          : `linear-gradient(135deg, ${insight.color}dd 0%, ${insight.color}bb 100%)`,
                         boxShadow: `0 12px 32px ${insight.color}40`,
                         transform: 'translateY(-2px)',
                       }
                     }}
                   >
-                    {insight.actionText}
+                    {completedActions.includes(insight.id) ? '✅ Done!' : insight.actionText}
                   </Button>
                 </CardContent>
               </Card>
