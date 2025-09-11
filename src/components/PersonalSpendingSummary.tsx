@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useTheme } from '@mui/material/styles';
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
 import { Badge } from "./ui/badge"
 import { Button } from "./ui/button"
@@ -132,6 +133,7 @@ const formatLargeNumber = (num: number) => {
 }
 
 export function PersonalSpendingSummary() {
+  const theme = useTheme();
   const [selectedPeriod, setSelectedPeriod] = useState("month")
   const [viewType, setViewType] = useState("overview")
 
@@ -183,8 +185,8 @@ export function PersonalSpendingSummary() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground">Total Income</p>
-                <p className="text-2xl font-medium text-green-600">{formatCurrency(currentMonth.income)}</p>
-                <p className={`text-xs flex items-center gap-1 ${incomeChange >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                <p className="text-2xl font-medium" style={{ color: theme.palette.success.main }}>{formatCurrency(currentMonth.income)}</p>
+                <p className="text-xs flex items-center gap-1" style={{ color: incomeChange >= 0 ? theme.palette.success.main : theme.palette.error.main }}>
                   {incomeChange >= 0 ? <TrendingUp className="h-3 w-3" /> : <TrendingDown className="h-3 w-3" />}
                   {Math.abs(incomeChange).toFixed(1)}% from last month
                 </p>
@@ -201,8 +203,8 @@ export function PersonalSpendingSummary() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground">Total Expenses</p>
-                <p className="text-2xl font-medium text-red-600">{formatCurrency(currentMonth.expenses)}</p>
-                <p className={`text-xs flex items-center gap-1 ${expenseChange <= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                <p className="text-2xl font-medium" style={{ color: theme.palette.error.main }}>{formatCurrency(currentMonth.expenses)}</p>
+                <p className="text-xs flex items-center gap-1" style={{ color: expenseChange <= 0 ? theme.palette.success.main : theme.palette.error.main }}>
                   {expenseChange <= 0 ? <TrendingDown className="h-3 w-3" /> : <TrendingUp className="h-3 w-3" />}
                   {Math.abs(expenseChange).toFixed(1)}% from last month
                 </p>
@@ -219,8 +221,8 @@ export function PersonalSpendingSummary() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground">Net Savings</p>
-                <p className="text-2xl font-medium text-blue-600">{formatCurrency(currentMonth.savings)}</p>
-                <p className={`text-xs flex items-center gap-1 ${savingsChange >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                <p className="text-2xl font-medium" style={{ color: theme.palette.info.main }}>{formatCurrency(currentMonth.savings)}</p>
+                <p className="text-xs flex items-center gap-1" style={{ color: savingsChange >= 0 ? theme.palette.success.main : theme.palette.error.main }}>
                   {savingsChange >= 0 ? <TrendingUp className="h-3 w-3" /> : <TrendingDown className="h-3 w-3" />}
                   {Math.abs(savingsChange).toFixed(1)}% from last month
                 </p>
