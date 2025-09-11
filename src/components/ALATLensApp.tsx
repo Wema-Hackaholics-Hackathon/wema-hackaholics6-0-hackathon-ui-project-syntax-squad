@@ -1,5 +1,6 @@
 'use client'
 import { useState } from "react"
+import { Box, useMediaQuery, useTheme } from "@mui/material"
 import { Header } from "./Header"
 import { ExpandableSidebar } from "./ExpandableSidebar" 
 import { MobileBottomBar } from "./MobileBottomBar"
@@ -18,6 +19,8 @@ type ActiveView = 'dashboard' | 'intelligence' | 'micro-actions' | 'social' | 'b
 export function ALATLensApp() {
   const [activeView, setActiveView] = useState<ActiveView>('dashboard')
   const [sidebarExpanded, setSidebarExpanded] = useState(true)
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
 
   const handleNavigation = (view: string) => {
     setActiveView(view as ActiveView)
@@ -49,42 +52,73 @@ export function ALATLensApp() {
     }
   }
 
+  const sidebarWidth = sidebarExpanded ? 240 : 64
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-[#fef9fc] to-[#f5e6f1]/30">
-      <div className="flex h-screen overflow-hidden">
-        {/* Expandable Sidebar */}
-        <ExpandableSidebar 
-          activeView={activeView} 
-          onViewChange={handleNavigation}
-          isExpanded={sidebarExpanded}
-          onToggle={() => setSidebarExpanded(!sidebarExpanded)}
-        />
+    <Box sx={{
+      minHeight: '100vh',
+      background: 'linear-gradient(135deg, #ffffff 0%, #fef9fc 50%, rgba(245,230,241,0.3) 100%)',
+    }}>
+      <Box sx={{ display: 'flex', height: '100vh', overflow: 'hidden' }}>
+        {/* Expandable Sidebar - Hidden on mobile */}
+        {!isMobile && (
+          <ExpandableSidebar 
+            activeView={activeView} 
+            onViewChange={handleNavigation}
+            isExpanded={sidebarExpanded}
+            onToggle={() => setSidebarExpanded(!sidebarExpanded)}
+          />
+        )}
         
         {/* Main Content Area */}
-        <div 
-          className={`
-            flex-1 flex flex-col overflow-hidden transition-all duration-300 ease-in-out
-            ${sidebarExpanded ? 'ml-64' : 'ml-16'}
-          `}
+        <Box 
+          sx={{
+            flexGrow: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            overflow: 'hidden',
+            marginLeft: isMobile ? 0 : `${sidebarWidth}px`,
+            transition: 'margin-left 300ms cubic-bezier(0.4, 0, 0.2, 1)',
+          }}
         >
           <Header 
             onNavigate={handleNavigation}
           />
           
-          <main className="flex-1 overflow-y-auto px-4 py-4 md:px-8 md:py-6 pb-20 md:pb-6">
-            <div className="h-full max-w-7xl mx-auto">
-              <div className="space-y-4 md:space-y-6">
+          <Box 
+            component="main" 
+            sx={{
+              flexGrow: 1,
+              overflow: 'auto',
+              px: { xs: 2, md: 4 },
+              py: { xs: 2, md: 3 },
+              pb: { xs: 10, md: 3 }, // Extra bottom padding on mobile for bottom bar
+            }}
+          >
+            <Box sx={{ 
+              height: '100%', 
+              maxWidth: '1400px', 
+              mx: 'auto',
+            }}>
+              <Box sx={{ 
+                display: 'flex',
+                flexDirection: 'column',
+                gap: { xs: 2, md: 3 }
+              }}>
                 {renderActiveView()}
-              </div>
-            </div>
-          </main>
+              </Box>
+            </Box>
+          </Box>
           
-          <MobileBottomBar 
-            activeView={activeView}
-            onNavigate={handleNavigation}
-          />
-        </div>
-      </div>
-    </div>
+          {/* Mobile Bottom Bar - Only shown on mobile */}
+          {isMobile && (
+            <MobileBottomBar 
+              activeView={activeView}
+              onNavigate={handleNavigation}
+            />
+          )}
+        </Box>
+      </Box>
+    </Box>
   )
 }

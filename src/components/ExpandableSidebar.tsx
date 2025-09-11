@@ -2,6 +2,19 @@
 
 import { Wallet, Zap, Users, User, LogOut, ChevronLeft, ChevronRight } from "lucide-react"
 import Image from "next/image"
+import { 
+  Drawer, 
+  Box, 
+  List, 
+  ListItem, 
+  ListItemButton, 
+  ListItemIcon, 
+  ListItemText, 
+  Typography, 
+  Divider,
+  IconButton,
+  Tooltip
+} from "@mui/material"
 
 interface ExpandableSidebarProps {
   activeView?: string
@@ -35,40 +48,67 @@ export function ExpandableSidebar({
     onViewChange?.(id)
   }
 
+  const sidebarWidth = isExpanded ? 240 : 64
+
   return (
-    <div 
-      className={`
-        fixed left-0 top-0 h-full z-50
-        transition-all duration-300 ease-in-out
-        ${isExpanded ? 'w-64' : 'w-16'}
-        bg-gradient-to-b from-white/95 via-[#fef9fc]/95 to-[#f5e6f1]/30
-        backdrop-blur-xl border-r border-[#AE328E]/10
-        shadow-[4px_0_24px_rgba(174,50,142,0.08)]
-      `}
+    <Drawer
+      variant="permanent"
+      sx={{
+        width: sidebarWidth,
+        flexShrink: 0,
+        '& .MuiDrawer-paper': {
+          width: sidebarWidth,
+          boxSizing: 'border-box',
+          background: 'linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(254,249,252,0.95) 50%, rgba(245,230,241,0.3) 100%)',
+          backdropFilter: 'blur(20px)',
+          borderRight: '1px solid rgba(174, 50, 142, 0.1)',
+          boxShadow: '4px 0 24px rgba(174, 50, 142, 0.08)',
+          transition: 'width 300ms cubic-bezier(0.4, 0, 0.2, 1)',
+          overflowX: 'hidden',
+        },
+      }}
     >
       {/* Toggle Button */}
-      <button
+      <IconButton
         onClick={onToggle}
-        className={`
-          absolute top-6 -right-3 w-6 h-6 
-          bg-white border border-[#AE328E]/20 rounded-full
-          flex items-center justify-center
-          shadow-md hover:shadow-lg transition-all duration-200
-          hover:bg-[#AE328E] hover:text-white
-          z-10
-        `}
+        sx={{
+          position: 'absolute',
+          top: 24,
+          right: -12,
+          width: 24,
+          height: 24,
+          bgcolor: 'white',
+          border: '1px solid rgba(174, 50, 142, 0.2)',
+          zIndex: 1,
+          '&:hover': {
+            bgcolor: '#AE328E',
+            color: 'white',
+          },
+          boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+        }}
       >
-        {isExpanded ? (
-          <ChevronLeft className="w-3 h-3" />
-        ) : (
-          <ChevronRight className="w-3 h-3" />
-        )}
-      </button>
+        {isExpanded ? <ChevronLeft size={12} /> : <ChevronRight size={12} />}
+      </IconButton>
 
-      <div className="flex flex-col h-full p-4">
+      <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%', p: 2 }}>
         {/* Logo and Title */}
-        <div className={`flex items-center mb-8 ${isExpanded ? 'gap-3' : 'justify-center'}`}>
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#AE328E] to-[#c13a9e] flex items-center justify-center shadow-lg">
+        <Box sx={{ 
+          display: 'flex', 
+          alignItems: 'center', 
+          mb: 4,
+          justifyContent: isExpanded ? 'flex-start' : 'center',
+          gap: isExpanded ? 1.5 : 0
+        }}>
+          <Box sx={{
+            width: 32,
+            height: 32,
+            borderRadius: 1.5,
+            background: 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxShadow: '0 4px 12px rgba(174, 50, 142, 0.3)',
+          }}>
             <Image
               src="/logo.webp"
               alt="ALAT Logo"
@@ -77,75 +117,134 @@ export function ExpandableSidebar({
               style={{ objectFit: 'contain' }}
               priority
             />
-          </div>
+          </Box>
           {isExpanded && (
-            <div>
-              <h1 className="text-lg font-bold bg-gradient-to-r from-[#AE328E] to-[#c13a9e] bg-clip-text text-transparent">
+            <Box>
+              <Typography variant="h6" sx={{ 
+                fontWeight: 700,
+                background: 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)',
+                backgroundClip: 'text',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                lineHeight: 1.2
+              }}>
                 ALAT Spark
-              </h1>
-              <p className="text-xs text-gray-600">Money made fun 💫</p>
-            </div>
+              </Typography>
+              <Typography variant="caption" sx={{ color: '#6b7280' }}>
+                Money made fun 💫
+              </Typography>
+            </Box>
           )}
-        </div>
+        </Box>
 
         {/* Main Navigation */}
-        <nav className="flex-1">
-          <ul className="space-y-2">
+        <Box sx={{ flexGrow: 1 }}>
+          <List sx={{ p: 0 }}>
             {navigation.map((item) => {
               const isActive = activeView === item.id
+              const IconComponent = item.icon
+              
               return (
-                <li key={item.id}>
-                  <button
-                    onClick={() => handleItemClick(item.id)}
-                    className={`
-                      w-full flex items-center rounded-lg p-3 transition-all duration-200
-                      ${isExpanded ? 'gap-3' : 'justify-center'}
-                      ${isActive 
-                        ? 'bg-gradient-to-r from-[#AE328E] to-[#c13a9e] text-white shadow-lg transform translate-y-[-1px]' 
-                        : 'text-gray-700 hover:bg-[#AE328E]/5 hover:text-[#AE328E] hover:translate-y-[-1px]'
-                      }
-                    `}
-                    title={!isExpanded ? item.name : undefined}
-                  >
-                    <item.icon 
-                      className={`w-5 h-5 ${isActive ? 'text-white' : ''}`} 
-                      strokeWidth={2.5}
-                    />
-                    {isExpanded && (
-                      <span className="font-medium text-sm">{item.name}</span>
-                    )}
-                  </button>
-                </li>
+                <ListItem key={item.id} disablePadding sx={{ mb: 0.5 }}>
+                  <Tooltip title={!isExpanded ? item.name : ''} placement="right">
+                    <ListItemButton
+                      onClick={() => handleItemClick(item.id)}
+                      sx={{
+                        borderRadius: 1.5,
+                        minHeight: 48,
+                        justifyContent: isExpanded ? 'initial' : 'center',
+                        px: 2,
+                        background: isActive 
+                          ? 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)'
+                          : 'transparent',
+                        color: isActive ? 'white' : '#374151',
+                        transform: isActive ? 'translateY(-1px)' : 'none',
+                        boxShadow: isActive ? '0 4px 12px rgba(174, 50, 142, 0.3)' : 'none',
+                        '&:hover': {
+                          background: isActive 
+                            ? 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)'
+                            : 'rgba(174, 50, 142, 0.05)',
+                          color: isActive ? 'white' : '#AE328E',
+                          transform: 'translateY(-1px)',
+                        },
+                        transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)',
+                      }}
+                    >
+                      <ListItemIcon sx={{
+                        minWidth: 0,
+                        mr: isExpanded ? 1.5 : 'auto',
+                        justifyContent: 'center',
+                        color: 'inherit',
+                      }}>
+                        <IconComponent size={20} strokeWidth={2.5} />
+                      </ListItemIcon>
+                      {isExpanded && (
+                        <ListItemText 
+                          primary={item.name} 
+                          primaryTypographyProps={{
+                            fontSize: '0.875rem',
+                            fontWeight: 500,
+                          }}
+                        />
+                      )}
+                    </ListItemButton>
+                  </Tooltip>
+                </ListItem>
               )
             })}
-          </ul>
-        </nav>
+          </List>
+        </Box>
 
         {/* Bottom Actions */}
-        <div className="border-t border-gray-200/50 pt-4">
-          <ul className="space-y-1">
-            {bottomActions.map((item) => (
-              <li key={item.id}>
-                <button
-                  onClick={() => handleItemClick(item.id)}
-                  className={`
-                    w-full flex items-center rounded-lg p-2.5 transition-all duration-200
-                    ${isExpanded ? 'gap-3' : 'justify-center'}
-                    text-gray-600 hover:bg-gray-100 hover:text-gray-900
-                    ${item.id === 'logout' ? 'hover:bg-red-50 hover:text-red-600' : ''}
-                  `}
-                  title={!isExpanded ? item.name : undefined}
-                >
-                  <item.icon className="w-4 h-4" strokeWidth={2} />
-                  {isExpanded && (
-                    <span className="font-medium text-sm">{item.name}</span>
-                  )}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </div>
+        <Box>
+          <Divider sx={{ mb: 2, borderColor: 'rgba(107, 114, 128, 0.2)' }} />
+          <List sx={{ p: 0 }}>
+            {bottomActions.map((item) => {
+              const IconComponent = item.icon
+              
+              return (
+                <ListItem key={item.id} disablePadding sx={{ mb: 0.25 }}>
+                  <Tooltip title={!isExpanded ? item.name : ''} placement="right">
+                    <ListItemButton
+                      onClick={() => handleItemClick(item.id)}
+                      sx={{
+                        borderRadius: 1.5,
+                        minHeight: 40,
+                        justifyContent: isExpanded ? 'initial' : 'center',
+                        px: 2,
+                        color: '#6b7280',
+                        '&:hover': {
+                          backgroundColor: item.id === 'logout' ? 'rgba(239, 68, 68, 0.05)' : 'rgba(107, 114, 128, 0.05)',
+                          color: item.id === 'logout' ? '#ef4444' : '#374151',
+                        },
+                        transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)',
+                      }}
+                    >
+                      <ListItemIcon sx={{
+                        minWidth: 0,
+                        mr: isExpanded ? 1.5 : 'auto',
+                        justifyContent: 'center',
+                        color: 'inherit',
+                      }}>
+                        <IconComponent size={16} strokeWidth={2} />
+                      </ListItemIcon>
+                      {isExpanded && (
+                        <ListItemText 
+                          primary={item.name} 
+                          primaryTypographyProps={{
+                            fontSize: '0.875rem',
+                            fontWeight: 500,
+                          }}
+                        />
+                      )}
+                    </ListItemButton>
+                  </Tooltip>
+                </ListItem>
+              )
+            })}
+          </List>
+        </Box>
+      </Box>
+    </Drawer>
   )
 }
