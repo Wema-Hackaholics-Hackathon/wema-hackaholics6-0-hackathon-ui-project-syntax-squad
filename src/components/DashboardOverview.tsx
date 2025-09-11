@@ -57,7 +57,7 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
       change: "+15.2%",
       changeType: "positive",
       icon: Wallet,
-      color: "#10b981",
+      color: "#AE328E",
     },
     {
       title: "This Week 🔥",
@@ -65,7 +65,7 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
       change: "+8.1%",
       changeType: "positive",
       icon: TrendingUp,
-      color: "#f59e0b",
+      color: "#425563",
     },
   ];
 
@@ -87,7 +87,7 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
       action: "View Progress",
       view: "intelligence",
       emoji: "⚡",
-      color: "#8b5cf6",
+      color: "#AE328E",
       actionType: "challenge"
     },
     {
@@ -97,7 +97,7 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
       action: "Find Friends",
       view: "social",
       emoji: "🤝",
-      color: "#06b6d4",
+      color: "#425563",
       actionType: "social"
     },
   ];
@@ -129,7 +129,7 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
   if (!userData) {
     return (
       <div className="flex items-center justify-center h-64">
-        <Typography variant="h6" color="#6b7280">Loading dashboard...</Typography>
+        <Typography variant="h6" color="#425563">Loading dashboard...</Typography>
       </div>
     );
   }
@@ -235,9 +235,9 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
                   {balanceVisible ? stat.value : '••••••'}
                 </Typography>
                 <Typography variant="caption" sx={{ 
-                  color: stat.changeType === 'positive' ? '#10b981' : '#ef4444',
-                  fontWeight: 600,
-                  background: stat.changeType === 'positive' ? '#10b98115' : '#ef444415',
+                  color: stat.changeType === 'positive' ? '#AE328E' : '#425563',
+                  fontSize: { xs: '0.8rem', md: '0.9rem' },
+                  background: stat.changeType === 'positive' ? '#AE328E15' : '#42556315',
                   px: 1,
                   py: 0.5,
                   borderRadius: 2,
@@ -341,7 +341,7 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
                     endIcon={<ArrowRight size={16} />}
                     sx={{
                       background: showSuccess && action.actionType === 'savings' 
-                        ? 'linear-gradient(135deg, #10b981 0%, #059669 100%)'
+                        ? 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)'
                         : `linear-gradient(135deg, ${action.color} 0%, ${action.color}dd 100%)`,
                       color: 'white',
                       borderRadius: 3,
@@ -376,12 +376,12 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
                 p: { xs: 2, md: 3 }, 
                 cursor: 'pointer', 
                 borderRadius: 4,
-                background: 'linear-gradient(135deg, #10b98115 0%, #10b98125 100%)',
-                border: '1px solid #10b98130',
+                background: 'linear-gradient(135deg, #AE328E15 0%, #AE328E25 100%)',
+                border: '1px solid #AE328E30',
                 transition: 'all 0.3s ease',
                 '&:hover': {
                   transform: 'translateY(-4px) scale(1.02)',
-                  boxShadow: '0 16px 48px #10b98120',
+                  boxShadow: '0 16px 48px #AE328E20',
                 }
               }}
               onClick={() => onNavigate('dashboard')}
@@ -389,7 +389,7 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
               <Box sx={{ textAlign: 'center' }}>
                 <Box sx={{ fontSize: { xs: '32px', md: '40px' }, mb: 1 }}>💰</Box>
                 <Typography variant="subtitle2" fontWeight={700} sx={{ 
-                  color: '#10b981', 
+                  color: '#AE328E', 
                   fontSize: { xs: '0.8rem', md: '0.9rem' } 
                 }}>
                   My Stash
@@ -403,12 +403,12 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
                 p: { xs: 2, md: 3 }, 
                 cursor: 'pointer', 
                 borderRadius: 4,
-                background: 'linear-gradient(135deg, #8b5cf615 0%, #8b5cf625 100%)',
-                border: '1px solid #8b5cf630',
+                background: 'linear-gradient(135deg, #42556315 0%, #42556325 100%)',
+                border: '1px solid #42556330',
                 transition: 'all 0.3s ease',
                 '&:hover': {
                   transform: 'translateY(-4px) scale(1.02)',
-                  boxShadow: '0 16px 48px #8b5cf620',
+                  boxShadow: '0 16px 48px #42556320',
                 }
               }}
               onClick={() => onNavigate('intelligence')}
@@ -416,7 +416,7 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
               <Box sx={{ textAlign: 'center' }}>
                 <Box sx={{ fontSize: { xs: '32px', md: '40px' }, mb: 1 }}>⚡</Box>
                 <Typography variant="subtitle2" fontWeight={700} sx={{ 
-                  color: '#8b5cf6', 
+                  color: '#425563', 
                   fontSize: { xs: '0.8rem', md: '0.9rem' } 
                 }}>
                   Sparks
@@ -430,12 +430,12 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
                 p: { xs: 2, md: 3 }, 
                 cursor: 'pointer', 
                 borderRadius: 4,
-                background: 'linear-gradient(135deg, #06b6d415 0%, #06b6d425 100%)',
-                border: '1px solid #06b6d430',
+                background: 'linear-gradient(135deg, #AE328E15 0%, #AE328E25 100%)',
+                border: '1px solid #AE328E30',
                 transition: 'all 0.3s ease',
                 '&:hover': {
                   transform: 'translateY(-4px) scale(1.02)',
-                  boxShadow: '0 16px 48px #06b6d420',
+                  boxShadow: '0 16px 48px #AE328E20',
                 }
               }}
               onClick={() => onNavigate('social')}
@@ -443,7 +443,7 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
               <Box sx={{ textAlign: 'center' }}>
                 <Box sx={{ fontSize: { xs: '32px', md: '40px' }, mb: 1 }}>🤝</Box>
                 <Typography variant="subtitle2" fontWeight={700} sx={{ 
-                  color: '#06b6d4', 
+                  color: '#AE328E', 
                   fontSize: { xs: '0.8rem', md: '0.9rem' } 
                 }}>
                   Connect

@@ -67,7 +67,7 @@ export function TransactionHistory() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <Typography variant="h6" color="#6b7280">Loading transactions...</Typography>
+        <Typography variant="h6" color="#425563">Loading transactions...</Typography>
       </div>
     )
   }
@@ -78,8 +78,8 @@ export function TransactionHistory() {
       <Card sx={{ 
         p: { xs: 2, md: 3 }, 
         borderRadius: 4, 
-        background: 'linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%)',
-        boxShadow: '0 12px 40px rgba(245, 158, 11, 0.3)',
+        background: 'linear-gradient(135deg, #AE328E 0%, #c13a9e 100%)',
+        boxShadow: '0 12px 40px rgba(174, 50, 142, 0.3)',
         border: 'none',
         position: 'relative',
         overflow: 'hidden',
