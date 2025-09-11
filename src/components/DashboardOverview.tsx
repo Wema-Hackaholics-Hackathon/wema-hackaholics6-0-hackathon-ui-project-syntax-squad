@@ -69,7 +69,7 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
       {/* Quick Stats */}
       <Grid container spacing={2} sx={{ mb: 3 }}>
         {quickStats.map((stat, index) => (
-          <Grid item size={{ xs: 6, md: 4 }} key={index}>
+          <Grid item xs={6} md={4} key={index}>
             <Card sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <Box sx={{ mb: 1 }}>
                 <stat.icon size={28} color={theme.palette.primary.main} />
@@ -87,7 +87,7 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
           </Grid>
         ))}
         {/* Quick Action Card */}
-        <Grid item size={{ xs: 12, md: 4 }}>
+        <Grid item xs={12} md={4}>
           <Card
             sx={{ p: 2, cursor: 'pointer', background: theme.custom?.gradients.secondary }}
             onClick={() => onNavigate('banking')}
@@ -107,7 +107,7 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
       {/* Key Insights & Actions */}
       <Grid container spacing={2} sx={{ mb: 3 }}>
         {recentInsights.map((insight, index) => (
-          <Grid item xs={12} md={6} xl={4} key={index}>
+          <Grid xs={12} md={6} xl={4} key={index}>
             <Card sx={{ p: 2 }}>
               <CardContent>
                 <Typography variant="subtitle1" fontWeight={600} gutterBottom>
@@ -133,9 +133,9 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
 
       {/* Navigation Cards */}
       <Grid container spacing={2}>
-        <Grid item xs={12} md={6}>
+        <Grid xs={12} md={6}>
           <Card
-            sx={{ p: 2, cursor: 'pointer', background: 'linear-gradient(135deg,#fffbe6 0%,#fff 50%,#fff7e6 100%)' }}
+            sx={{ p: 2, cursor: 'pointer', background: theme.custom?.gradients.secondary }}
             onClick={() => onNavigate('transactions')}
           >
             <CardHeader
@@ -145,7 +145,7 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
                     Transaction History
                   </Typography>
                   <Box sx={{ p: 1, borderRadius: '50%', bgcolor: 'orange', boxShadow: 1 }}>
-                    <ArrowRight size={18} color="#fff" />
+                    <ArrowRight size={18} color={theme.palette.common.white} />
                   </Box>
                 </Box>
               }
@@ -161,9 +161,9 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid xs={12} md={6}>
           <Card
-            sx={{ p: 2, cursor: 'pointer', background: 'linear-gradient(135deg,#fffbe6 0%,#fff 50%,#fff7e6 100%)' }}
+            sx={{ p: 2, cursor: 'pointer', background: theme.custom?.gradients.secondary }}
             onClick={() => onNavigate('transaction-analytics')}
           >
             <CardHeader
@@ -173,7 +173,7 @@ export function DashboardOverview({ onNavigate }: DashboardOverviewProps) {
                     Analytics & Insights
                   </Typography>
                   <Box sx={{ p: 1, borderRadius: '50%', bgcolor: 'orange', boxShadow: 1 }}>
-                    <ArrowRight size={18} color="#fff" />
+                    <ArrowRight size={18} color={theme.palette.common.white} />
                   </Box>
                 </Box>
               }
