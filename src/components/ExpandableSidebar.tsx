@@ -1,6 +1,6 @@
 'use client'
 
-import { Wallet, Zap, Users, User, LogOut, ChevronLeft, ChevronRight } from "lucide-react"
+import { Wallet, Zap, Users, User, LogOut, Settings, ChevronLeft, ChevronRight } from "lucide-react"
 import { 
   Drawer, 
   Box, 
@@ -28,7 +28,7 @@ const navigation = [
 ]
 
 const bottomActions = [
-  { name: 'Profile', icon: User, id: 'profile' },
+  { name: 'Settings', icon: Settings, id: 'settings' },
   { name: 'Log Out', icon: LogOut, id: 'logout' },
 ]
 
