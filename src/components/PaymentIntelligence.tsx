@@ -11,6 +11,16 @@ import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
 import Button from "@mui/material/Button"
 import { useState } from "react"
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Checkbox,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+} from "@mui/material"
 
 interface SimpleInsight {
   id: string
@@ -58,17 +68,35 @@ const spendingCategories = [
 
 export function PaymentIntelligence() {
   const [completedActions, setCompletedActions] = useState<string[]>([]);
+  const [showCancelDialog, setShowCancelDialog] = useState(false);
+  const [selectedSubs, setSelectedSubs] = useState<string[]>([]);
+  const [showBudgetDialog, setShowBudgetDialog] = useState(false);
+  const [selectedBudget, setSelectedBudget] = useState<string>('');
   
+  const subscriptions = [
+    { name: "Netflix", amount: "₦2,200/month" },
+    { name: "Spotify", amount: "₦2,000/month" },
+  ];
+
+  const budgetChoices = ["10k - 15k", "15k - 30k", "30k - 45k"];
+
   const handleActionClick = (insightId: string) => {
-    if (!completedActions.includes(insightId)) {
-      setCompletedActions([...completedActions, insightId]);
-      // Show a brief success state
-      setTimeout(() => {
-        // Could add more complex state management here
-      }, 1000);
+    if (insightId === "2") {
+      setShowCancelDialog(true);
+    } else if (insightId === "3") {
+      setShowBudgetDialog(true);
+    } else {
+      if (!completedActions.includes(insightId)) {
+        setCompletedActions([...completedActions, insightId]);
+        // Show a brief success state
+        setTimeout(() => {
+          // Could add more complex state management here
+        }, 1000);
+      }
     }
   };
   return (
+    <>
     <div className="space-y-4 md:space-y-6">
       {/* Sparks Header */}
       <Card sx={{ 
@@ -343,5 +371,64 @@ export function PaymentIntelligence() {
         </CardContent>
       </Card>
     </div>
+    <Dialog open={showCancelDialog} onClose={() => { setShowCancelDialog(false); setSelectedSubs([]); }}>
+      <DialogTitle>Select Subscriptions to Cancel</DialogTitle>
+      <DialogContent>
+        {subscriptions.map((sub) => (
+          <FormControlLabel
+            key={sub.name}
+            control={
+              <Checkbox
+                checked={selectedSubs.includes(sub.name)}
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    setSelectedSubs([...selectedSubs, sub.name]);
+                  } else {
+                    setSelectedSubs(selectedSubs.filter(s => s !== sub.name));
+                  }
+                }}
+              />
+            }
+            label={`${sub.name} - ${sub.amount}`}
+          />
+        ))}
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={() => { setShowCancelDialog(false); setSelectedSubs([]); }}>Close</Button>
+        <Button onClick={() => {
+          if (selectedSubs.length > 0 && !completedActions.includes("2")) {
+            setCompletedActions([...completedActions, "2"]);
+          }
+          setShowCancelDialog(false);
+          setSelectedSubs([]);
+        }}>Cancel Selected</Button>
+      </DialogActions>
+    </Dialog>
+    <Dialog open={showBudgetDialog} onClose={() => { setShowBudgetDialog(false); setSelectedBudget(''); }}>
+      <DialogTitle>Select Weekend Budget Limit</DialogTitle>
+      <DialogContent>
+        <RadioGroup value={selectedBudget} onChange={(e) => setSelectedBudget(e.target.value)}>
+          {budgetChoices.map((choice) => (
+            <FormControlLabel
+              key={choice}
+              value={choice}
+              control={<Radio />}
+              label={choice}
+            />
+          ))}
+        </RadioGroup>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={() => { setShowBudgetDialog(false); setSelectedBudget(''); }}>Close</Button>
+        <Button onClick={() => {
+          if (selectedBudget && !completedActions.includes("3")) {
+            setCompletedActions([...completedActions, "3"]);
+          }
+          setShowBudgetDialog(false);
+          setSelectedBudget('');
+        }}>Set Budget</Button>
+      </DialogActions>
+    </Dialog>
+    </>
   );
 }
