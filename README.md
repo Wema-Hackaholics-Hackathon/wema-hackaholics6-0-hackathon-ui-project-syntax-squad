@@ -27,9 +27,13 @@ Recorded Demo: https://www.loom.com/share/c92cfcb2c6f04db3b42d103fb1b3b4fb
 
 
 ## 🎯 The Problem
-Which "How Might We..." question from the challenge brief are you tackling? Show the format by providing an example below.
+Digital payments only move money—but what if they could do more?
+What if receiving a salary could automatically trigger savings?
+What if splitting a bill could feel social instead of transactional?
+What if small business owners could unlock insights directly from their payment history?
 
-Example: How might we help busy people organize their daily tasks more effectively?
+Today, payments lack context and miss these opportunities.
+They are utilities, when they could be experiences.
 
 ## ✨ Our Solution
 
@@ -58,8 +62,8 @@ Alat Spark reimagines financial management through intelligent insights and seam
 
 ```bash
 # Clone repository
-git clone <repository-url>
-cd syntaxsquad
+git clone https://github.com/Wema-Hackaholics-Hackathon/wema-hackaholics6-0-hackathon-ui-project-syntax-squad
+cd wema-hackaholics6-0-hackathon-ui-project-syntax-squad
 
 # Install dependencies
 npm install
