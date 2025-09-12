@@ -8,7 +8,7 @@ export * from './notification'
 export * from './ui'
 
 // Common utility types
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   success: boolean
   data?: T
   error?: string

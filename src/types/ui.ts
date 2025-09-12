@@ -20,7 +20,7 @@ export interface ShadowConfig {
 export interface ModalConfig {
   id: string
   component: ReactNode
-  props?: Record<string, any>
+  props?: Record<string, unknown>
   options: ModalOptions
 }
 
@@ -92,20 +92,20 @@ export interface PaginationConfig {
   hasPrevious: boolean
 }
 
-export interface FilterConfig<T = any> {
+export interface FilterConfig<T = unknown> {
   field: keyof T
   operator: 'equals' | 'contains' | 'startsWith' | 'endsWith' | 'greaterThan' | 'lessThan' | 'between'
-  value: any
+  value: unknown
   label: string
 }
 
-export interface SortConfig<T = any> {
+export interface SortConfig<T = unknown> {
   field: keyof T
   direction: 'asc' | 'desc'
   label: string
 }
 
-export interface TableColumn<T = any> {
+export interface TableColumn<T = unknown> {
   id: string
   field: keyof T
   label: string
@@ -113,7 +113,7 @@ export interface TableColumn<T = any> {
   filterable?: boolean
   width?: string | number
   align?: 'left' | 'center' | 'right'
-  render?: (value: any, row: T) => ReactNode
+  render?: (value: unknown, row: T) => ReactNode
 }
 
 export interface ActionMenuItem {
@@ -158,14 +158,14 @@ export interface FormFieldConfig {
   placeholder?: string
   required?: boolean
   disabled?: boolean
-  options?: Array<{ label: string; value: any }>
+  options?: Array<{ label: string; value: unknown }>
   validation?: ValidationRule[]
   description?: string
 }
 
 export interface ValidationRule {
   type: 'required' | 'email' | 'min' | 'max' | 'pattern' | 'custom'
-  value?: any
+  value?: unknown
   message: string
 }
 

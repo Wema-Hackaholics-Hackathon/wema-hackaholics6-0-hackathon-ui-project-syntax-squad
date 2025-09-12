@@ -41,7 +41,7 @@ export interface NotificationData {
   actionUrl?: string
   actionLabel?: string
   imageUrl?: string
-  metadata?: Record<string, any>
+  metadata?: Record<string, unknown>
 }
 
 export interface AlertRule {
@@ -77,7 +77,7 @@ export interface AlertCondition {
 
 export interface AlertAction {
   type: 'notification' | 'email' | 'sms' | 'block_account' | 'log_event'
-  config: Record<string, any>
+  config: Record<string, unknown>
 }
 
 export interface AlertFrequency {
@@ -119,7 +119,7 @@ export interface TemplateVariable {
   name: string
   type: 'string' | 'number' | 'date' | 'currency'
   required: boolean
-  defaultValue?: any
+  defaultValue?: unknown
   description?: string
 }
 
