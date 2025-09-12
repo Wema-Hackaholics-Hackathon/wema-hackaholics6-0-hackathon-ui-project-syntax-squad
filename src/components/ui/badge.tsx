@@ -19,7 +19,7 @@ function Badge({
 
   if (asChild) {
     return (
-      <Comp data-slot="badge" className={cn(className)} {...(props as any)}>
+      <Comp data-slot="badge" className={cn(className)} {...(props as Record<string, unknown>)}>
         {children}
       </Comp>
     );
@@ -34,7 +34,7 @@ function Badge({
       label={children as React.ReactNode}
       size="small"
       color={color as string}
-      variant={variantStyle as any}
+      variant={variantStyle as "filled" | "outlined"}
       className={cn(className)}
       {...(props as any)}
     />

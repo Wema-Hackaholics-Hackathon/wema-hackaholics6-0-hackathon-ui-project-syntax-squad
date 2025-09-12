@@ -55,7 +55,7 @@ function mapSizeToMui(size: OurSize) {
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = "default", size = "default", asChild = false, children, ...props }, ref) => {
     if (asChild) {
-      const Comp = Slot as any;
+      const Comp = Slot as typeof Slot;
       return (
         <Comp data-slot="button" className={cn(className)} ref={ref as unknown as React.Ref<HTMLButtonElement>} {...(props as Record<string, unknown>)}>
           {children}
