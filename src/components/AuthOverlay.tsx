@@ -53,7 +53,7 @@ export function AuthOverlay({ onAuthSuccess }: AuthOverlayProps) {
       } else {
         setError('Account number not found. Please check and try again.')
       }
-    } catch (error) {
+    } catch {
       setError('Unable to verify account. Please try again.')
     } finally {
       setLoading(false)
@@ -67,7 +67,7 @@ export function AuthOverlay({ onAuthSuccess }: AuthOverlayProps) {
     try {
       await authService.sendOTP(accountNumber, maskedEmail)
       setStep('otp')
-    } catch (error) {
+    } catch {
       setError('Failed to send OTP. Please try again.')
     } finally {
       setLoading(false)
@@ -91,7 +91,7 @@ export function AuthOverlay({ onAuthSuccess }: AuthOverlayProps) {
       } else {
         setError('Invalid OTP. Please check and try again.')
       }
-    } catch (error) {
+    } catch {
       setError('OTP verification failed. Please try again.')
     } finally {
       setLoading(false)

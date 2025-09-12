@@ -8,7 +8,7 @@ interface AvatarProps {
   alt?: string;
   className?: string;
   children?: React.ReactNode;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 function Avatar({ src, alt, className, children, ...props }: AvatarProps) {
@@ -22,7 +22,8 @@ function Avatar({ src, alt, className, children, ...props }: AvatarProps) {
 interface AvatarImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {}
 
 function AvatarImage(props: AvatarImageProps) {
-  return <img {...props} />;
+  return // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
+  <img {...props} />;
 }
 
 interface AvatarFallbackProps extends React.HTMLAttributes<HTMLSpanElement> {

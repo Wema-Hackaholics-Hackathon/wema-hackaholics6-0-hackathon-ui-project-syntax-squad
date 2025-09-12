@@ -1,6 +1,6 @@
 'use client'
 
-import { Wallet, Zap, Users, User, LogOut, Settings, ChevronLeft, ChevronRight } from "lucide-react"
+import { Wallet, Zap, Users, LogOut, Settings, ChevronLeft, ChevronRight } from "lucide-react"
 import { 
   Drawer, 
   Box, 

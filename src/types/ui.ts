@@ -172,7 +172,7 @@ export interface ValidationRule {
 export interface ViewState {
   isLoading: boolean
   error: ErrorState
-  data: any
+  data: unknown
   filters: FilterConfig[]
   sort: SortConfig
   pagination: PaginationConfig

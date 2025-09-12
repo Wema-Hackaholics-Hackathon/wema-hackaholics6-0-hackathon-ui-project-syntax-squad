@@ -58,7 +58,7 @@ export interface SpendingInsight {
   description: string
   impact: InsightImpact
   recommendation?: string
-  data: Record<string, any>
+  data: Record<string, unknown>
   confidence: number
   createdAt: string
 }
