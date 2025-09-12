@@ -23,7 +23,7 @@ Alat, with a spark for Gen Z ✨
 ## 🚀 Live Demo
 Live Application: [Alat spark](https://alat-spark.vercel.app/)
 
-Recorded Demo: 
+Recorded Demo: https://www.loom.com/share/c92cfcb2c6f04db3b42d103fb1b3b4fb
 
 
 ## 🎯 The Problem
