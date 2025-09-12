@@ -19,7 +19,7 @@ function Avatar({ src, alt, className, children, ...props }: AvatarProps) {
   );
 }
 
-interface AvatarImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {}
+type AvatarImageProps = React.ImgHTMLAttributes<HTMLImageElement>;
 
 function AvatarImage(props: AvatarImageProps) {
   return // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
