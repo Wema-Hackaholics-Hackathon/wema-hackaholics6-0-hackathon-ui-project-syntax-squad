@@ -60,7 +60,7 @@ class LocalDatabase {
     }
   }
 
-  private notifyListeners(key: string, data: any): void {
+  private notifyListeners(key: string, data: unknown): void {
     if (this.listeners[key]) {
       this.listeners[key].forEach(callback => callback(data))
     }

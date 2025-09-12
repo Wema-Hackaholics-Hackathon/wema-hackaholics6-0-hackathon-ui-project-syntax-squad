@@ -33,7 +33,7 @@ function Badge({
       data-slot="badge"
       label={children as React.ReactNode}
       size="small"
-      color={color as any}
+      color={color as string}
       variant={variantStyle as any}
       className={cn(className)}
       {...(props as any)}

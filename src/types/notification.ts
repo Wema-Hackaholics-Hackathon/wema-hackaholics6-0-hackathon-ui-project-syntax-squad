@@ -71,7 +71,7 @@ export type AlertType =
 export interface AlertCondition {
   field: string
   operator: 'equals' | 'greater_than' | 'less_than' | 'contains' | 'not_equals'
-  value: any
+  value: unknown
   logicalOperator?: 'AND' | 'OR'
 }
 

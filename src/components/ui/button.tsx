@@ -57,7 +57,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     if (asChild) {
       const Comp = Slot as any;
       return (
-        <Comp data-slot="button" className={cn(className)} ref={ref as any} {...(props as any)}>
+        <Comp data-slot="button" className={cn(className)} ref={ref as unknown as React.Ref<HTMLButtonElement>} {...(props as Record<string, unknown>)}>
           {children}
         </Comp>
       );

@@ -149,7 +149,7 @@ export interface SocialNotification {
   type: SocialNotificationType
   title: string
   message: string
-  data: Record<string, any>
+  data: Record<string, unknown>
   isRead: boolean
   createdAt: string
   readAt?: string

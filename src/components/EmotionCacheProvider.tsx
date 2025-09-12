@@ -14,7 +14,7 @@ export default function EmotionCacheProvider({ children, options }: Props) {
   const [cache] = React.useState(() => {
     const c = createCache({ key: "mui", prepend: true, ...options });
     // Enable compatibility mode to better work with SSR in React 18/19
-    (c as any).compat = true;
+    (c as unknown as { compat: boolean }).compat = true;
     return c;
   });
 
