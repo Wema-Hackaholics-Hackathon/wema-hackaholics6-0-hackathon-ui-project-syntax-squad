@@ -1,38 +1,29 @@
- ⚠ Linting is disabled.
    ▲ Next.js 15.5.2
 
-  Creating an optimized production build ...
-Failed to compile.
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 69s
+   Skipping validation of types
+   Skipping linting
+   Collecting page data ...
+   Generating static pages (0/7) ...
+   Generating static pages (1/7) 
+   Generating static pages (3/7) 
+   Generating static pages (5/7) 
+ ✓ Generating static pages (7/7)
+   Finalizing page optimization ...
+   Collecting build traces ...
 
-./src/components/ui/button.tsx
-Module parse failed: Duplicate export 'buttonVariants' (82:17)
-File was processed with these loaders:
- * ./node_modules/next/dist/build/webpack/loaders/next-flight-client-module-loader.js
- * ./node_modules/next/dist/build/webpack/loaders/next-swc-loader.js
-You may need an additional loader to handle the result of these loaders.
-| });
-| Button.displayName = "Button";
-> export { Button, buttonVariants };
-| 
-
-Import trace for requested module:
-./src/components/ui/button.tsx
-
-./src/components/ui/button.tsx
-Module parse failed: Identifier 'buttonVariants' has already been declared (11:15)
-File was processed with these loaders:
- * ./node_modules/next/dist/build/webpack/loaders/next-flight-loader/index.js
- * ./node_modules/next/dist/build/webpack/loaders/next-swc-loader.js
-You may need an additional loader to handle the result of these loaders.
-| "/home/user/syntaxsquad/src/components/ui/button.tsx",
-| "Button",
-> );export const buttonVariants = registerClientReference(
-| function() { throw new Error("Attempted to call buttonVariants() from the server but buttonVariants is on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component."); },
-| "/home/user/syntaxsquad/src/components/ui/button.tsx",
-
-Import trace for requested module:
-./src/components/ui/button.tsx
-./src/app/not-found.tsx
+Route (app)                                 Size  First Load JS
+┌ ○ /                                     305 kB         443 kB
+├ ○ /_not-found                            128 B         102 kB
+├ ƒ /api/alerts                            128 B         102 kB
+└ ƒ /api/balance                           128 B         102 kB
++ First Load JS shared by all             102 kB
+  ├ chunks/255-d84ecbd286e9bd04.js       45.6 kB
+  ├ chunks/4bd1b696-409494caf8c83275.js  54.2 kB
+  └ other shared chunks (total)          1.98 kB
 
 
-> Build failed because of webpack errors
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
