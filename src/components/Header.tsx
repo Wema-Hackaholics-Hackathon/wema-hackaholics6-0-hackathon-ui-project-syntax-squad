@@ -190,11 +190,10 @@ export function Header({ onNavigate }: HeaderProps) {
 
           
 
-          {/* Account Dropdown */}
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from './ui/dropdown-menu';
+           {/* Account Dropdown */}
 
 <DropdownMenu>
-  <DropdownMenuTrigger asChild>
+  <DropdownMenuTrigger>
     <IconButton sx={{ p: 0 }}>
       <Avatar
         src={profileData.avatar}
