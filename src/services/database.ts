@@ -9,7 +9,7 @@ import {
 
 // Simple reactive local storage implementation without external dependencies
 class LocalDatabase {
-  private listeners: { [key: string]: Array<(data: any) => void> } = {}
+  private listeners: { [key: string]: Array<(data: unknown) => void> } = {}
   private isClient: boolean
 
   constructor() {
@@ -69,14 +69,20 @@ class LocalDatabase {
   // Subscribe to data changes
   subscribe<T>(key: string, callback: (data: T[]) => void): () => void {
     if (!this.listeners[key]) {
-      this.listeners[key] = []
+      this.listeners[key] = [];
     }
-    this.listeners[key].push(callback)
+    // Wrap the callback to cast unknown to T[] safely
+    const wrappedCallback = (data: unknown) => {
+      if (Array.isArray(data)) {
+        callback(data as T[]);
+      }
+    };
+    this.listeners[key].push(wrappedCallback);
 
     // Return unsubscribe function
     return () => {
-      this.listeners[key] = this.listeners[key].filter(cb => cb !== callback)
-    }
+      this.listeners[key] = this.listeners[key].filter(cb => cb !== wrappedCallback);
+    };
   }
 
   // Users collection

@@ -25,18 +25,23 @@ function Badge({
     );
   }
 
-  const color = variant === "destructive" ? "error" : variant === "secondary" ? "secondary" : "default";
-  const variantStyle = variant === "outline" ? "outlined" : "filled";
+  const color: "default" | "secondary" | "error" =
+    variant === "destructive"
+      ? "error"
+      : variant === "secondary"
+      ? "secondary"
+      : "default";
+  const variantStyle: "filled" | "outlined" = variant === "outline" ? "outlined" : "filled";
 
   return (
     <Chip
       data-slot="badge"
       label={children as React.ReactNode}
       size="small"
-      color={color as string}
-      variant={variantStyle as "filled" | "outlined"}
+      color={color}
+      variant={variantStyle}
       className={cn(className)}
-      {...(props as any)}
+      {...(props as Record<string, unknown>)}
     />
   );
 }
