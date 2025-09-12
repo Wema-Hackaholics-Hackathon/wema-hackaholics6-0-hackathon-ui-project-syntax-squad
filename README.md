@@ -27,9 +27,11 @@ Recorded Demo: https://www.loom.com/share/c92cfcb2c6f04db3b42d103fb1b3b4fb
 
 
 ## 🎯 The Problem
-Which "How Might We..." question from the challenge brief are you tackling? Show the format by providing an example below.
+· The Core Problem: Digital payments are a utility—they just move money. But they happen
+at key moments in a customers' life: paying for dinner, splitting a bill, receiving a salary. We are missing the human context and the opportunity to add value.
 
-Example: How might we help busy people organize their daily tasks more effectively?
+The Big Question: How might we transform the simple act of payment into a smarter, more
+social, and more valuable experience for customers?
 
 ## ✨ Our Solution
 
@@ -58,8 +60,8 @@ Alat Spark reimagines financial management through intelligent insights and seam
 
 ```bash
 # Clone repository
-git clone <repository-url>
-cd syntaxsquad
+git clone https://github.com/Wema-Hackaholics-Hackathon/wema-hackaholics6-0-hackathon-ui-project-syntax-squad alat-spark
+cd alat-spark
 
 # Install dependencies
 npm install
